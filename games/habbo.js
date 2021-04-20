@@ -2,13 +2,6 @@ const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
 
- if (!message.guild.me.hasPermission("MANAGE_MESSAGES")) {
-    const adm = new Discord.MessageEmbed()
-      .setColor('#FF0000')
-      .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
-    return message.inlineReply(adm)
-  }
-
   var game = 'Haboo Hotel'
   var link1 = 'https://www.habbo.com.br/'
   var link2 = 'https://play.google.com/store/apps/details?id=air.com.sulake.habboair&hl=pt-br'
@@ -19,7 +12,7 @@ exports.run = async (client, message, args) => {
   var an = 'Android'
   var nv = 'Navegador'
 
-  const GameEmbed = new Discord.MessageEmbed()
+  var GameEmbed = new Discord.MessageEmbed()
     .setColor('BLUE')
     .setTitle(`${game}`)
     .addField(`${site}`, `${link1}`)

@@ -1,13 +1,6 @@
 const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
-
- if (!message.guild.me.hasPermission("MANAGE_MESSAGES")) {
-    const adm = new Discord.MessageEmbed()
-      .setColor('#FF0000')
-      .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
-    return message.inlineReply(adm)
-  }
   
   var game = 'Genshin Impact RPG'
   var link1 = 'https://genshin.mihoyo.com/en'
@@ -18,7 +11,7 @@ exports.run = async (client, message, args) => {
   var ios = 'iOS'
   var an = 'Android'
 
-  const TFMEmbed = new Discord.MessageEmbed()
+  var TFMEmbed = new Discord.MessageEmbed()
     .setColor('BLUE')
     .setTitle(`${game}`)
     .addField('Site Oficial', `${link1}`)

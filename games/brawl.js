@@ -2,14 +2,7 @@ const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
 
- if (!message.guild.me.hasPermission("MANAGE_MESSAGES")) {
-    const adm = new Discord.MessageEmbed()
-      .setColor('#FF0000')
-      .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
-    return message.inlineReply(adm)
-  }
-
-  const games = new Discord.MessageEmbed()
+  var games = new Discord.MessageEmbed()
     .setColor('BLUE')
     .setTitle('Existe 2 jogos com o apelido Brawl no meu banco de dados')
     .setDescription('☝️ Brawlhalla\n✌️ Brawlstars')
@@ -36,7 +29,7 @@ exports.run = async (client, message, args) => {
         var mc = 'MacOS'
         var ios = 'iOS'
         var an = 'Android'
-        const GameEmbed = new Discord.MessageEmbed()
+        var GameEmbed = new Discord.MessageEmbed()
           .setColor('BLUE')
           .setTitle(`${game}`)
           .addField(`${st}`, `${link1}`)
@@ -60,7 +53,7 @@ exports.run = async (client, message, args) => {
         var ios = 'iOS'
         var an = 'Android'
 
-        const GameEmbed = new Discord.MessageEmbed()
+        var GameEmbed = new Discord.MessageEmbed()
           .setColor('BLUE')
           .setTitle(`${game}`)
           .addField(`${st}`, `${link1}`)

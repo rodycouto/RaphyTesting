@@ -2,13 +2,6 @@ const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
 
- if (!message.guild.me.hasPermission("MANAGE_MESSAGES")) {
-    const adm = new Discord.MessageEmbed()
-      .setColor('#FF0000')
-      .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
-    return message.inlineReply(adm)
-  }
-
   var game = 'Brawlhalla'
   var link1 = 'https://store.steampowered.com/app/291550/Brawlhalla/'
   var link2 = 'https://play.google.com/store/apps/details?id=air.com.ubisoft.brawl.halla.platform.fighting.action.pvp&hl=pt_BR'
@@ -22,7 +15,7 @@ exports.run = async (client, message, args) => {
   var ios = 'iOS'
   var an = 'Android'
 
-  const GameEmbed = new Discord.MessageEmbed()
+  var GameEmbed = new Discord.MessageEmbed()
     .setColor('BLUE')
     .setTitle(`${game}`)
     .addField(`${st}`, `${link1}`)
