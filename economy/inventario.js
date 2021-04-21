@@ -108,7 +108,6 @@ exports.run = async (client, message, args) => {
     var Embed = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setTitle(`📖 **Inventário de ${user.user.username}**`)
-        .setDescription('📊 Bolsa de Valores | Em Breve')
         .addField('Itens Comprados', `${nada}${arma}${picareta}${vara}${machado}${cartas}`)
         .addField('Itens Obtidos', `${nada2}${title}${faca}${loli}${fossil}${mamute}`)
         .addField('Mantimentos', `🐟 ${peixes} Peixes\n🪱 ${iscas} Iscas\n🥤 ${agua} Água\n🎟️ ${fichas} Fichas\n🍤 ${camarao} Camarões\n🦴 ${ossos} Ossos\n🪵 ${madeira} Madeiras\n🍎 ${apple} Maça\n🪨 ${minerio} Minérios\n💎 ${diamond} Diamantes`)
