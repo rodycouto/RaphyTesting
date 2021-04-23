@@ -53,17 +53,75 @@ exports.run = async (client, message, args) => {
                 .addField('📌 Informações adicionais', '**1.** Todo o dinheiro perdido, vai para o meu banco\n**2.** O resultado de vitória é de 20%, derrota é de 40% e empate 40%\n**3. Resultado**\nVitória: Recebe de volta até o dobro do valor apostado\nEmpate: Recebe de volta o dinheiro apostado\nDerrota: O dinheiro apostado vai para o meu banco.')
                 .setFooter('A Maya não se responsabiliza por dinheiro perdido.')
 
+            if (['all', 'tudo', 'ALL', 'All', 'Tudo', 'TUDO'].includes(args[0])) {
+                if (args[1]) { return message.inlineReply(':x: Nada além do "all", coisas a mais atrapalha meu processamento.') }
+                if (fichas === null) { return message.inlineReply(':x: Você não tem fichas para jogar.') }
+                if (fichas === 0) { return message.inlineReply(':x: Você não tem fichas para jogar.') }
+                if (fichas < 0) { return message.inlineReply(':x: Você não tem fichas para jogar.') }
+                if (money === null) { money = '0' }
+                if (money === '0') { return message.inlineReply(':x: Você não tem dinheiro para jogar.') }
+                if (money < '0') { return message.inlineReply(':x: Você quer jogar na roleta estando negativado?.') }
+
+                var jogando = new Discord.MessageEmbed()
+                    .setColor('BLUE')
+                    .setDescription(`🔄 ${message.author} iniciou um jogo na roleta apostando todo o dinheiro da carteira...`)
+    
+                var winembed = new Discord.MessageEmbed()
+                    .setColor('GREEN')
+                    .setTitle('💰 GANHOU!')
+                    .setDescription(`${message.author} apostou tudo na roleta e faturou ${winprize}<:StarPoint:766794021128765469>MPoints`)
+    
+                var loseembed = new Discord.MessageEmbed()
+                    .setColor('#FF0000')
+                    .setTitle('❌ PERDEU!')
+                    .setDescription(`${message.author} jogou na roleta e perdeu todo o dinheiro da carteira.`)
+    
+                var empateembed = new Discord.MessageEmbed()
+                    .setColor('YELLOW')
+                    .setTitle('🏷️ EMPATE')
+                    .setDescription(`${message.author} apostou tudo na roleta e não ganhou nada.`)
+    
+                if (result === "win") {
+                    setTimeout(function () {
+                        db.set(`roletatimeout_${message.author.id}`, Date.now())
+                        db.subtract(`fichas_${message.author.id}`, 1)
+                        db.add(`mpoints_${message.author.id}`, winprize)
+                        message.inlineReply(winembed)
+                    }, 6300)
+                    return message.inlineReply(jogando).then(msg => msg.delete({ timeout: 6000 }).catch(err => { return }))
+                }
+    
+                if (result === "lose") {
+                    setTimeout(function () {
+                        db.set(`roletatimeout_${message.author.id}`, Date.now())
+                        db.subtract(`fichas_${message.author.id}`, 1)
+                        db.subtract(`mpoints_${message.author.id}`, money)
+                        db.add(`banco_${client.user.id}`, money)
+                        message.inlineReply(loseembed)
+                    }, 6300)
+                    return message.inlineReply(jogando).then(msg => msg.delete({ timeout: 6000 }).catch(err => { return }))
+                }
+    
+                if (result === "empate") {
+                    setTimeout(function () {
+                        db.set(`roletatimeout_${message.author.id}`, Date.now())
+                        db.subtract(`fichas_${message.author.id}`, 1)
+                        message.inlineReply(empateembed)
+                    }, 6300)
+                    return message.inlineReply(jogando).then(msg => msg.delete({ timeout: 6000 }).catch(err => { return }))
+                }
+            }
+
             if (!args[0]) { return message.inlineReply(roletaembed) }
             if (['help', 'ajuda'].includes(args[0])) { return message.inlineReply(roletaembed) }
-            if (['all', 'tudo'].includes(args[0])) { return message.inlineReply('Um momento amigo, este comando está quase pronto.') }
-            if (fichas === null) { return message.inlineReply('Você não tem fichas para jogar.') }
-            if (fichas === 0) { return message.inlineReply('Você não tem fichas para jogar.') }
-            if (fichas < 0) { return message.inlineReply('Você não tem fichas para jogar.') }
-            if (isNaN(args[0])) { return message.inlineReply(`**${args.join(" ")}** não é um número.\n${formato}`) }
+            if (fichas === null) { return message.inlineReply(':x: Você não tem fichas para jogar.') }
+            if (fichas === 0) { return message.inlineReply(':x: Você não tem fichas para jogar.') }
+            if (fichas < 0) { return message.inlineReply(':x: Você não tem fichas para jogar.') }
+            if (isNaN(args[0])) { return message.inlineReply(`:x:  **${args.join(" ")}** não é um número.\n${formato}`) }
             if (money === null) { money = '0' }
-            if (money === '0') { return message.inlineReply('Você não tem dinheiro para jogar.') }
-            if (money < valor) { return message.inlineReply('Você não possui todo esse dinheiro na carteira.') }
-            if (valor < '0' || valor === '0') { return message.inlineReply('Informe uma quantia maior que 0.') }
+            if (money === '0') { return message.inlineReply(':x: Você não tem dinheiro para jogar.') }
+            if (money < valor) { return message.inlineReply(':x: Você não possui todo esse dinheiro na carteira.') }
+            if (valor < '0' || valor === '0') { return message.inlineReply('❓ Informe uma quantia maior que 0.') }
             if (args[1]) { return message.inlineReply(formato) }
 
             var jogando = new Discord.MessageEmbed()
