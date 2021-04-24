@@ -1,7 +1,9 @@
 // Sharding Soon
 const Discord = require("discord.js")
 require("./inlineReply") // Remove in Discord.js V13
-const client = new Discord.Client()
+const client = new Discord.Client({
+    allowedMentions: { everyone: false }
+})
 const { token } = require("./config.json")
 const db = require('quick.db')
 client.commands = new Discord.Collection()
@@ -38,10 +40,10 @@ client.on("message", async (message) => {
 
     let prefix = db.get(`prefix_${message.guild.id}`)
     if (prefix === null) { prefix = "-" }
-    
+
     if (message.content.startsWith('<')) {
         if (message.content.endsWith('>'))
-        if (message.mentions.has(client.user.id)) { return message.inlineReply('Prefixo atual: `' + prefix + '` | `' + prefix + 'help`').then(msg => msg.delete({ timeout: 5000 })).catch(err => { return }) }
+            if (message.mentions.has(client.user.id)) { return message.inlineReply('Prefixo atual: `' + prefix + '` | `' + prefix + 'help`').then(msg => msg.delete({ timeout: 5000 })).catch(err => { return }) }
     }
 
     if (!message.member.hasPermission("ADMINISTRATOR")) {
