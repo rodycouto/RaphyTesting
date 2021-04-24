@@ -6,6 +6,7 @@ exports.run = async (client, message, args) => {
 
   var rody = message.author.id === ("451619591320371213")
   if (rody) {
+    if (!args[0]) {return message.channel.send('Diga algo.')}
     var sayMessage = args.join(' ')
     return message.channel.send(sayMessage)
   }
