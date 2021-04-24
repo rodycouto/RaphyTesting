@@ -39,12 +39,6 @@ exports.run = async (client, message, args) => {
             var chances = ["win", "lose", "empate"]
             let result = chances[Math.floor(Math.random() * chances.length)]
 
-            let winmoney2 = valor
-            let winmoney3 = valor / 2
-            let winmoney4 = valor / 4
-            let winratemoney = [winmoney2, winmoney3, winmoney4, winmoney3, winmoney2, winmoney4, winmoney3, winmoney4, winmoney3, winmoney4]
-            let winprize = winratemoney[Math.floor(Math.random() * winratemoney.length)]
-
             var roletaembed = new Discord.MessageEmbed()
                 .setColor('BLUE')
                 .setTitle('🎲 Roleta Maya')
@@ -62,50 +56,61 @@ exports.run = async (client, message, args) => {
                 if (money === '0') { return message.inlineReply(':x: Você não tem dinheiro para jogar.') }
                 if (money < '0') { return message.inlineReply(':x: Você quer jogar na roleta estando negativado?.') }
 
+                db.set(`roletatimeout_${message.author.id}`, Date.now())
+                db.subtract(`fichas_${message.author.id}`, 1)
+                db.add(`rolcache_${message.author.id}`, money)
+                db.subtract(`mpoints_${message.author.id}`, money)
+                let cache = db.get(`rolcache_${message.author.id}`)
+
+                let winmoney2 = cache
+                let winmoney3 = cache / 2
+                let winmoney4 = cache / 4
+                let winratemoney = [winmoney2, winmoney3, winmoney4, winmoney3, winmoney2, winmoney4, winmoney3, winmoney4, winmoney3, winmoney4]
+                let winprize = winratemoney[Math.floor(Math.random() * winratemoney.length)]
+                let finalprize = winprize + cache
+
                 var jogando = new Discord.MessageEmbed()
                     .setColor('BLUE')
                     .setDescription(`🔄 ${message.author} iniciou um jogo na roleta apostando todo o dinheiro da carteira...`)
-    
+
                 var winembed = new Discord.MessageEmbed()
                     .setColor('GREEN')
                     .setTitle('💰 GANHOU!')
                     .setDescription(`${message.author} apostou tudo na roleta e faturou ${winprize}<:StarPoint:766794021128765469>MPoints`)
-    
+
                 var loseembed = new Discord.MessageEmbed()
                     .setColor('#FF0000')
                     .setTitle('❌ PERDEU!')
                     .setDescription(`${message.author} jogou na roleta e perdeu todo o dinheiro da carteira.`)
-    
+
                 var empateembed = new Discord.MessageEmbed()
                     .setColor('YELLOW')
                     .setTitle('🏷️ EMPATE')
                     .setDescription(`${message.author} apostou tudo na roleta e não ganhou nada.`)
-    
+
                 if (result === "win") {
                     setTimeout(function () {
-                        db.set(`roletatimeout_${message.author.id}`, Date.now())
-                        db.subtract(`fichas_${message.author.id}`, 1)
-                        db.add(`mpoints_${message.author.id}`, winprize)
+                        db.add(`mpoints_${message.author.id}`, finalprize)
+                        db.delete(`rolcache_${message.author.id}`)
                         message.inlineReply(winembed)
                     }, 6300)
                     return message.inlineReply(jogando).then(msg => msg.delete({ timeout: 6000 }).catch(err => { return }))
                 }
-    
+
                 if (result === "lose") {
                     setTimeout(function () {
-                        db.set(`roletatimeout_${message.author.id}`, Date.now())
-                        db.subtract(`fichas_${message.author.id}`, 1)
-                        db.subtract(`mpoints_${message.author.id}`, money)
-                        db.add(`banco_${client.user.id}`, money)
+                        db.subtract(`mpoints_${message.author.id}`, cache)
+                        db.add(`banco_${client.user.id}`, cache)
+                        db.delete(`rolcache_${message.author.id}`)
                         message.inlineReply(loseembed)
                     }, 6300)
                     return message.inlineReply(jogando).then(msg => msg.delete({ timeout: 6000 }).catch(err => { return }))
                 }
-    
+
                 if (result === "empate") {
                     setTimeout(function () {
-                        db.set(`roletatimeout_${message.author.id}`, Date.now())
-                        db.subtract(`fichas_${message.author.id}`, 1)
+                        db.add(`mpoints_${message.author.id}`, cache)
+                        db.delete(`rolcache_${message.author.id}`)
                         message.inlineReply(empateembed)
                     }, 6300)
                     return message.inlineReply(jogando).then(msg => msg.delete({ timeout: 6000 }).catch(err => { return }))
@@ -123,6 +128,19 @@ exports.run = async (client, message, args) => {
             if (money < valor) { return message.inlineReply(':x: Você não possui todo esse dinheiro na carteira.') }
             if (valor < '0' || valor === '0') { return message.inlineReply('❓ Informe uma quantia maior que 0.') }
             if (args[1]) { return message.inlineReply(formato) }
+
+            db.set(`roletatimeout_${message.author.id}`, Date.now())
+            db.subtract(`fichas_${message.author.id}`, 1)
+            db.add(`rolcache_${message.author.id}`, valor)
+            db.subtract(`mpoints_${message.author.id}`, valor)
+            let cache = db.get(`rolcache_${message.author.id}`)
+
+            let winmoney2 = valor
+            let winmoney3 = valor / 2
+            let winmoney4 = valor / 4
+            let winratemoney = [winmoney2, winmoney3, winmoney4, winmoney3, winmoney2, winmoney4, winmoney3, winmoney4, winmoney3, winmoney4]
+            let winprize = winratemoney[Math.floor(Math.random() * winratemoney.length)]
+            let finalprize = winprize + cache
 
             var jogando = new Discord.MessageEmbed()
                 .setColor('BLUE')
@@ -145,9 +163,8 @@ exports.run = async (client, message, args) => {
 
             if (result === "win") {
                 setTimeout(function () {
-                    db.set(`roletatimeout_${message.author.id}`, Date.now())
-                    db.subtract(`fichas_${message.author.id}`, 1)
-                    db.add(`mpoints_${message.author.id}`, winprize)
+                    db.add(`mpoints_${message.author.id}`, finalprize)
+                    db.delete(`rolcache_${message.author.id}`)
                     message.inlineReply(winembed)
                 }, 6300)
                 return message.inlineReply(jogando).then(msg => msg.delete({ timeout: 6000 }).catch(err => { return }))
@@ -155,10 +172,9 @@ exports.run = async (client, message, args) => {
 
             if (result === "lose") {
                 setTimeout(function () {
-                    db.set(`roletatimeout_${message.author.id}`, Date.now())
-                    db.subtract(`fichas_${message.author.id}`, 1)
-                    db.subtract(`mpoints_${message.author.id}`, valor)
-                    db.add(`banco_${client.user.id}`, valor)
+                    db.subtract(`mpoints_${message.author.id}`, cache)
+                    db.add(`banco_${client.user.id}`, cache)
+                    db.delete(`rolcache_${message.author.id}`)
                     message.inlineReply(loseembed)
                 }, 6300)
                 return message.inlineReply(jogando).then(msg => msg.delete({ timeout: 6000 }).catch(err => { return }))
@@ -166,8 +182,8 @@ exports.run = async (client, message, args) => {
 
             if (result === "empate") {
                 setTimeout(function () {
-                    db.set(`roletatimeout_${message.author.id}`, Date.now())
-                    db.subtract(`fichas_${message.author.id}`, 1)
+                    db.add(`mpoints_${message.author.id}`, cache)
+                    db.delete(`rolcache_${message.author.id}`)
                     message.inlineReply(empateembed)
                 }, 6300)
                 return message.inlineReply(jogando).then(msg => msg.delete({ timeout: 6000 }).catch(err => { return }))
