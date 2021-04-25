@@ -1,51 +1,47 @@
 const Discord = require('discord.js')
+const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
 
-    var permss = new Discord.MessageEmbed()
-        .setColor('#FF0000')
-        .setTitle('Permissão Necessária: Manusear Roles (cargos)')
-
-    let perms = message.member.hasPermission("MANAGE_ROLES")
-    if (!perms) {
-        return message.inlineReply(permss)
-    }
-
-    if (!message.guild.me.hasPermission("MANAGE_ROLES")) {
-        var adm = new Discord.MessageEmbed()
-            .setColor('#FF0000')
-            .setTitle('Eu preciso da permissão "Manusear Cargos" para utilizar esta função.')
-        return message.inlineReply(adm)
-    }
+    let prefix = db.get(`prefix_${message.guild.id}`)
+    if (prefix === null) prefix = "-"
 
     let user = message.mentions.members.first()
-    if (!user) {
-        var userr = new Discord.MessageEmbed()
-            .setColor('#FF0000')
-            .setTitle('Siga o formato')
-            .setDescription('`-addrole @user @cargo`')
-        return message.inlineReply(userr)
-    }
-
     let role = message.mentions.roles.first()
-    if (!role) {
-        var rolee = new Discord.MessageEmbed()
+
+    if (!message.member.hasPermission("MANAGE_ROLES")) { return message.inlineReply(':x: Permissão Necessária: Manusear Roles (cargos)') }
+    if (!message.guild.me.hasPermission("MANAGE_ROLES")) { return message.inlineReply('Eu preciso da permissão "Manusear Cargos" para utilizar esta função.') }
+    if (!user) { return message.inlineReply(('`' + prefix + 'addrole @user @cargo`')) }
+    if (message.author.id === user.id) { return message.inlineReply(":x: Você não pode adicionar cargos para você mesmo.") }
+    if (!role) { return message.inlineReply(('`' + prefix + 'addrole @user @cargo`')) }
+    if (user.roles.cache.has(role.id)) { return message.inlineReply(`${user.user.username} já possui este cargo.`) }
+
+    if (!role.editable) {
+        var soberol = new Discord.MessageEmbed()
+            .setColor('BLUE')
+            .setTitle('Meu cargo não é alto o suficiente.')
+            .addFields(
+                {
+                    name: 'Suba meu cargo',
+                    value: '1 - Configurações do Servidor\n2 - Cargos\n3 - Procure meu cargo "Maya"\n4 - Arraste meu cargo para um dos primeiros\n5 - Salve as alterações e tente novamente.'
+                }
+            )
+
+        var sobcarg = new Discord.MessageEmbed()
             .setColor('#FF0000')
-            .setTitle('Siga o formato')
-            .setDescription('`-addrole @user @cargo`')
-        return message.inlineReply(rolee)
+            .setDescription('<a:loading:834782920287846430> Um erro foi encontrado. Buscando solução...')
+
+        setTimeout(function () {
+            message.inlineReply(soberol)
+        }, 6000)
+        return message.inlineReply(sobcarg).then(msg => msg.delete({ timeout: 5800 }))
     }
 
-    if (user.roles.cache.has(role.id)) {
-        var roleee = new Discord.MessageEmbed()
-            .setColor('#FF0000')
-            .setTitle(`${user.user.username} já possui este cargo.`)
-        return message.inlineReply(roleee)
-    }
-
-    user.roles.add(role)
     var sucess = new Discord.MessageEmbed()
         .setColor('GREEN')
         .setDescription(`${user.user.username} recebeu o cargo ${role} com sucesso!`)
-    message.inlineReply(sucess)
+
+    user.roles.add(role).catch(err => { if (err) { return message.inlineReply(`:x: Não tenho poder suficiente para adicionar o cargo ${role}`) } })
+
+    return message.channel.send(sucess)
 }
