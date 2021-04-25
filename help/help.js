@@ -262,7 +262,19 @@ exports.run = async (client, message, args) => {
       .setDescription('Antes de começarmos, você sabe o que é Autorole?\n \n❓ **O que é Autorole?**\nAutorole é um sistema automático em que todo membro que entrar no servidor, receberá um cargo de um bot pré definido pela staff do servidor.\n \n❗ **ATENÇÃO**\nPara perfeito funcionamento, o meu cargo DEVE estar ACIMA do cargo definido.')
       .addField('• Comando de ativação', '`' + prefix + 'setautorole @cargo`', true)
       .addField('• Comando de desativação', '`' + prefix + 'setautorole off`', true)
-      .addField('• Veja o status', '`' + prefix + 'autorole`')
+      .addField('• Veja o status', '`' + prefix + 'autorole`', true)
+    return message.inlineReply(embed)
+  }
+
+  if (['role', 'cargo', 'roles', 'cargos'].includes(args[0])) {
+    var embed = new Discord.MessageEmbed()
+      .setColor('BLUE')
+      .setTitle('🛠️ Gerenciamento de Cargos')
+      .setDescription('Você pode gerenciar cargos rapidamente atráves de comandos simples e rapidos!')
+      .addField('• Crie cargos', '`' + prefix + 'role create Nome Do Cargo`', true)
+      .addField('• Exclua cargos', '`' + prefix + 'role delete Nome do Cargo`', true)
+      .addField('• Veja quantas pessoas possui algum cargo', '`' + prefix + 'role @cargo`')
+      .setFooter(`Procurando Autorole? ${prefix}help autorole`)
     return message.inlineReply(embed)
   } else {
     return message.inlineReply('Esta categoria não foi encontrada. use `' + prefix + 'help categoria` e veja as categorias disponiveis.')

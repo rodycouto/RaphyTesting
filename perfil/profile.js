@@ -128,7 +128,5 @@ exports.run = async (client, message, args) => {
 
     await message.inlineReply(perfilembed)
 
-    if (['help', 'ajuda', 'comandos'].includes(args[0])) {
-        return message.inlineReply('Quase pronto')
-    }
+    if (['help', 'ajuda', 'comandos'].includes(args[0])) { return message.inlineReply('Quase pronto') }
 }

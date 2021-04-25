@@ -46,7 +46,7 @@ exports.run = async (client, message, args) => {
 	let casar = new Discord.MessageEmbed()
 		.setColor('BLUE')
 		.setTitle('💍Novo Pedido de Casamento💍')
-		.setDescription(`${message.author.username} está pedindo a mão de ${member.username} em casamento.\n\n${member}, você aceita se casar com ${message.author}?`)
+		.setDescription(`${message.author.username} está pedindo a mão de ${member.user.username} em casamento.\n\n${member}, você aceita se casar com ${message.author}?`)
 		.setThumbnail(gif)
 		.setFooter('Clique no anel para aceitar o pedido de casamento.')
 

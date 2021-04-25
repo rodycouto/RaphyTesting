@@ -15,7 +15,7 @@ exports.run = async (client, message, args) => {
     var newhelp = new Discord.MessageEmbed()
       .setColor('#CD853F')
       .setTitle('⭐ Centralzinha de Ajuda da Maya ⭐')
-      .setDescription('Use `' + `${prefix}help categoria` + '` para as pastas de comandos')
+      .setDescription('Use `' + `${prefix}h categoria` + '` para as pastas de comandos')
       .addField('Acesso rápido', `:tools: [Lista de Comandos](${linkgithub})\n☎️ [Suporte](${linksupport})\n🧩 [Meu servidor](${linkservidor})\n:heart: [Me adicione](${invitebot})`)
       .addField('Me ajude a ficar online', `<a:MoneyWings:834899137991540797> [Doar R$1,00](${mercadopago})`, true)
       .addField('💰 Loteria Maya', `Prêmio Atual: ${db.get('loteria')} <:StarPoint:766794021128765469>MPoints`, true)
@@ -190,7 +190,7 @@ exports.run = async (client, message, args) => {
       .setColor('BLUE')
       .setTitle(':gear: Comandos exclusivos do Owner')
       .setDescription('Comandos exclusivos do meu criador')
-      .addField('• Comandos Online: (8)', '`' + prefix + 'add <item> [@user]` Adiciona algo\n' + '`' + prefix + 'del <item> [@user]` Deleta algo\n' + '`' + prefix + 'give <item> [@user]` Dá algo\n' + '`' + prefix + 'remove <item> [@user]` Retira algo\n' + '`' + prefix + 'reboot` Me reinicia\n' + '`' + prefix + 'servers 1/2/3...` Lista de servidores\n' + '`' + prefix + 'status [argumento]` Muda meu status')
+      .addField('• Comandos Online: (8)', '`' + prefix + 'add <item> [@user]` Adiciona algo\n' + '`' + prefix + 'datasorteio` Define uma data pro sorteio da loteria\n' + '`' + prefix + 'del <item> [@user]` Deleta algo\n' + '`' + prefix + 'give <item> [@user]` Dá algo\n' + '`' + prefix + 'remove <item> [@user]` Retira algo\n' + '`' + prefix + 'reboot` Me reinicia\n' + '`' + prefix + 'servers 1/2/3...` Lista de servidores\n' + '`' + prefix + 'sortearticket` Sorteia a loteria\n' + '`' + prefix + 'status [argumento]` Muda meu status\n' + '`' + prefix + 'whitelist` Mostra quem está na Whitelist')
       .addField('• Comandos Offline: (0)', `:tools: [Lista de Comandos](${linkgithub})`)
       .setFooter('• Comandos em construção: (4)')
     return message.inlineReply(embed)
@@ -262,7 +262,19 @@ exports.run = async (client, message, args) => {
       .setDescription('Antes de começarmos, você sabe o que é Autorole?\n \n❓ **O que é Autorole?**\nAutorole é um sistema automático em que todo membro que entrar no servidor, receberá um cargo de um bot pré definido pela staff do servidor.\n \n❗ **ATENÇÃO**\nPara perfeito funcionamento, o meu cargo DEVE estar ACIMA do cargo definido.')
       .addField('• Comando de ativação', '`' + prefix + 'setautorole @cargo`', true)
       .addField('• Comando de desativação', '`' + prefix + 'setautorole off`', true)
-      .addField('• Veja o status', '`' + prefix + 'autorole`')
+      .addField('• Veja o status', '`' + prefix + 'autorole`', true)
+    return message.inlineReply(embed)
+  }
+
+  if (['role', 'cargo', 'roles', 'cargos'].includes(args[0])) {
+    var embed = new Discord.MessageEmbed()
+      .setColor('BLUE')
+      .setTitle('🛠️ Gerenciamento de Cargos')
+      .setDescription('Você pode gerenciar cargos rapidamente atráves de comandos simples e rapidos!')
+      .addField('• Crie cargos', '`' + prefix + 'role create Nome Do Cargo`', true)
+      .addField('• Exclua cargos', '`' + prefix + 'role delete Nome do Cargo`', true)
+      .addField('• Veja quantas pessoas possui algum cargo', '`' + prefix + 'role @cargo`')
+      .setFooter(`Procurando Autorole? ${prefix}help autorole`)
     return message.inlineReply(embed)
   } else {
     return message.inlineReply('Esta categoria não foi encontrada. use `' + prefix + 'help categoria` e veja as categorias disponiveis.')

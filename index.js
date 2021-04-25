@@ -1,9 +1,7 @@
 // Sharding Soon
 const Discord = require("discord.js")
 require("./inlineReply") // Remove in Discord.js V13
-const client = new Discord.Client({
-    allowedMentions: { everyone: false }
-})
+const client = new Discord.Client({})
 const { token } = require("./config.json")
 const db = require('quick.db')
 client.commands = new Discord.Collection()

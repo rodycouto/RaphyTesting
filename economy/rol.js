@@ -99,7 +99,6 @@ exports.run = async (client, message, args) => {
 
                 if (result === "lose") {
                     setTimeout(function () {
-                        db.subtract(`mpoints_${message.author.id}`, cache)
                         db.add(`banco_${client.user.id}`, cache)
                         db.delete(`rolcache_${message.author.id}`)
                         message.inlineReply(loseembed)
@@ -172,7 +171,6 @@ exports.run = async (client, message, args) => {
 
             if (result === "lose") {
                 setTimeout(function () {
-                    db.subtract(`mpoints_${message.author.id}`, cache)
                     db.add(`banco_${client.user.id}`, cache)
                     db.delete(`rolcache_${message.author.id}`)
                     message.inlineReply(loseembed)
