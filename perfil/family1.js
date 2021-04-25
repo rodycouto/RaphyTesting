@@ -2,49 +2,20 @@ const discord = require('discord.js')
 const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
+	var bot = member.bot
 
 	var member = message.mentions.users.first()
 
-	if (!args[0]) {
-		return message.inlineReply('Ei, me fala quem você quer convidar para sua familia.')
-	}
-
-	if (!member) {
-		return message.inlineReply('Ei, me fala quem você quer convidar para sua familia.')
-	}
-
-	var bot = member.bot
-	if (bot) {
-		return message.inlineReply('Você não pode convidar um bot pra sua familia.')
-	}
-
-	if (db.get(`family1_${message.author.id}`)) {
-		return message.inlineReply(`Nesta posição, <@${db.get(`family1_${message.author.id}`)}> é seu familiar.`)
-	}
-
-	if (db.get(`family1_${member.id}`)) {
-		return message.inlineReply(member.username + ' já tem um familiar nesta posição.')
-	}
-
-	if (member.id === client.user.id) {
-		return message.inlineReply('É... Não sei se meu pai deixaria eu entrar para sua familia. Acho melhor nós ficarmos apenas na amizade.')
-	}
-
-	if (member.id === message.author.id) {
-		return message.inlineReply('Você quer entrar na sua familia? Não entendi...')
-	}
-
-	if (member.id === db.get(`family1_${message.author.id}`)) {
-		return message.inlineReply(`${member} já está na sua familia`)
-	}
-
-	if (member.id === db.get(`family2_${message.author.id}`)) {
-		return message.inlineReply(`${member} já está na sua familia`)
-	}
-
-	if (member.id === db.get(`family3_${message.author.id}`)) {
-		return message.inlineReply(`${member} já está na sua familia`)
-	}
+	if (!args[0]) { return message.inlineReply('Ei, me fala quem você quer convidar para sua familia.') }
+	if (!member) { return message.inlineReply('Ei, me fala quem você quer convidar para sua familia.') }
+	if (bot) { return message.inlineReply('Você não pode convidar um bot pra sua familia.') }
+	if (db.get(`family1_${message.author.id}`)) { return message.inlineReply(`Nesta posição, <@${db.get(`family1_${message.author.id}`)}> é seu familiar.`) }
+	if (db.get(`family1_${member.id}`)) { return message.inlineReply(member.username + ' já tem um familiar nesta posição.') }
+	if (member.id === client.user.id) { return message.inlineReply('É... Não sei se meu pai deixaria eu entrar para sua familia. Acho melhor nós ficarmos apenas na amizade.') }
+	if (member.id === message.author.id) { return message.inlineReply('Você quer entrar na sua familia? Não entendi...') }
+	if (member.id === db.get(`family1_${message.author.id}`)) { return message.inlineReply(`${member} já está na sua familia`) }
+	if (member.id === db.get(`family2_${message.author.id}`)) { return message.inlineReply(`${member} já está na sua familia`) }
+	if (member.id === db.get(`family3_${message.author.id}`)) { return message.inlineReply(`${member} já está na sua familia`) }
 
 	let family = await db.fetch(`family1_${message.author.id}`)
 	let family2 = await db.fetch(`family1_${member.id}`)
@@ -79,7 +50,5 @@ exports.run = async (client, message, args) => {
 			})
 		})
 	}
-	if (family2 === null) {
-		return
-	}
+	if (family2 === null) { return }
 }

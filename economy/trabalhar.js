@@ -18,21 +18,30 @@ exports.run = async (client, message, args) => {
         return message.inlineReply(presomax)
     } else {
 
-        let timeout = 600000
+        let timeout = 86400000
         let author = await db.fetch(`worked_${message.author.id}`)
 
         if (author !== null && timeout - (Date.now() - author) > 0) {
             let time = ms(timeout - (Date.now() - author))
 
-            return message.inlineReply(`Você pode trabalhar novamente em ${time.minutes}m e ${time.seconds}s`)
+            return message.inlineReply(`Você já trabalhou hoje, descance um pouco! Volte em ${time.hours}h, ${time.minutes}m, e ${time.seconds}s`)
         } else {
-            let amount = 33
-            let amountxp = 150
-            db.add(`mpoints_${message.author.id}`, amount)
-            db.add(`xp_${message.author.id}`, amountxp)
+
+            var luck = ['win', 'lose', 'lose', 'lose', 'lose']
+            var result = luck[Math.floor(Math.random() * luck.length)]
+            var gorgeta = [Math.floor(Math.random() * 400) + 1]
+            db.add(`mpoints_${message.author.id}`, 33)
+            db.add(`xp_${message.author.id}`, 150)
             db.set(`worked_${message.author.id}`, Date.now())
 
-            return message.inlineReply(`Você trabalhou e ganhou ${amount} <:StarPoint:766794021128765469>MPoints e ${amountxp} XP`)
+            if (result === "win") {
+                db.add(`mpoints_${message.author.id}`, gorgeta)
+                return message.inlineReply(`Você trabalhou e ganhou 33 <:StarPoint:766794021128765469>MPoints, 150 XP e uma gorgeta de ${gorjeta} <:StarPoint:766794021128765469>MPoints`)
+            }
+
+            if (result === 'lose') {
+                return message.inlineReply(`Você trabalhou e ganhou 33 <:StarPoint:766794021128765469>MPoints e 150 XP`)
+            }
         }
     }
 }

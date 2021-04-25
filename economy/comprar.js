@@ -37,10 +37,10 @@ exports.run = async (client, message, args) => {
         if (['vara de pesca', 'vara', 'pesca', 'Vara de Pesca'].includes(args.join(" "))) {
 
             if (db.get(`vara_${message.author.id}`)) { return message.inlineReply(`❗ Você já possui este item.`) }
-            if (money < 140) { return message.inlineReply(`❌ ${message.author}, você não tem dinheiro suficiente para comprar este item.`) }
-            if (money === 0) { return message.inlineReply(`❌ ${message.author}, você não tem dinheiro.`) }
-            if (money < 0) { return message.inlineReply(`❌ ${message.author}, você está com divida.`) }
-            if (money === null) { return message.inlineReply(`❌ ${message.author}, você não tem dinheiro para comprar este item.`) }
+            if (money < 140) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você não tem dinheiro suficiente para comprar este item.`) }
+            if (money === 0) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você não tem dinheiro.`) }
+            if (money < 0) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você está com divida.`) }
+            if (money === null) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você não tem dinheiro para comprar este item.`) }
 
             if (money = 140 || money > 140) {
                 db.subtract(`mpoints_${message.author.id}`, 140)
@@ -58,10 +58,10 @@ exports.run = async (client, message, args) => {
         if (['machado', 'Machado'].includes(args[0])) {
 
             if (db.get(`machado_${message.author.id}`)) { return message.inlineReply(`❗ Você já possui este item.`) }
-            if (money === null) { return message.inlineReply(`❌ ${message.author}, você não tem dinheiro para comprar este item.`) }
-            if (money === 0) { return message.inlineReply(`❌ ${message.author}, você não tem dinheiro.`) }
-            if (money < 0) { return message.inlineReply(`❌ ${message.author}, você está com divida.`) }
-            if (money < 35) { return message.inlineReply(`❌ ${message.author}, você não tem dinheiro suficiente para comprar este item.`) }
+            if (money === null) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você não tem dinheiro para comprar este item.`) }
+            if (money === 0) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você não tem dinheiro.`) }
+            if (money < 0) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você está com divida.`) }
+            if (money < 35) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você não tem dinheiro suficiente para comprar este item.`) }
 
             if (money = 35 || money > 35) {
                 db.subtract(`mpoints_${message.author.id}`, 35)
@@ -79,10 +79,10 @@ exports.run = async (client, message, args) => {
         if (['arma', 'gun', 'Arma'].includes(args[0])) {
 
             if (db.get(`arma_${message.author.id}`)) { return message.inlineReply(`❗ Você já possui este item.`) }
-            if (money === null) { return message.inlineReply(`❌ ${message.author}, você não tem dinheiro para comprar este item.`) }
-            if (money === 0) { return message.inlineReply(`❌ ${message.author}, você não tem dinheiro.`) }
-            if (money < 0) { return message.inlineReply(`❌ ${message.author}, você está com divida.`) }
-            if (money < 4000) { return message.inlineReply(`❌ ${message.author}, você não tem dinheiro suficiente para comprar este item.`) }
+            if (money === null) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você não tem dinheiro para comprar este item.`) }
+            if (money === 0) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você não tem dinheiro.`) }
+            if (money < 0) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você está com divida.`) }
+            if (money < 4000) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você não tem dinheiro suficiente para comprar este item.`) }
 
             if (money = 4000 || money > 4000) {
                 db.subtract(`mpoints_${message.author.id}`, 4000)
@@ -98,12 +98,12 @@ exports.run = async (client, message, args) => {
 
         if (['ticketloteria', 'ticket', 'Ticket', 'tickets', 'Tickets'].includes(args[0])) {
 
-            if (money === null) { return message.inlineReply(`❌ ${message.author}, você não tem dinheiro para comprar este item.`) }
+            if (money === null) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você não tem dinheiro para comprar este item.`) }
             if (!args[1]) { return message.inlineReply('Quantos tickets você quer comprar? `' + prefix + 'buy tickets quantidade`') }
             if (isNaN(args[1])) { return message.inlineReply(`${args[1]} não é um número.`) }
-            if (money < 0) { return message.inlineReply(`❌ ${message.author}, você está com divida.`) }
-            if (money === 0) { return message.inlineReply(`❌ ${message.author}, você não tem dinheiro.`) }
-            if (money < args[1] * 10) { return message.inlineReply(`❌ ${message.author}, você não tem dinheiro suficiente para comprar este item.`) }
+            if (money < 0) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você está com divida.`) }
+            if (money === 0) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você não tem dinheiro.`) }
+            if (money < args[1] * 10) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você não tem dinheiro suficiente para comprar este item.`) }
 
             db.add(`ticketloteria_${message.author.id}`, args[1])
             db.subtract(`mpoints_${message.author.id}`, args[1] * 10)
@@ -117,12 +117,12 @@ exports.run = async (client, message, args) => {
 
         if (['ficha', 'fichas'].includes(args[0])) {
 
-            if (money === null) { return message.inlineReply(`❌ ${message.author}, você não tem dinheiro para comprar este item.`) }
+            if (money === null) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você não tem dinheiro para comprar este item.`) }
             if (!args[1]) { return message.inlineReply('Quantas fichas você quer comprar? `' + prefix + 'buy fichas quantidade`') }
             if (isNaN(!args[1])) { return message.inlineReply(`${args[1]} não é um número.`) }
-            if (money === 0) { return message.inlineReply(`❌ ${message.author}, você não tem dinheiro.`) }
-            if (money < 0) { return message.inlineReply(`❌ ${message.author}, você está com divida.`) }
-            if (money < args[1] * 2) { return message.inlineReply(`❌ ${message.author}, você não tem dinheiro suficiente para comprar este item.`) }
+            if (money === 0) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você não tem dinheiro.`) }
+            if (money < 0) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você está com divida.`) }
+            if (money < args[1] * 2) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você não tem dinheiro suficiente para comprar este item.`) }
 
             db.add(`fichas_${message.author.id}`, args[1])
             var acima = db.get(`fichas_${message.author.id}`)
@@ -146,12 +146,12 @@ exports.run = async (client, message, args) => {
 
         if (['agua', 'Água', 'água', 'water', 'águas', 'aguas', 'copo', 'd\água'].includes(args[0])) {
 
-            if (money === null) { return message.inlineReply(`❌ ${message.author}, você não tem dinheiro para comprar este item.`) }
+            if (money === null) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você não tem dinheiro para comprar este item.`) }
             if (!args[1]) { return message.inlineReply('Quantas águas você quer comprar? `' + prefix + 'buy águas quantidade`') }
             if (isNaN(args[1])) { return message.inlineReply('`' + prefix + 'buy águas quantidade`') }
-            if (money === 0) { return message.inlineReply(`❌ ${message.author}, você não tem dinheiro.`) }
-            if (money < 0) { return message.inlineReply(`❌ ${message.author}, você está com divida.`) }
-            if (money < args[1]) { return message.inlineReply(`❌ ${message.author}, você não tem dinheiro suficiente para comprar este item.`) }
+            if (money === 0) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você não tem dinheiro.`) }
+            if (money < 0) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você está com divida.`) }
+            if (money < args[1]) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você não tem dinheiro suficiente para comprar este item.`) }
 
             db.add(`agua_${message.author.id}`, args[1])
             var acima = db.get(`agua_${message.author.id}`)
@@ -178,10 +178,10 @@ exports.run = async (client, message, args) => {
         if (['picareta', "Picareta"].includes(args[0])) {
 
             if (db.get(`picareta_${message.author.id}`)) { return message.inlineReply(`❗ Você já possui este item.`) }
-            if (money === null) { return message.inlineReply(`❌ ${message.author}, você não tem dinheiro para comprar este item.`) }
-            if (money === 0) { return message.inlineReply(`❌ ${message.author}, você não tem dinheiro.`) }
-            if (money < 0) { return message.inlineReply(`❌ ${message.author}, você está com divida.`) }
-            if (money < 85) { return message.inlineReply(`❌ ${message.author}, você não tem dinheiro suficiente para comprar este item.`) }
+            if (money === null) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você não tem dinheiro para comprar este item.`) }
+            if (money === 0) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você não tem dinheiro.`) }
+            if (money < 0) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você está com divida.`) }
+            if (money < 85) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você não tem dinheiro suficiente para comprar este item.`) }
 
             if (money = 85 || money > 85) {
                 db.subtract(`mpoints_${message.author.id}`, 85)
@@ -200,8 +200,8 @@ exports.run = async (client, message, args) => {
 
             if (db.get(`title_${message.author.id}`)) { return message.inlineReply(`Você já possui a permissão de alterar seu título.`) }
             if (money === null) { return message.inlineReply(`${message.author}, você não tem dinheiro para comprar esta permissão.`) }
-            if (money === 0) { return message.inlineReply(`❌ ${message.author}, você não tem dinheiro.`) }
-            if (money < 0) { return message.inlineReply(`❌ ${message.author}, você está com divida.`) }
+            if (money === 0) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você não tem dinheiro.`) }
+            if (money < 0) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você está com divida.`) }
             if (money < 10000) { return message.inlineReply(`${message.author}, você não tem dinheiro suficiente para comprar esta permissão.`) }
 
             if (money = 10000 || money > 10000) {
@@ -231,12 +231,12 @@ exports.run = async (client, message, args) => {
 
         if (['isca', 'minhoca', 'iscas', 'minhocas', 'Isca', 'Iscas'].includes(args[0])) {
 
-            if (money === null) { return message.inlineReply(`❌ ${message.author}, você não tem dinheiro para comprar este item.`) }
+            if (money === null) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você não tem dinheiro para comprar este item.`) }
             if (!args[1]) { return message.inlineReply('Quantas iscas você quer comprar? `' + prefix + 'buy iscas quantidade`') }
             if (isNaN(args[1])) { return message.inlineReply(args[1] + ', não é um número, ok?`' + prefix + 'buy iscas quantidade`') }
-            if (money < args[1]) { return message.inlineReply(`❌ ${message.author}, você não tem dinheiro suficiente para comprar este item.`) }
-            if (money === 0) { return message.inlineReply(`❌ ${message.author}, você não tem dinheiro.`) }
-            if (money < 0) { return message.inlineReply(`❌ ${message.author}, você está com divida.`) }
+            if (money === 0) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você não tem dinheiro.`) }
+            if (money < 0) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você está com divida.`) }
+            if (money < args[1]) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você não tem dinheiro suficiente para comprar este item.`) }
 
             db.add(`iscas_${message.author.id}`, args[1])
             var acima = db.get(`iscas_${message.author.id}`)
@@ -260,14 +260,45 @@ exports.run = async (client, message, args) => {
             }
         }
 
+        if (['comida', 'food', 'comidas'].includes(args[0])) {
+
+            if (money === null) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você não tem dinheiro para comprar este item.`) }
+            if (!args[1]) { return message.inlineReply('Quantas comidas você quer comprar? `' + prefix + 'buy comida quantidade`') }
+            if (isNaN(args[1])) { return message.inlineReply(args[1] + ', não é um número, ok?`' + prefix + 'buy comida quantidade`') }
+            if (money === 0) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você não tem dinheiro.`) }
+            if (money < 0) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você está com divida.`) }
+            if (money < args[1] * 2) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você não tem dinheiro suficiente para comprar este item.`) }
+
+            db.add(`comida_${message.author.id}`, args[1])
+            var acima = db.get(`comida_${message.author.id}`)
+            if (acima > 20) {
+                db.subtract(`comida_${message.author.id}`, args[1])
+                var nota = new Discord.MessageEmbed()
+                    .setColor('#FF0000')
+                    .setTitle('LIMITE DE COMIDA ATINGIDO!')
+                    .setDescription(`${message.author}, você não pode passar de **20 comidas**.`)
+                return message.inlineReply(nota)
+            }
+
+            if (money > args[1] * 2) {
+                db.subtract(`mpoints_${message.author.id}`, args[1] * 2)
+                db.add(`banco_${client.user.id}`, args[1] * 2)
+                var buycomida = new Discord.MessageEmbed()
+                    .setColor('GREEN')
+                    .setTitle('✅ Compra aprovada')
+                    .setDescription(`${message.author} você comprou ${args[1]} 🥘 ` + '`Comidas`')
+                return message.inlineReply(buycomida)
+            }
+        }
+
         if (['Carta', 'carta', 'cartas', 'Cartas', 'letter', 'Letter'].includes(args[0])) {
 
-            if (money === null) { return message.inlineReply(`❌ ${message.author}, você não tem dinheiro para comprar este item.`) }
+            if (money === null) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você não tem dinheiro para comprar este item.`) }
             if (!args[1]) { return message.inlineReply('Quantas cartas você quer comprar? `' + prefix + 'buy cartas quantidade`') }
             if (isNaN(args[1])) { return message.inlineReply('A quantidade precisa ser um número. `' + prefix + 'buy cartas quantidade`') }
-            if (money === 0) { return message.inlineReply(`❌ ${message.author}, você não tem dinheiro.`) }
-            if (money < 0) { return message.inlineReply(`❌ ${message.author}, você está com divida.`) }
-            if (money < args[1]) { return message.inlineReply(`❌ ${message.author}, você não tem dinheiro suficiente para comprar este item.`) }
+            if (money === 0) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você não tem dinheiro.`) }
+            if (money < 0) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você está com divida.`) }
+            if (money < args[1]) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você não tem dinheiro suficiente para comprar este item.`) }
 
             db.add(`cartas_${message.author.id}`, args[1])
             var acima = db.get(`cartas_${message.author.id}`)

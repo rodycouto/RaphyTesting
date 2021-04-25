@@ -1,7 +1,7 @@
 const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
-   
+
    var list = [
       'https://imgur.com/YhJgGX0.gif',
       'https://imgur.com/Xv6ERdq.gif',
@@ -20,5 +20,6 @@ exports.run = async (client, message, args) => {
       .setDescription(`:flushed:`)
       .setImage(rand)
       .setFooter(`Comando por: ${message.author.tag}`, message.author.displayAvatarURL())
-   await message.inlineReply(embed).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+   setTimeout(function () { message.delete() }, 5000)
+   await message.inlineReply(embed).then(msg => msg.delete({ timeout: 5000 }).catch(err => { return }))
 }

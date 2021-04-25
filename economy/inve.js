@@ -18,6 +18,10 @@ exports.run = async (client, message, args) => {
     if (iscas === null) { iscas = "0" }
     if (!db.get(`iscas_${user.id}`)) { iscas = "0" }
 
+    let comida = await db.get(`comida_${user.id}`)
+    if (comida === null) { comida = "0" }
+    if (!db.get(`comida_${user.id}`)) { comida = "0" }
+
     let cartas = await db.get(`cartas_${user.id}`)
     if (cartas) { cartas = `\n💌 Cartas: ${db.get(`cartas_${user.id}`)}` }
     if (cartas === null) { cartas = "" }
@@ -51,9 +55,9 @@ exports.run = async (client, message, args) => {
     if (apple === null) { apple = "0" }
     if (!db.get(`apple_${user.id}`)) { apple = "0" }
 
-    let madeira = await db.get(`madeira_${user.id}`)
-    if (madeira === null) { madeira = "0" }
-    if (!db.get(`madeira_${user.id}`)) { madeira = "0" }
+    let rosas = await db.get(`rosas_${user.id}`)
+    if (rosas === null) { rosas = "0" }
+    if (!db.get(`rosas_${user.id}`)) { rosas = "0" }
 
     let arma = await db.get(`arma_${user.id}`)
     if (arma) { arma = "\n🔫 Arma" }
@@ -88,8 +92,13 @@ exports.run = async (client, message, args) => {
 
     let cachorro = db.get(`cachorro_${user.id}`)
     if (cachorro) { cachorro = "\n🐶 Cachorro" }
-    if (cachorro === null) { cachorro = "\n🐶 Cachorro *(Em Breve)*" }
-    if (!db.get(`cachorro_${user.id}`)) { cachorro = "\n🐶 Cachorro *(Em Breve)*" }
+    if (cachorro === null) { cachorro = "" }
+    if (!db.get(`cachorro_${user.id}`)) { cachorro = "" }
+
+    let bola = db.get(`bola_${user.id}`)
+    if (bola) { bola = "\n🥎 Bola" }
+    if (bola === null) { bola = "" }
+    if (!db.get(`bola_${user.id}`)) { bola = "" }
 
     let fossil = db.get(`fossil_${user.id}`)
     if (fossil) { fossil = "\n<:fossil:831859111578173450> Fossil" }
@@ -105,7 +114,7 @@ exports.run = async (client, message, args) => {
     if (nada) { nada = 'Não há nada aqui' }
     if (!nada) { nada = '' }
 
-    let nada2 = !title && !faca && !loli && !fossil && !mamute
+    let nada2 = !title && !faca && !loli && !fossil && !mamute && !bola && !cachorro
     if (nada2) { nada2 = 'Não há nada aqui' }
     if (!nada2) { nada2 = '' }
 
@@ -113,8 +122,8 @@ exports.run = async (client, message, args) => {
         .setColor('BLUE')
         .setTitle(`📖 **Inventário de ${user.user.username}**`)
         .addField('Itens Comprados', `${nada}${arma}${picareta}${vara}${machado}${cartas}`)
-        .addField('Itens Obtidos', `${nada2}${title}${faca}${loli}${fossil}${mamute}${cachorro}`)
-        .addField('Mantimentos', `🐟 ${peixes} Peixes\n🪱 ${iscas} Iscas\n🥤 ${agua} Água\n🎟️ ${fichas} Fichas\n🍤 ${camarao} Camarões\n🦴 ${ossos} Ossos\n🪵 ${madeira} Madeiras\n🍎 ${apple} Maça\n🪨 ${minerio} Minérios\n💎 ${diamond} Diamantes`)
+        .addField('Itens Obtidos', `${nada2}${title}${faca}${loli}${fossil}${mamute}${bola}${cachorro}`)
+        .addField('Mantimentos', `🐟 ${peixes} Peixes\n🥘 ${comida} Comidas\n🪱 ${iscas} Iscas\n🥤 ${agua} Água\n🎟️ ${fichas} Fichas\n🍤 ${camarao} Camarões\n🦴 ${ossos} Ossos\n🌹 ${rosas} Rosas\n🍎 ${apple} Maça\n🪨 ${minerio} Minérios\n💎 ${diamond} Diamantes`)
 
     await message.inlineReply(Embed)
 }
