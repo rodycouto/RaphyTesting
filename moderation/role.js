@@ -3,7 +3,7 @@ const db = require("quick.db")
 
 exports.run = async (client, message, args) => {
 
-  if (!message.member.hasPermission(["ADMINISTRATOR"])) { return message.channel.send(`:x: Permissão Requerida: Administrador`) }
+  if (!message.member.hasPermission("ADMINISTRATOR")) { return message.channel.send(`:x: Permissão Requerida: Administrador`) }
   if (!message.guild.me.hasPermission("MANAGE_ROLES")) { return message.inlineReply('Eu preciso da permissão "Gerenciar Cargos" para utilizar esta função.') }
 
   let prefix = db.get(`prefix_${message.guild.id}`)
@@ -15,12 +15,51 @@ exports.run = async (client, message, args) => {
     .setDescription('Crie e delete cargos no servidor de maneira rápida e prática.')
     .addField('Crie um cargo', '`' + prefix + 'role create Nome do Cargo`')
     .addField('Delete um cargo', '`' + prefix + 'role delete Nome do Cargo`')
+    .addField('Veja informações', '`' + prefix + 'role info @cargo`')
 
   var formato = ':x: Siga o formato correto! `' + prefix + 'role create/delete Nome Do Cargo`'
 
   if (!args[0]) { return message.inlineReply(embed) }
 
-  if (['criar', 'crie', 'create'].includes(args[0])) {
+  let role = message.mentions.roles.first()
+
+  if (['info', 'informações'].includes(args[0])) {
+
+    const roleName = message.guild.roles.cache.find(r => (r.name === args.toString()) || (r.id === args.toString())) || `<@&${role.id}>`
+    const perms = new Discord.Permissions(roleName.permissions.bitfield).toArray()
+    let NumMembersRole = message.guild.roles.cache.get(role.id).members
+
+    return message.inlineReply('Sessão em reforma.')
+    if (!roleName) {return message.inlineReply('`' + prefix + 'role info @role`')}
+
+    const embed = new Discord.MessageEmbed()
+      .setColor(roleName.color)
+      .setTitle(roleName.name)
+      .addFields(
+        {
+          name: '🆔 Role ID',
+          value: roleName.id,
+          inline: true
+        },
+        {
+          name: '📝 Nome da Role',
+          value: roleName.name,
+          inline: true
+        },
+        {
+          name: '❓ Mencionavel?',
+          value: roleName.mentionable ? 'Sim' : 'Não',
+          inline: true
+        },
+        {
+          name: 'Permissões do cargos',
+          value: perms.join(', ')
+        }
+      )
+    if (NumMembersRole) { embed.addField('ℹ️ Membros com o Cargo', `${NumMembersRole.size} Membros`) }
+
+    return message.channel.send(embed)
+  } else if (['criar', 'crie', 'create'].includes(args[0])) {
 
     let RoleName = args.slice(1).join(" ")
     if (!RoleName) { return message.channel.send(formato) }
@@ -51,9 +90,7 @@ exports.run = async (client, message, args) => {
         }
       })
     })
-  }
-
-  if (['delete', 'excluir', 'deletar'].includes(args[0])) {
+  } else if (['delete', 'excluir', 'deletar'].includes(args[0])) {
 
     let RoleToDelete = message.guild.roles.cache.get(args[1]) || message.guild.roles.cache.find(r => r.name == args[1])
     if (!RoleToDelete) { return message.channel.send(formato) }
@@ -105,5 +142,7 @@ exports.run = async (client, message, args) => {
         }
       })
     })
+  } else {
+    return message.inlineReply(`Não achei nenhum comando com o nome ${args.join(" ")}. Use ` + '`' + prefix + 'help role`')
   }
 }
