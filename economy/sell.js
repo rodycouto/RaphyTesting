@@ -3,6 +3,9 @@ const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
 
+    let prefix = db.get(`prefix_${message.guild.id}`)
+    if (prefix === null) { prefix = "-" }
+
     let timeout1 = 9140000
     let author1 = await db.fetch(`pego_${message.author.id}`)
 
@@ -53,9 +56,9 @@ exports.run = async (client, message, args) => {
         if (ossos === null) { ossos = 0 }
         if (!db.get(`ossos_${message.author.id}`)) { ossos = 0 }
 
-        let madeira = await db.get(`madeira_${message.author.id}`)
-        if (madeira === null) { madeira = "0" }
-        if (!db.get(`madeira_${message.author.id}`)) { madeira = "0" }
+        let rosas = await db.get(`rosas_${message.author.id}`)
+        if (rosas === null) { rosas = "0" }
+        if (!db.get(`rosas_${message.author.id}`)) { rosas = "0" }
 
         if (user) { return message.inlineReply(`O sistema de venda inter-jogadores estará pronto dentro de 2 dias.`) }
 
@@ -156,21 +159,22 @@ exports.run = async (client, message, args) => {
             }
         }
 
-        if (['madeira', 'madeiras', 'wood', 'tronco'].includes(args[0])) {
+        if (['rosas', 'rosa'].includes(args[0])) {
 
-            if (madeira === null) { return message.inlineReply(`❌ ${message.author}, você não tem madeiras para vender.`) }
-            if (!args[1]) { return message.inlineReply('Quantas madeiras você quer vender? `' + prefix + 'sell madeira quantidade`') }
-            if (madeira < args[1]) { return message.inlineReply(`❌ ${message.author}, você não tem tudo isso de madeiras para vender.`) }
-            if (madeira == 0) { return message.inlineReply(`❌ ${message.author}, você não tem madeiras para vender.`) }
-            if (madeira < 0) { return message.inlineReply(`❌ ${message.author}, você não tem madeiras para vender.`) }
+            if (rosas === null) { return message.inlineReply(`❌ ${message.author}, você não tem rosas para vender.`) }
+            if (!args[1]) { return message.inlineReply('Quantas rosas você quer vender? `' + prefix + 'sell rosas quantidade`') }
+            if (isNaN(args[1])) { return message.inlineReply(`**${args[1]}** não é um número!`) }
+            if (rosas < args[1]) { return message.inlineReply(`❌ ${message.author}, você não tem tudo isso de rosas para vender.`) }
+            if (rosas == 0) { return message.inlineReply(`❌ ${message.author}, você não tem rosas para vender.`) }
+            if (rosas < 0) { return message.inlineReply(`❌ ${message.author}, você não tem rosas para vender.`) }
 
-            if (madeira = args[1] || madeira > args[1]) {
-                db.subtract(`madeira_${message.author.id}`, args[1])
-                db.add(`mpoints_${message.author.id}`, args[1] * 5)
+            if (rosas = args[1] || rosas > args[1]) {
+                db.subtract(`rosas_${message.author.id}`, args[1])
+                db.add(`mpoints_${message.author.id}`, args[1] * 3)
                 var buyarma = new Discord.MessageEmbed()
                     .setColor('GREEN')
                     .setTitle('✅ Venda aprovada')
-                    .setDescription(`${message.author} vendeu 🪵 ${args[1]} madeiras e obteve ${args[1] * 5}<:StarPoint:766794021128765469>MPoints`)
+                    .setDescription(`${message.author} vendeu 🌹 ${args[1]} rosas e obteve ${args[1] * 3}<:StarPoint:766794021128765469>MPoints`)
                 return message.inlineReply(buyarma)
             }
         }
@@ -178,7 +182,7 @@ exports.run = async (client, message, args) => {
         if (['maças', 'apple', 'maça', 'apples'].includes(args[0])) {
 
             if (apple === null) { return message.inlineReply(`❌ ${message.author}, você não tem maças para vender.`) }
-            if (!args[1]) { return message.inlineReply('Quantas madeiras você quer vender? `' + prefix + 'sell maças quantidade`') }
+            if (!args[1]) { return message.inlineReply('Quantas rosas você quer vender? `' + prefix + 'sell maças quantidade`') }
             if (apple < args[1]) { return message.inlineReply(`❌ ${message.author}, você não tem tudo isso de maças para vender.`) }
             if (apple == 0) { return message.inlineReply(`❌ ${message.author}, você não tem maças para vender.`) }
             if (apple < 0) { return message.inlineReply(`❌ ${message.author}, você não tem maças para vender.`) }

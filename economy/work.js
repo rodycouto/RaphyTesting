@@ -29,14 +29,14 @@ exports.run = async (client, message, args) => {
 
             var luck = ['win', 'lose', 'lose', 'lose', 'lose']
             var result = luck[Math.floor(Math.random() * luck.length)]
-            var gorgeta = [Math.floor(Math.random() * 400) + 1]
+            var gorjeta = [Math.floor(Math.random() * 400) + 1]
             db.add(`mpoints_${message.author.id}`, 33)
             db.add(`xp_${message.author.id}`, 150)
             db.set(`worked_${message.author.id}`, Date.now())
 
             if (result === "win") {
-                db.add(`mpoints_${message.author.id}`, gorgeta)
-                return message.inlineReply(`Você trabalhou e ganhou 33 <:StarPoint:766794021128765469>MPoints, 150 XP e uma gorgeta de ${gorgeta} <:StarPoint:766794021128765469>MPoints`)
+                db.add(`mpoints_${message.author.id}`, gorjeta)
+                return message.inlineReply(`Você trabalhou e ganhou 33 <:StarPoint:766794021128765469>MPoints, 150 XP e uma gorjeta de ${gorjeta} <:StarPoint:766794021128765469>MPoints`)
             }
 
             if (result === 'lose') {
