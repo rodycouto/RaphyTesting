@@ -66,7 +66,7 @@ exports.run = async (client, message, args) => {
                         db.add(`rosas_${message.mentions.members.first().id}`, rosas)
                         db.subtract(`rosas_${message.author.id}`, rosas)
                         db.add(`rp_${message.mentions.members.first().id}`, quantia * 2)
-                        return message.channel.send(`<a:Check:836347816036663309> Transação efetuada com sucesso!\n${user} recebeu: ${args[1] * 2} Reputações e ${args[2]} 🌹 Rosas`).catch(err => { return })
+                        return message.channel.send(`<a:Check:836347816036663309> Transação efetuada com sucesso!\n${user} recebeu: ${args[2] * 2} Reputações e ${args[2]} 🌹 Rosas`).catch(err => { return })
                     }
 
                     if (reaction.emoji.name === '❌') { // Não
@@ -119,7 +119,7 @@ exports.run = async (client, message, args) => {
                 let confirm2 = new Discord.MessageEmbed() // Doar quantia
                     .setColor('BLUE')
                     .setTitle('Confirmação...')
-                    .setDescription(`<a:attention:836101248183959562> Confirmar transação no valor de ${args[1]}<:StarPoint:766794021128765469>MPoints para ${user}?`)
+                    .setDescription(`<a:attention:836101248183959562> Confirmar transação no valor de ${args[2]}<:StarPoint:766794021128765469>MPoints para ${user}?`)
 
                 return message.inlineReply(confirm2).then(msg => {
                     msg.react('✅').catch(err => { return }) // Check
@@ -133,9 +133,9 @@ exports.run = async (client, message, args) => {
                         if (reaction.emoji.name === '✅') { // Sim
                             msg.delete().catch(err => { return })
 
-                            db.add(`mpoints_${message.mentions.members.first().id}`, args[1])
-                            db.subtract(`mpoints_${message.author.id}`, args[1])
-                            return message.channel.send(`<a:Check:836347816036663309> Transação efetuada com sucesso!\n${user.username} recebeu ${args[1]}<:StarPoint:766794021128765469>MPoints`).catch(err => { return })
+                            db.add(`mpoints_${message.mentions.members.first().id}`, args[2])
+                            db.subtract(`mpoints_${message.author.id}`, args[2])
+                            return message.channel.send(`<a:Check:836347816036663309> Transação efetuada com sucesso!\n${user.username} recebeu ${args[2]}<:StarPoint:766794021128765469>MPoints`).catch(err => { return })
                         }
 
                         if (reaction.emoji.name === '❌') { // Não
