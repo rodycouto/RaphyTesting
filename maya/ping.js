@@ -1,3 +1,6 @@
 exports.run = async (client, message, args) => {
-  await message.inlineReply(`⏳ ${Math.round(client.ws.ping)}ms`)
+  exports.run = async (client, message, args) => {
+    const msg = await message.inlineReply(":carregando:")
+    msg.edit(`⏳ Pings\nAPI ${Math.round(client.ws.ping)}ms\nTiming Responsive ${msg.createdTimestamp - message.createdTimestamp}ms`)
+  }
 }
