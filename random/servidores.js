@@ -4,10 +4,10 @@ exports.run = async (client, message, args) => {
 
 
 
-    var Akatsuki = 'https://discord.gg/JMvXDZHG4H'
-    var mk = 'https://discord.gg/mx8eMx6'
+    let Akatsuki = 'https://discord.gg/JMvXDZHG4H'
+    let mk = 'https://discord.gg/mx8eMx6'
 
-    var historys = new Discord.MessageEmbed()
+    let historys = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setTitle('📝 Listinha de Servidores TOP\'s')
         .setDescription(`Envie seu servidor no [suporte](https://discord.gg/TC26m4ZRV3)`)

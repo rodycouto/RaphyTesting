@@ -11,7 +11,7 @@ exports.run = async (client, message, args) => {
     let prefix = db.get(`prefix_${message.guild.id}`)
     if (prefix === null) prefix = "-"
 
-    var lan = new Discord.MessageEmbed()
+    const lan = new Discord.MessageEmbed()
         .setColor('#FF0000') // Red
         .setTitle('Siga o formato correto')
         .setDescription('`' + prefix + 't en/pt/fr/lt A frase que deseja traduzir`')
@@ -19,7 +19,7 @@ exports.run = async (client, message, args) => {
     if (!language || language.length !== 2 || !text) { return message.inlineReply(lan) }
 
     translate(args.slice(1).join(" "), { to: language }).then(res => {
-        var translateEmbed = new Discord.MessageEmbed()
+        const translateEmbed = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setAuthor(`Google Tradutor`, googlepng)
             .setDescription("```css\n" + `${res.text}` + "\n```", false)

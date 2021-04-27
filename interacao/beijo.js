@@ -3,7 +3,7 @@ const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
 
-  var list1 = [
+  let list1 = [
     'https://imgur.com/iclUiUN.gif',
     'https://imgur.com/II1bakc.gif',
     'https://imgur.com/MzAjNdv.gif',
@@ -29,7 +29,7 @@ exports.run = async (client, message, args) => {
     'https://imgur.com/4Pw0uxb.gif'
   ]
 
-  var rand1 = list1[Math.floor(Math.random() * list1.length)]
+  let rand1 = list1[Math.floor(Math.random() * list1.length)]
   let user = message.mentions.users.first()
 
   let prefix = db.get(`prefix_${message.guild.id}`)
@@ -42,7 +42,7 @@ exports.run = async (client, message, args) => {
 
   let avatar1 = user.displayAvatarURL({ format: 'png' })
 
-  var embed = new Discord.MessageEmbed()
+  let embed = new Discord.MessageEmbed()
     .setColor('BLUE')
     .setAuthor(user.username + ` aceitou o beijo de ${message.author.username}`, avatar1)
     .setImage(rand1)

@@ -7,7 +7,7 @@ exports.run = async (client, message, args) => {
     let prefix = db.get(`prefix_${message.guild.id}`)
     if (prefix === null) { prefix = "-" }
 
-    var user = message.mentions.members.first()
+    let user = message.mentions.members.first()
 
     if (!args[0]) { return message.inlineReply('Marque o seu familiar `' + prefix + 'nofamily1 @Familiar`') }
     if (args[1]) { return message.inlineReply(`<:xis:835943511932665926> Hey ${message.author}! Nada além do @user, por favor.`) }

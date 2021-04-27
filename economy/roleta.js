@@ -13,7 +13,7 @@ exports.run = async (client, message, args) => {
     if (author1 !== null && timeout1 - (Date.now() - author1) > 0) {
         let time = ms(timeout1 - (Date.now() - author1))
   
-        var presomax = new Discord.MessageEmbed()
+        let presomax = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('🚨 Você está em prisão máxima!')
             .setDescription(`Liberdade em: ${time.hours}h ${time.minutes}m e ${time.seconds}s`)
@@ -36,10 +36,10 @@ exports.run = async (client, message, args) => {
             let formato = 'Siga o formato correto: `' + prefix + 'roleta valor`'
             let valor = args[0]
 
-            var chances = ["win", "lose", "empate"]
+            let chances = ["win", "lose", "empate"]
             let result = chances[Math.floor(Math.random() * chances.length)]
 
-            var roletaembed = new Discord.MessageEmbed()
+            let roletaembed = new Discord.MessageEmbed()
                 .setColor('BLUE')
                 .setTitle('🎲 Roleta Maya')
                 .setDescription('<:pikachu:833378638291271680> Seja muito bem vindo a Roleta Maya!\n \n❓ **O que é a Roleta Maya?**\n- A Roleta é um simples jogo onde você ganha ou perde dinheiro.\n \nA Roleta consiste em uma variavel de sorte, onde depende de um resultado aleatório para você ganhar.')
@@ -69,21 +69,21 @@ exports.run = async (client, message, args) => {
                 let winprize = winratemoney[Math.floor(Math.random() * winratemoney.length)]
                 let finalprize = winprize + cache
 
-                var jogando = new Discord.MessageEmbed()
+                let jogando = new Discord.MessageEmbed()
                     .setColor('BLUE')
                     .setDescription(`🔄 ${message.author} iniciou um jogo na roleta apostando todo o dinheiro da carteira...`)
 
-                var winembed = new Discord.MessageEmbed()
+                let winembed = new Discord.MessageEmbed()
                     .setColor('GREEN')
                     .setTitle('💰 GANHOU!')
                     .setDescription(`${message.author} apostou tudo na roleta e faturou ${winprize}<:StarPoint:766794021128765469>MPoints`)
 
-                var loseembed = new Discord.MessageEmbed()
+                let loseembed = new Discord.MessageEmbed()
                     .setColor('#FF0000')
                     .setTitle('❌ PERDEU!')
                     .setDescription(`${message.author} jogou na roleta e perdeu todo o dinheiro da carteira.`)
 
-                var empateembed = new Discord.MessageEmbed()
+                let empateembed = new Discord.MessageEmbed()
                     .setColor('YELLOW')
                     .setTitle('🏷️ EMPATE')
                     .setDescription(`${message.author} apostou tudo na roleta e não ganhou nada.`)
@@ -141,21 +141,21 @@ exports.run = async (client, message, args) => {
             let winprize = winratemoney[Math.floor(Math.random() * winratemoney.length)]
             let finalprize = winprize + cache
 
-            var jogando = new Discord.MessageEmbed()
+            let jogando = new Discord.MessageEmbed()
                 .setColor('BLUE')
                 .setDescription(`🔄 ${message.author} iniciou um jogo na roleta...`)
 
-            var winembed = new Discord.MessageEmbed()
+            let winembed = new Discord.MessageEmbed()
                 .setColor('GREEN')
                 .setTitle('💰 GANHOU!')
                 .setDescription(`${message.author} apostou ${args[0]} na roleta e faturou ${winprize}<:StarPoint:766794021128765469>MPoints`)
 
-            var loseembed = new Discord.MessageEmbed()
+            let loseembed = new Discord.MessageEmbed()
                 .setColor('#FF0000')
                 .setTitle('❌ PERDEU!')
                 .setDescription(`${message.author} jogou na roleta e perdeu ${valor}<:StarPoint:766794021128765469>MPoints`)
 
-            var empateembed = new Discord.MessageEmbed()
+            let empateembed = new Discord.MessageEmbed()
                 .setColor('YELLOW')
                 .setTitle('🏷️ EMPATE')
                 .setDescription(`${message.author} jogou na roleta e não ganhou nada.`)

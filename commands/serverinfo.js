@@ -26,7 +26,7 @@ exports.run = async (client, message, args) => {
             break
     }
 
-    let embed = new Discord.MessageEmbed()
+    const embed = new Discord.MessageEmbed()
         .setThumbnail(message.guild.iconURL({ dynamic: true }))
         .setColor('#f3f3f3')
         .setTitle(`${message.guild.name}`)

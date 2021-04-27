@@ -4,7 +4,7 @@ exports.run = async (client, message, args) => {
 
 
 
-  var list = [
+  let list = [
     'https://imgur.com/IWcnsVz.gif',
     'https://imgur.com/ykbbyeG.gif',
     'https://imgur.com/DvXtkrp.gif',
@@ -29,11 +29,11 @@ exports.run = async (client, message, args) => {
     'https://imgur.com/UQzU1kl.gif'
   ]
 
-  var rand = list[Math.floor(Math.random() * list.length)]
-  var texto = args.join(" ")
+  let rand = list[Math.floor(Math.random() * list.length)]
+  let texto = args.join(" ")
   if (!texto) texto = `${message.author}`
 
-  var embed = new Discord.MessageEmbed()
+  let embed = new Discord.MessageEmbed()
     .setColor('BLUE')
     .setDescription(`${texto}`)
     .setImage(rand)
@@ -49,7 +49,7 @@ exports.run = async (client, message, args) => {
       if (reaction.emoji.name === '🔄') { // 1º Embed - Principal
         reaction.users.remove(user)
 
-        var embed = new Discord.MessageEmbed()
+        let embed = new Discord.MessageEmbed()
           .setColor('BLUE')
           .setDescription(`${texto}`)
           .setImage(list[Math.floor(Math.random() * list.length)])

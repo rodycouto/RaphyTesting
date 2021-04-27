@@ -3,7 +3,7 @@ const Discord = require('discord.js')
 exports.run = async (client, message, args) => {
 
 
-  var list = [
+  let list = [
     'https://imgur.com/9zEHFOj.gif',
     'https://imgur.com/Q24PF7s.gif',
     'https://imgur.com/EZgl4vG.gif',
@@ -16,8 +16,8 @@ exports.run = async (client, message, args) => {
     'https://imgur.com/rZkPeYR.gif'
   ]
 
-  var rand = list[Math.floor(Math.random() * list.length)]
-  var texto = args.join(" ")
+  let rand = list[Math.floor(Math.random() * list.length)]
+  let texto = args.join(" ")
   if (!texto) texto = `${message.author}`
 
   const embed = new Discord.MessageEmbed()

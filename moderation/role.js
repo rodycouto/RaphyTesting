@@ -9,7 +9,7 @@ exports.run = async (client, message, args) => {
   let prefix = db.get(`prefix_${message.guild.id}`)
   if (prefix === null) prefix = "-"
 
-  var embed = new Discord.MessageEmbed()
+  let embed = new Discord.MessageEmbed()
     .setColor('BLUE')
     .setTitle('🛠️ Gerenciamento de Cargos')
     .setDescription('Crie e delete cargos no servidor de maneira rápida e prática.')
@@ -17,7 +17,7 @@ exports.run = async (client, message, args) => {
     .addField('Delete um cargo', '`' + prefix + 'role delete Nome do Cargo`')
     .addField('Veja informações', '`' + prefix + 'role info @cargo`')
 
-  var formato = '<:xis:835943511932665926> Siga o formato correto! `' + prefix + 'role create/delete Nome Do Cargo`'
+  let formato = '<:xis:835943511932665926> Siga o formato correto! `' + prefix + 'role create/delete Nome Do Cargo`'
 
   if (!args[0]) { return message.inlineReply(embed) }
 
@@ -65,7 +65,7 @@ exports.run = async (client, message, args) => {
     let RoleName = args.slice(1).join(" ")
     if (!RoleName) { return message.channel.send(formato) }
 
-    var confirm = new Discord.MessageEmbed()
+    let confirm = new Discord.MessageEmbed()
       .setColor('BLUE')
       .setTitle('Confirmação')
       .setDescription(`Você confirma a criação do cargo: **${args.slice(1).join(" ")}** ?`)
@@ -97,7 +97,7 @@ exports.run = async (client, message, args) => {
     if (!RoleToDelete) { return message.channel.send(formato) }
 
     if (!RoleToDelete.editable) {
-      var soberol = new Discord.MessageEmbed()
+      let soberol = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setTitle('Meu cargo não é alto o suficiente.')
         .addFields(
@@ -107,7 +107,7 @@ exports.run = async (client, message, args) => {
           }
         )
 
-      var sobcarg = new Discord.MessageEmbed()
+      let sobcarg = new Discord.MessageEmbed()
         .setColor('#FF0000')
         .setDescription('<a:carregando:836101628083437608> Um erro foi encontrado. Buscando solução...')
 
@@ -117,7 +117,7 @@ exports.run = async (client, message, args) => {
       return message.inlineReply(sobcarg).then(msg => msg.delete({ timeout: 5700 }))
     }
 
-    var confirm1 = new Discord.MessageEmbed()
+    let confirm1 = new Discord.MessageEmbed()
       .setColor('BLUE')
       .setTitle('Confirmação')
       .setDescription(`Você confirma a exclusão do cargo: **${args.slice(1).join(" ")}** ?`)

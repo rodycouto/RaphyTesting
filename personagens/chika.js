@@ -3,7 +3,7 @@ const Discord = require('discord.js')
 exports.run = async (client, message, args) => {
 
 
-    var list = [
+    let list = [
         'https://imgur.com/Iuaiyp7.png',
         'https://imgur.com/cMrsyls.gif',
         'https://imgur.com/3qZ0lf6.gif',
@@ -19,9 +19,9 @@ exports.run = async (client, message, args) => {
         'https://imgur.com/qoOALJI.gif'
     ]
 
-    var gif = list[Math.floor(Math.random() * list.length)]
+    let gif = list[Math.floor(Math.random() * list.length)]
 
-    var chika = new Discord.MessageEmbed()
+    let chika = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setImage(gif)
 
@@ -35,7 +35,7 @@ exports.run = async (client, message, args) => {
 
             if (reaction.emoji.name === '🔄') { // 1º Embed - Principal
                 reaction.users.remove(user)
-                var chika = new Discord.MessageEmbed()
+                let chika = new Discord.MessageEmbed()
                     .setColor('BLUE')
                     .setImage(list[Math.floor(Math.random() * list.length)])
                 msg.edit(chika)

@@ -7,8 +7,8 @@ exports.run = async (client, message, args) => {
     if (level < 10) { return message.inlineReply('🚫 Libere este comando no level 10') }
     if (args[0]) { return message.inlineReply('Por favor, utilize apenas o comando, sem nada na frente. Informações desnecessárias atrapalham meu processamento.') }
 
-    var linkserver = 'https://discord.gg/YpFWgJuuUV'
-    var embed = new Discord.MessageEmbed()
+    let linkserver = 'https://discord.gg/YpFWgJuuUV'
+    const embed = new Discord.MessageEmbed()
         .setColor('#1e3ddf')
         .setTitle('BETA - Dicas da Maya - CommandFile')
         .setDescription('Permite você usar comandos em outras pastas e diminuir o tamanho do index')

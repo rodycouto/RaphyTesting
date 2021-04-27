@@ -4,16 +4,16 @@ exports.run = async (client, message, args) => {
 
   if (args[0]) { return message.inlineReply('Por favor, utilize apenas o comando, sem nada na frente. Informações desnecessárias atrapalham meu processamento.') }
 
-  var game = 'Counter-Strike: Global Offensive'
-  var link1 = 'https://store.steampowered.com/app/730/CounterStrike_Global_Offensive/'
-  var st = 'Steam'
-  var pt = 'PlayStation'
-  var win = 'Microsoft Windows'
-  var x = 'Xbox'
-  var mc = 'MacOS'
-  var li = 'Linux'
+  let game = 'Counter-Strike: Global Offensive'
+  let link1 = 'https://store.steampowered.com/app/730/CounterStrike_Global_Offensive/'
+  let st = 'Steam'
+  let pt = 'PlayStation'
+  let win = 'Microsoft Windows'
+  let x = 'Xbox'
+  let mc = 'MacOS'
+  let li = 'Linux'
 
-  var GameEmbed = new Discord.MessageEmbed()
+  let GameEmbed = new Discord.MessageEmbed()
     .setColor('BLUE')
     .setTitle(`${game}`)
     .addField(`${st}`, `${link1}`)

@@ -3,7 +3,7 @@ const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
 
-    var user = message.mentions.members.first()
+    let user = message.mentions.members.first()
     let prefix = db.get(`prefix_${message.guild.id}`)
     if (prefix === null) prefix = "-"
 
@@ -12,15 +12,15 @@ exports.run = async (client, message, args) => {
 
     if (user.id === message.author.id) { return message.inlineReply('Você não pode usar este comando com você mesmo.') }
 
-    var list = ['win', 'lose']
-    var result = list[Math.floor(Math.random() * list.length)]
+    let list = ['win', 'lose']
+    let result = list[Math.floor(Math.random() * list.length)]
 
-    var lutando = new Discord.MessageEmbed()
+    let lutando = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setTitle('⚔️ Lutando...')
 
     if (result === 'win') {
-        var vitória = new Discord.MessageEmbed()
+        let vitória = new Discord.MessageEmbed()
             .setColor('GREEN')
             .setTitle('👑 Vitória')
             .setDescription(`${message.author} ganhou a luta contra ${user}`)
@@ -29,7 +29,7 @@ exports.run = async (client, message, args) => {
     }
 
     if (result === 'lose') {
-        var derrota = new Discord.MessageEmbed()
+        let derrota = new Discord.MessageEmbed()
             .setColor('RED')
             .setTitle('⛑️ Derrota')
             .setDescription(`${message.author} perdeu a luta contra ${user}`)

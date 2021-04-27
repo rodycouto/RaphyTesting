@@ -3,7 +3,7 @@ const Discord = require('discord.js')
 exports.run = async (client, message, args) => {
 
 
-    var list = [
+    let list = [
         'https://imgur.com/vV4hpLj.gif',
         'https://imgur.com/WzIRoEy.gif',
         'https://imgur.com/kOrLZ2t.gif',
@@ -16,9 +16,9 @@ exports.run = async (client, message, args) => {
         'https://imgur.com/acSah5H.gif'
     ]
 
-    var gif = list[Math.floor(Math.random() * list.length)]
+    let gif = list[Math.floor(Math.random() * list.length)]
 
-    var gojo = new Discord.MessageEmbed()
+    let gojo = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setImage(gif)
 
@@ -32,7 +32,7 @@ exports.run = async (client, message, args) => {
 
             if (reaction.emoji.name === '🔄') { // 1º Embed - Principal
                 reaction.users.remove(user)
-                var gojo = new Discord.MessageEmbed()
+                let gojo = new Discord.MessageEmbed()
                     .setColor('BLUE')
                     .setImage(list[Math.floor(Math.random() * list.length)])
                 msg.edit(gojo)

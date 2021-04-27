@@ -3,7 +3,7 @@ const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
 
-    var list = [
+    let list = [
         'https://imgur.com/LFZfUsJ.gif',
         'https://imgur.com/Yvhlp1r.gif',
         'https://imgur.com/TQ6FcAG.gif',
@@ -15,7 +15,7 @@ exports.run = async (client, message, args) => {
         'https://imgur.com/L9qnxnv.gif'
     ]
 
-    var list1 = [
+    let list1 = [
         'https://imgur.com/LFZfUsJ.gif',
         'https://imgur.com/Yvhlp1r.gif',
         'https://imgur.com/TQ6FcAG.gif',
@@ -27,15 +27,15 @@ exports.run = async (client, message, args) => {
         'https://imgur.com/L9qnxnv.gif'
     ]
 
-    var rand = list[Math.floor(Math.random() * list.length)]
-    var rand1 = list1[Math.floor(Math.random() * list1.length)]
+    let rand = list[Math.floor(Math.random() * list.length)]
+    let rand1 = list1[Math.floor(Math.random() * list1.length)]
     let user = message.mentions.users.first()
 
     if (!user) {
         let prefix = db.get(`prefix_${message.guild.id}`)
         if (prefix === null) prefix = "-"
 
-        var nouser = new Discord.MessageEmbed()
+        let nouser = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Erroooou')
             .setDescription('`' + prefix + 'cutucar @user`')
@@ -52,13 +52,13 @@ exports.run = async (client, message, args) => {
 
     let avatar = message.author.displayAvatarURL({ format: 'png' })
     let avatar1 = user.displayAvatarURL({ format: 'png' })
-    var embed = new Discord.MessageEmbed()
+    let embed = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setDescription(`${message.author} está te cutucando ${user}`, avatar)
         .setImage(rand)
         .setFooter('Clique em 🔁 para retribuir')
 
-    var embed2 = new Discord.MessageEmbed()
+    let embed2 = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setDescription(`${user} também cutucou você ${message.author} `, avatar1)
         .setImage(rand1)

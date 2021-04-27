@@ -6,7 +6,7 @@ exports.run = async (client, message, args) => {
     let prefix = db.get(`prefix_${message.guild.id}`)
     if (prefix === null) prefix = "-"
 
-    var itens = new Discord.MessageEmbed()
+    let itens = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setTitle('📋 Itens e suas funções')
         .setDescription('Todos os dados de todos os itens aqui em baixo')

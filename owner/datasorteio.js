@@ -9,7 +9,7 @@ exports.run = async (client, message, args) => {
 
     if (!args[0]) { return message.channel.send('Faltou dizer a data') }
 
-    var data = args.join(" ")
+    let data = args.join(" ")
 
     db.set('datasorteio', data)
     return message.inlineReply('Feito!')

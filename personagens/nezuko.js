@@ -3,7 +3,7 @@ const Discord = require('discord.js')
 exports.run = async (client, message, args) => {
 
 
-    var NezukoList = [
+    let NezukoList = [
         'https://imgur.com/aXAIvkS.gif',
         'https://imgur.com/MZjgryh.gif',
         'https://imgur.com/7KtfCMh.gif',
@@ -12,9 +12,9 @@ exports.run = async (client, message, args) => {
         'https://imgur.com/lagU5oh.gif',
     ]
 
-    var gif = NezukoList[Math.floor(Math.random() * NezukoList.length)]
+    let gif = NezukoList[Math.floor(Math.random() * NezukoList.length)]
 
-    var nezukoo = new Discord.MessageEmbed()
+    let nezukoo = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setImage(gif)
 
@@ -28,7 +28,7 @@ exports.run = async (client, message, args) => {
 
             if (reaction.emoji.name === '🔄') { // 1º Embed - Principal
                 reaction.users.remove(user)
-                var nezukoo = new Discord.MessageEmbed()
+                let nezukoo = new Discord.MessageEmbed()
                     .setColor('BLUE')
                     .setImage(NezukoList[Math.floor(Math.random() * NezukoList.length)])
                 msg.edit(nezukoo)

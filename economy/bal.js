@@ -13,7 +13,7 @@ exports.run = async (client, message, args) => {
   let bank = db.get(`banco_${user.id}`)
   if (bank === null) bank = 0
 
-  var list = [
+  let list = [
     'Pessoas podem te roubar, tenha cuidado.',
     'Mantenha seu dinheiro no banco',
     'Sabia que você pode roubar o dinheiro de outras pessoas?',
@@ -33,9 +33,9 @@ exports.run = async (client, message, args) => {
     'Já apostou na loteria hoje?'
   ]
 
-  var frase = list[Math.floor(Math.random() * list.length)]
+  let frase = list[Math.floor(Math.random() * list.length)]
 
-  var embed = new Discord.MessageEmbed()
+  const embed = new Discord.MessageEmbed()
     .setColor('#efff00')
     .setAuthor(`Finanças de ${user.user.tag}`, user.user.displayAvatarURL())
     .setThumbnail(user.user.displayAvatarURL({ dynamic: true }))

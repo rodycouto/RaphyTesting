@@ -6,7 +6,7 @@ exports.run = async (client, message, args) => {
     let prefix = db.get(`prefix_${message.guild.id}`)
     if (prefix === null) { prefix = "-" }
 
-    var commands = new Discord.MessageEmbed()
+    let commands = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setTitle('📋 Comandos Exclusivos de Adição (OWNER)')
         .setDescription('Com este comando, o meu criador torna possivel a adição de qualquer item da loja para qualquer pessoa.')
@@ -14,7 +14,7 @@ exports.run = async (client, message, args) => {
 
     if (!args[0]) { return message.inlineReply(commands) }
 
-    var rody = message.author.id === ("451619591320371213")
+    let rody = message.author.id === ("451619591320371213")
     if (!rody) {
         message.delete().catch(err => { return })
         return message.inlineReply('⚠️ Este comando é um restrito.').then(msg => msg.delete({ timeout: 5000 }))

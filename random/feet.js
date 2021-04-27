@@ -4,7 +4,7 @@ exports.run = async (client, message, args) => {
 
 
 
-  var list = [
+  let list = [
     'https://imgur.com/LHYGFv9.gif',
     'https://imgur.com/nejyn8e.gif',
     'https://imgur.com/Iv7XODR.gif',
@@ -16,8 +16,8 @@ exports.run = async (client, message, args) => {
     'https://imgur.com/gtGkba6.gif'
   ]
   
-  var rand = list[Math.floor(Math.random() * list.length)]
-  var embed = new Discord.MessageEmbed()
+  let rand = list[Math.floor(Math.random() * list.length)]
+  let embed = new Discord.MessageEmbed()
     .setColor('#000000')
     .setDescription(`Um pézinho pra você :thumbsup: ${message.author}`)
     .setImage(rand)

@@ -6,9 +6,9 @@ exports.run = async (client, message, args) => {
 
     let prefix = db.get(`prefix_${message.guild.id}`)
     if (prefix === null) prefix = "-"
-    var formato = '`' + prefix + 'assaltar @user`, dúvidas? use `' + prefix + 'assaltar`'
+    let formato = '`' + prefix + 'assaltar @user`, dúvidas? use `' + prefix + 'assaltar`'
 
-    var noargs1 = new Discord.MessageEmbed()
+    const noargs1 = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setTitle('🥷 Comando Assaltar')
         .setDescription('O comando assaltar te garante 100% do dinheiro que o @user tem na carteira.\n \nCaso a pessoa que você assaltar também tenha uma arma, você tem a chance de ser assaltado de volta, preso, se ferir e perder dinheiro do próprio banco para tratamento.')
@@ -33,7 +33,7 @@ exports.run = async (client, message, args) => {
     if (author1 !== null && timeout1 - (Date.now() - author1) > 0) {
         let time = ms(timeout1 - (Date.now() - author1))
 
-        var presomax = new Discord.MessageEmbed()
+        const presomax = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('🚨 Você está em prisão máxima!')
             .setDescription(`Liberdade em: ${time.hours}h ${time.minutes}m e ${time.seconds}s`)
@@ -49,7 +49,7 @@ exports.run = async (client, message, args) => {
             return message.inlineReply(`Você está preso! Liberdade em: ${time.minutes}m e ${time.seconds}s`)
         } else {
 
-            var timeout = 1040000
+            let timeout = 1040000
             let daily = db.get(`assaltotime_${message.author.id}`)
             if (daily !== null && timeout - (Date.now() - daily) > 0) {
                 let time = ms(timeout - (Date.now() - daily))
@@ -67,30 +67,30 @@ exports.run = async (client, message, args) => {
 
                 if (gunuser) {
 
-                    var luck = ['win', 'lose', 'preso', 'win', 'ferido']
+                    let luck = ['win', 'lose', 'preso', 'win', 'ferido']
                     let result = luck[Math.floor(Math.random() * luck.length)]
                     let tratamento = Math.floor(Math.random() * 5000) + 1
 
-                    var assaltando = new Discord.MessageEmbed()
+                    const assaltando = new Discord.MessageEmbed()
                         .setColor('BLUE')
                         .setDescription(`<a:carregando:836101628083437608> ${message.author} está assaltando ${user}`)
 
-                    var LoseEmbed = new Discord.MessageEmbed()
+                    const LoseEmbed = new Discord.MessageEmbed()
                         .setColor('#FF0000')
                         .setTitle("🔫 O assalto falhou!!")
                         .setDescription(`${user} reagiu mais rápido que você e te assaltou!\n \nVocê perdeu ${amount}<:StarPoint:766794021128765469>MPoints`)
 
-                    var WinEmbed = new Discord.MessageEmbed()
+                    const WinEmbed = new Discord.MessageEmbed()
                         .setColor("GREEN")
                         .setTitle(`🔫 Você assaltou ${user.user.username} com sucesso!`)
                         .setDescription(`${message.author} assaltou todo o dinheiro de ${user} e obteve ${db.get(`mpoints_${user.id}`)}<:StarPoint:766794021128765469>MPoints`)
 
-                    var PresoEmbed = new Discord.MessageEmbed()
+                    const PresoEmbed = new Discord.MessageEmbed()
                         .setColor('#FF0000')
                         .setTitle('🚨 Preso!')
                         .setDescription(`${user} te rendeu e você foi preso sem direito a fiança!`)
 
-                    var FeridoEmbed = new Discord.MessageEmbed()
+                    const FeridoEmbed = new Discord.MessageEmbed()
                         .setColor('#FF0000')
                         .setTitle('🚑 Você levou um tiro!')
                         .setDescription(`${user} atirou em você! Você está ferido e precisa de tratamentos rápido!`)
@@ -137,15 +137,15 @@ exports.run = async (client, message, args) => {
 
                 if (!gunuser) {
 
-                    var luck1 = ['win', 'lose']
+                    let luck1 = ['win', 'lose']
                     let result1 = luck1[Math.floor(Math.random() * luck1.length)]
 
-                    let AssaltEmbed = new Discord.MessageEmbed()
+                    const AssaltEmbed = new Discord.MessageEmbed()
                         .setColor("GREEN")
                         .setTitle(`🔫 Você assaltou ${user.user.username} com sucesso!`)
                         .setDescription(`${message.author} assaltou todo o dinheiro de ${user} e obteve ${db.get(`mpoints_${user.id}`)}<:StarPoint:766794021128765469>MPoints`)
 
-                    var PresoEmbed = new Discord.MessageEmbed()
+                    const PresoEmbed = new Discord.MessageEmbed()
                         .setColor('#FF0000')
                         .setTitle('🚨 Preso!')
                         .setDescription(`Havia policía por perto e você foi preso sem direito a fiança!`)

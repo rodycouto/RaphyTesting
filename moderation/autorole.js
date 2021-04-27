@@ -3,12 +3,12 @@ const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
 
-    var role = db.get(`autorole_${message.guild.id}`)
+    let role = db.get(`autorole_${message.guild.id}`)
     let prefix = db.get(`prefix_${message.guild.id}`)
     if (prefix === null) prefix = "-"
 
     if (role) {
-        var autoroleautal = new Discord.MessageEmbed()
+        let autoroleautal = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setTitle('Autorole System está ativado')
             .setDescription(`Cargo atual: <@&${role}>`)
@@ -29,7 +29,7 @@ exports.run = async (client, message, args) => {
     }
 
     if (role === null) {
-        var autoroleautal = new Discord.MessageEmbed()
+        let autoroleautal = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setTitle('Autorole System está desativado')
             .setDescription(`Cargo atual: Nenhum`)

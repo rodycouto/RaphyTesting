@@ -2,7 +2,7 @@ const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
 
-  var list = [
+  let list = [
     'https://imgur.com/AD3MbBi.gif',
     'https://imgur.com/O3EIPHp.gif',
     'https://imgur.com/KWvtdg0.gif',
@@ -19,10 +19,10 @@ exports.run = async (client, message, args) => {
     'https://imgur.com/xmaQyK4.gif'
   ]
 
-  var rand = list[Math.floor(Math.random() * list.length)]
+  let rand = list[Math.floor(Math.random() * list.length)]
   let user = client.users.cache.get(args[0])
 
-  var embed = new Discord.MessageEmbed()
+  let embed = new Discord.MessageEmbed()
     .setColor('#000000')
     .setDescription(`Filhotinhooo :hearts: :cat:`)
     .setImage(rand)

@@ -7,7 +7,7 @@ exports.run = async (client, message, args) => {
     if (prefix === null) { prefix = "-" }
 
     if (!args[0]) {
-        var commands = new Discord.MessageEmbed()
+        let commands = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setTitle('📋 Comandos Exclusivos de Delete (OWNER)')
             .setDescription('Com este comando, o meu criador torna possivel a opção de Deletar qualquer item de qualquer pessoa.')
@@ -15,7 +15,7 @@ exports.run = async (client, message, args) => {
         return message.inlineReply(commands)
     }
 
-    var rody = message.author.id === ("451619591320371213")
+    let rody = message.author.id === ("451619591320371213")
     if (!rody) {
         message.delete().catch(err => { return })
         return message.inlineReply('⚠️ Este comando é um restrito.').then(msg => msg.delete({ timeout: 5000 }))
@@ -107,7 +107,7 @@ exports.run = async (client, message, args) => {
 
     if (['xpid', 'levelid'].includes(args[0])) {
 
-        var id = args[1]
+        let id = args[1]
         if (!id) { return message.inlineReply('`' + prefix + 'del xpid @user`') }
 
         db.delete(`xp_${id}`)

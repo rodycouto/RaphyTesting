@@ -5,20 +5,20 @@ exports.run = async (client, message, args) => {
   message.delete().catch(err => { return })
 
   if (!message.member.permissions.has("MANAGE_MESSAGES")) {
-    var perms = new Discord.MessageEmbed()
+    let perms = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Permissão Necessária: Manusear Mensagens')
     return message.channel.send(perms).then(message => message.delete({ timeout: 5000 })).catch(err => { return })
   }
 
   if (!message.guild.me.hasPermission("MANAGE_MESSAGES")) {
-    var adm = new Discord.MessageEmbed()
+    let adm = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Eu preciso da permissão "Manusear Mensagens" para utilizar esta função.')
     return message.channel.send(adm)
   }
 
-  var clearembed = new Discord.MessageEmbed()
+  let clearembed = new Discord.MessageEmbed()
     .setColor("BLUE")
     .setTitle("🧹 Comando Clear 🧹")
     .setDescription("Use o comando clear para fazer aquela limpa nas mensagens")

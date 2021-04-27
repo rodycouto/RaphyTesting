@@ -4,32 +4,32 @@ const db = require('quick.db')
 exports.run = async (client, message, args) => {
 
     if (!message.member.permissions.has("MOVE_MEMBERS")) {
-        var noperms = new Discord.MessageEmbed()
+        let noperms = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Permissão necessária: Mover Membros')
         return message.inlineReply(noperms)
     }
 
     if (!message.guild.me.hasPermission("MOVE_MEMBERS")) {
-        var adm = new Discord.MessageEmbed()
+        let adm = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Eu preciso da permissão "Mover Membros" para utilizar esta função.')
         return message.inlineReply(adm)
     }
 
     if (!message.member.voice.channel) {
-        var canal = new Discord.MessageEmbed()
+        let canal = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Você não está em nenhum canal de voz.')
         return message.inlineReply(canal)
     }
 
-    var member = message.mentions.members.first()
+    let member = message.mentions.members.first()
     if (!member) {
         let prefix = db.get(`prefix_${message.guild.id}`)
         if (prefix === null) prefix = "-"
 
-        var noform = new Discord.MessageEmbed()
+        let noform = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Siga o formato correto')
             .setDescription('`' + prefix + 'move @user`')
@@ -37,20 +37,20 @@ exports.run = async (client, message, args) => {
     }
 
     if (db.get(`whitelist_${member.id}`)) {// Rodrigo Couto
-        var banrody = new Discord.MessageEmbed()
+        let banrody = new Discord.MessageEmbed()
             .setColor('GREEN')
             .setTitle(member.user.username + ' está na whitelist.')
         return message.inlineReply(banrody)
     }
 
     if (member.permissions.has("MANAGE_CHANNELS", "ADMINISTRATOR", "BAN_MEMBERS", "MANAGE_ROLES")) {
-        var perms = new Discord.MessageEmbed()
+        let perms = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle(`Eu não posso mover ${member.user.username}.`)
         return message.inlineReply(perms)
     }
     if (!member.voice.channel) {
-        var permsc = new Discord.MessageEmbed()
+        let permsc = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle(`${member.user.username} não está em nenhum canal de voz.`)
         return message.inlineReply(permsc)

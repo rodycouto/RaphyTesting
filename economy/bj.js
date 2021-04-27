@@ -14,7 +14,7 @@ exports.run = async (client, message, args) => {
   if (author1 !== null && timeout1 - (Date.now() - author1) > 0) {
     let time = ms(timeout1 - (Date.now() - author1))
 
-    var presomax = new Discord.MessageEmbed()
+    const presomax = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('🚨 Você está em prisão máxima!')
       .setDescription(`Liberdade em: ${time.hours}h ${time.minutes}m e ${time.seconds}s`)
@@ -31,7 +31,7 @@ exports.run = async (client, message, args) => {
     if (!args[0]) {
       let prefix = db.get(`prefix_${message.guild.id}`)
       if (prefix === null) prefix = '-'
-      var noargs = new Discord.MessageEmbed()
+      const noargs = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setTitle(':spades: :hearts: 21 Pontos - Blackjack :clubs: :diamonds:')
         .setDescription('Precisa de ajuda? `' + prefix + 'bjhelp`')
@@ -43,7 +43,7 @@ exports.run = async (client, message, args) => {
       let prefix = db.get(`prefix_${message.guild.id}`)
       if (prefix === null) prefix = '-'
 
-      var nomumber = new Discord.MessageEmbed()
+      const nomumber = new Discord.MessageEmbed()
         .setColor('#FF0000')
         .setTitle('Qual o valor que deseja apostar?')
         .setDescription('Dinheiro disponivel: ' + moneydb + '<:StarPoint:766794021128765469>')
@@ -53,21 +53,21 @@ exports.run = async (client, message, args) => {
     }
 
     if (moneydb === null) {
-      var nomumber = new Discord.MessageEmbed()
+      const nomumber = new Discord.MessageEmbed()
         .setColor('#FF0000')
         .setTitle("Você não tem dinheiro suficiente")
       message.inlineReply(nomumber)
       return
     }
 
-    var numCardsPulled = 0
-    var gameOver = false
+    let numCardsPulled = 0
+    let gameOver = false
 
-    var player = { cards: [], score: 0 }
-    var dealer = { cards: [], score: 0 }
+    let player = { cards: [], score: 0 }
+    let dealer = { cards: [], score: 0 }
 
     function getCardsValue(a) {
-      var cardArray = []
+      let cardArray = []
       sum = 0,
         i = 0,
         dk = 10.5,
@@ -93,10 +93,10 @@ exports.run = async (client, message, args) => {
       return sum;
     }
 
-    var deck = {
+    let deck = {
       deckArray: [],
       initialize: function () {
-        var suitArray, rankArray, s, r, n;
+        let suitArray, rankArray, s, r, n;
         suitArray = ["clubes", "Diamantes", "corações", "espadas"];
         rankArray = [2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K", "A"];
         n = 13;
@@ -110,7 +110,7 @@ exports.run = async (client, message, args) => {
         }
       },
       shuffle: function () {
-        var temp, i, rnd;
+        let temp, i, rnd;
         for (i = 0; i < this.deckArray.length; i += 1) {
           rnd = Math.floor(Math.random() * this.deckArray.length);
           temp = this.deckArray[i];
@@ -175,7 +175,7 @@ exports.run = async (client, message, args) => {
         dealerMsg += " = " + dealer.score.toString()
       }
 
-      var gambleEmbed = new Discord.MessageEmbed()
+      const gambleEmbed = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setAuthor(`${message.author.username} começou um BlackJack!`, message.author.displayAvatarURL())
         .addField('Suas Cartas', '**' + cardsMsg + '**')

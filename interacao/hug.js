@@ -3,7 +3,7 @@ const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
 
-  var list = [
+  let list = [
     'https://imgur.com/uXL0iTg.gif',
     'https://imgur.com/U8W2LSy.gif',
     'https://imgur.com/Y0rsWyI.gif',
@@ -28,7 +28,7 @@ exports.run = async (client, message, args) => {
     'https://imgur.com/koFG06W.gif'
   ]
 
-  var list1 = [
+  let list1 = [
     'https://imgur.com/uXL0iTg.gif',
     'https://imgur.com/U8W2LSy.gif',
     'https://imgur.com/Y0rsWyI.gif',
@@ -53,8 +53,8 @@ exports.run = async (client, message, args) => {
     'https://imgur.com/koFG06W.gif'
   ]
 
-  var rand = list[Math.floor(Math.random() * list.length)]
-  var rand1 = list1[Math.floor(Math.random() * list1.length)]
+  let rand = list[Math.floor(Math.random() * list.length)]
+  let rand1 = list1[Math.floor(Math.random() * list1.length)]
   let user = message.mentions.users.first()
 
   let prefix = db.get(`prefix_${message.guild.id}`)
@@ -64,7 +64,7 @@ exports.run = async (client, message, args) => {
 
   if (user.id === '821471191578574888') {
     let avatar = message.author.displayAvatarURL({ format: 'png' })
-    var embed1 = new Discord.MessageEmbed()
+    let embed1 = new Discord.MessageEmbed()
       .setColor('BLUE')
       .setAuthor(message.author.username + ` está abraçando ${user.username}`, avatar)
       .setImage(rand)
@@ -77,13 +77,13 @@ exports.run = async (client, message, args) => {
   let avatar = message.author.displayAvatarURL({ format: 'png' })
   let avatar1 = user.displayAvatarURL({ format: 'png' })
 
-  var embed = new Discord.MessageEmbed()
+  let embed = new Discord.MessageEmbed()
     .setColor('BLUE')
     .setAuthor(message.author.username + ` está abraçando `, avatar)
     .setImage(rand)
     .setFooter('Clique em 🔁 para retribuir')
 
-  var embed2 = new Discord.MessageEmbed()
+  let embed2 = new Discord.MessageEmbed()
     .setColor('BLUE')
     .setAuthor(user.username + ` retribuiu o abraço de ${message.author.username}`, avatar1)
     .setImage(rand1)

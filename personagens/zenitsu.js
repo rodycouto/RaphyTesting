@@ -3,7 +3,7 @@ const Discord = require('discord.js')
 exports.run = async (client, message, args) => {
 
 
-    var list = [
+    let list = [
         'https://imgur.com/RJyI598.gif',
         'https://imgur.com/arkqlmx.gif',
         'https://imgur.com/1Hhsqfu.gif',
@@ -18,9 +18,9 @@ exports.run = async (client, message, args) => {
         'https://imgur.com/akmnXUc.gif'
     ]
 
-    var gif = list[Math.floor(Math.random() * list.length)]
+    let gif = list[Math.floor(Math.random() * list.length)]
 
-    var Zenii = new Discord.MessageEmbed()
+    let Zenii = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setImage(gif)
 
@@ -34,7 +34,7 @@ exports.run = async (client, message, args) => {
 
             if (reaction.emoji.name === '🔄') { // 1º Embed - Principal
                 reaction.users.remove(user)
-                var Zenii = new Discord.MessageEmbed()
+                let Zenii = new Discord.MessageEmbed()
                     .setColor('BLUE')
                     .setImage(list[Math.floor(Math.random() * list.length)])
                 msg.edit(Zenii)

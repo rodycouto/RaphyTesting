@@ -2,7 +2,7 @@ const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
 
-     var Thanks = new Discord.MessageEmbed()
+     let Thanks = new Discord.MessageEmbed()
           .setColor('GREEN')
           .setThumbnail(client.user.displayAvatarURL())
           .setTitle(':hearts: OBRIGADA a todos que me ajuda a crescer! :hearts:')

@@ -10,7 +10,7 @@ exports.run = async (client, message, args) => {
     if (author1 !== null && timeout1 - (Date.now() - author1) > 0) {
         let time = ms(timeout1 - (Date.now() - author1))
   
-        var presomax = new Discord.MessageEmbed()
+        let presomax = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('🚨 Você está em prisão máxima!')
             .setDescription(`Liberdade em: ${time.hours}h ${time.minutes}m e ${time.seconds}s`)
@@ -23,14 +23,14 @@ exports.run = async (client, message, args) => {
         let prefix = db.get(`prefix_${message.guild.id}`)
         if (prefix === null) prefix = "-"
 
-        var correto = new Discord.MessageEmbed()
+        let correto = new Discord.MessageEmbed()
             .setColor('#ff0000')
             .setTitle('Siga o formato correto')
             .setDescription('`' + prefix + 'cobrar @user Valor`')
 
         args[0] = user
         if (!args[0]) {
-            var cobre = new Discord.MessageEmbed()
+            let cobre = new Discord.MessageEmbed()
                 .setColor('BLUE')
                 .setTitle('💸 Sistema de cobrança')
                 .setDescription('Cobre as pessoas que te devem ou apenas peça dinheiro, você que sabe.')
@@ -60,7 +60,7 @@ exports.run = async (client, message, args) => {
         }
 
         if (isNaN(args[1])) {
-            var notnumber = new Discord.MessageEmbed()
+            let notnumber = new Discord.MessageEmbed()
                 .setColor('#FF0000')
                 .setTitle('❌ Valor não reconhecido')
                 .setDescription('O valor que você digitou não é um número.')
@@ -71,7 +71,7 @@ exports.run = async (client, message, args) => {
             return message.inlineReply(correto)
         }
 
-        var cobrando = new Discord.MessageEmbed()
+        let cobrando = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setTitle('💸 Sistema de Cobrança')
             .addFields(
@@ -103,9 +103,9 @@ exports.run = async (client, message, args) => {
 
                 if (reaction.emoji.name === '✅') { // Check
                     msg.delete().catch(err => { return })
-                    var money = db.get(`mpoints_${user.id}`)
+                    let money = db.get(`mpoints_${user.id}`)
 
-                    var nomoney = new Discord.MessageEmbed()
+                    let nomoney = new Discord.MessageEmbed()
                         .setColor('#FF0000')
                         .setDescription('Você não tem todo esse dinheiro na carteira.')
 
@@ -124,7 +124,7 @@ exports.run = async (client, message, args) => {
                     db.subtract(`mpoints_${user.id}`, args[1])
                     db.add(`mpoints_${message.author.id}`, args[1])
 
-                    var embed2 = new Discord.MessageEmbed()
+                    let embed2 = new Discord.MessageEmbed()
                         .setColor('GREEN')
                         .setTitle('<a:Check:836347816036663309> Transação concluida!')
                         .setDescription(`${user} pagou ${args[1]}<:StarPoint:766794021128765469>MPoints para ${message.author}`)

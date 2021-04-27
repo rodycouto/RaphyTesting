@@ -7,7 +7,9 @@ exports.run = async (client, message, args) => {
     let prefix = db.get(`prefix_${message.guild.id}`)
     if (prefix === null) prefix = "-"
 
-    var help = new Discord.MessageEmbed()
+    let PrivadoDesativado = db.get(`privadooff_${message.author.id}`)
+
+    const help = new Discord.MessageEmbed()
         .setColor('BLUE') // red
         .setTitle(':loudspeaker: Sistema de Report')
         .setDescription('Com este comando, você ativará o meu sistema de report. Isso é bastante útil.')
@@ -17,19 +19,19 @@ exports.run = async (client, message, args) => {
         .addField('Comando de Desativação', '`' + prefix + 'setreportchannel off`')
         .setFooter('A Maya não se responsabiliza pelo conteúdo enviado atráves deste sistema.')
 
-    var nochanel = new Discord.MessageEmbed()
+    const nochanel = new Discord.MessageEmbed()
         .setColor('#FF0000')
         .setTitle('❌ Parece que o canal de report foi excluido.')
         .setDescription('`' + prefix + 'setreportchannel #canal`')
         .addField('Quer ajuda?', '`' + prefix + 'help report`')
 
-    var noargs = new Discord.MessageEmbed()
+    const noargs = new Discord.MessageEmbed()
         .setColor('#FF0000')
         .setTitle('❌ Por favor, siga o formato correto')
         .setDescription(`Use o comando abaixo para reportar algo a equipe da ${message.guild.name}.\n \n*O **@user** é opcional, use se quiser reportar algum membro.*`)
         .addField('Comando', '`' + prefix + 'report @user O motivo da sua denúncia`')
 
-    var nochannel1 = new Discord.MessageEmbed()
+    const nochannel1 = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setTitle('Nenhum canal de report definido.')
         .setDescription('Ooopa, parece que não definiram o canal de reports. Fale para alguém da Staff criar ou definir o canal, o comando é simples.\n \nCom está função, os membros são capazes de reportar coisas de qualquer canal para um canal especifico, geralmente exclusivo apenas para a moderação do servidor. As mensagens são apagadas, tornando anônimo o report, para evitar brigas e discussões.\n \nTem mais, não é necessário reportar só pessoas, você também pode reportar coisas do servidor sem precisar ficar marcando @alguém.')
@@ -37,7 +39,7 @@ exports.run = async (client, message, args) => {
         .addField('Comando de desativação', '`' + prefix + 'setreportchannel off`')
         .addField('Quer mais?', '`' + prefix + 'help report`')
 
-    var channel = db.get(`reportchannel_${message.guild.id}`)
+    const channel = db.get(`reportchannel_${message.guild.id}`)
     let user = message.mentions.members.first()
 
     if (['help', 'ajuda'].includes(args[0])) { return message.inlineReply(help) }
@@ -46,7 +48,7 @@ exports.run = async (client, message, args) => {
     if (!args[0]) { return message.channel.send(noargs) }
 
     if (!user) {
-        var embed1 = new Discord.MessageEmbed()
+        const embed1 = new Discord.MessageEmbed()
             .setColor("BLUE")
             .setTitle('📢 Novo Reporte Recebido')
             .addFields(
@@ -68,11 +70,11 @@ exports.run = async (client, message, args) => {
             .setThumbnail(message.author.displayAvatarURL({ dynamic: true }))
             .setTimestamp()
         client.channels.cache.get(channel).send(embed1)
-        return message.author.send(`📨 O seu report foi enviado com sucesso para a equipe do servidor **${message.guild.name}**.\n \nMembro reportado: Ninguém\nConteúdo do Reporte: ${args.join(" ")}`).catch(err => { return })
+        if (PrivadoDesativado) { return message.channel.send(`${message.author}, você desativou as mensagens no privado. Então, não te enviei o relatório. **${prefix}privado**`) } else { return message.author.send(`📨 O seu report foi enviado com sucesso para a equipe do servidor **${message.guild.name}**.\n \nMembro reportado: Ninguém\nConteúdo do Reporte: ${args.join(" ")}`).catch(err => { return }) }
     }
 
     if (args[0] !== user) {
-        var embed1 = new Discord.MessageEmbed()
+        const embed1 = new Discord.MessageEmbed()
             .setColor("BLUE")
             .setTitle('📢 Novo Reporte Recebido')
             .addFields(
@@ -95,6 +97,10 @@ exports.run = async (client, message, args) => {
             .setTimestamp()
             .setFooter(`${message.author.username}`)
         client.channels.cache.get(channel).send(embed1)
-        return message.author.send(`📨 O seu report foi enviado com sucesso para a equipe do servidor **${message.guild.name}**.\n \nMembro reportado: ${user}\nConteúdo do Reporte: ${args.slice(1).join(" ")}`).catch(err => { return })
+        if (PrivadoDesativado) {
+            return message.channel.send(`${message.author}, você desativou as mensagens no privado. Então, não te enviei o relatório. **${prefix}privado**`)
+        } else {
+            return message.author.send(`📨 O seu report foi enviado com sucesso para a equipe do servidor **${message.guild.name}**.\n \nMembro reportado: ${user}\nConteúdo do Reporte: ${args.slice(1).join(" ")}`).catch(err => { return })
+        }
     }
 }

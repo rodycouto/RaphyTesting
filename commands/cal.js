@@ -17,14 +17,14 @@ exports.run = async (client, message, args) => {
     try {
         resp = math.evaluate(args.join(" "))
     } catch (e) {
-        var noargs = new Discord.MessageEmbed()
+        const noargs = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Por favor, siga o formato correto')
             .setDescription('Adição: `10 + 10`\nDivisão: `10 / 10`\nSubtração: `10 - 10`\nMultiplicação: `10 * 10`')
         return message.inlineReply(noargs)
     }
 
-    var embed = new Discord.MessageEmbed()
+    const embed = new Discord.MessageEmbed()
         .setColor('BLUE')
         .addField('📊 Conta', `\`\`\`css\n${args.join(' ')}\`\`\``)
         .addField('📝 Resultado', `\`\`\`css\n${resp}\`\`\``)

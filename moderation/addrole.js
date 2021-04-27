@@ -17,7 +17,7 @@ exports.run = async (client, message, args) => {
     if (user.roles.cache.has(role.id)) { return message.inlineReply(`${user.user.username} já possui este cargo.`) }
 
     if (!role.editable) {
-        var soberol = new Discord.MessageEmbed()
+        let soberol = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setTitle('Meu cargo não é alto o suficiente.')
             .addFields(
@@ -27,7 +27,7 @@ exports.run = async (client, message, args) => {
                 }
             )
 
-        var sobcarg = new Discord.MessageEmbed()
+        let sobcarg = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setDescription('<a:carregando:836101628083437608> Um erro foi encontrado. Buscando solução...')
 
@@ -37,7 +37,7 @@ exports.run = async (client, message, args) => {
         return message.inlineReply(sobcarg).then(msg => msg.delete({ timeout: 5800 }))
     }
 
-    var sucess = new Discord.MessageEmbed()
+    let sucess = new Discord.MessageEmbed()
         .setColor('GREEN')
         .setDescription(`${user.user.username} recebeu o cargo ${role} com sucesso!`)
 

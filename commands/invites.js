@@ -16,7 +16,7 @@ exports.run = async (client, message, args) => {
             inviteCounter[name] = (inviteCounter[name] || 0) + uses
         }))
 
-        let replyText = new Discord.MessageEmbed()
+        const replyText = new Discord.MessageEmbed()
             .setTitle(`📩 Convites ${message.guild.name}`)
             .setDescription(` \n`)
             .setColor("BLUE")
@@ -29,7 +29,7 @@ exports.run = async (client, message, args) => {
 
 
         for (const invite of sortedInvites) {
-            var count = inviteCounter[invite]
+            let count = inviteCounter[invite]
             replyText.description += `\n${invite} convidou ${count} membro(s).`
         }
 

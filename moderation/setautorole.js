@@ -6,16 +6,16 @@ exports.run = async (client, message, args) => {
     let botperm = message.guild.me.hasPermission("MANAGE_ROLES")
     let userperms = message.member.hasPermission("MANAGE_ROLES")
     let autorole = db.get(`autorole_${message.guild.id}`)
-    var role = message.mentions.roles.first()
+    let role = message.mentions.roles.first()
 
     let prefix = db.get(`prefix_${message.guild.id}`)
     if (prefix === null) prefix = "-"
 
-    var adm = new Discord.MessageEmbed()
+    let adm = new Discord.MessageEmbed()
         .setColor('#FF0000')
         .setTitle('Eu preciso da permissão "Manusear Cargos" para utilizar esta função.')
 
-    var permss = new Discord.MessageEmbed()
+    let permss = new Discord.MessageEmbed()
         .setColor('#FF0000')
         .setTitle('Permissão Necessária: Manusear Roles (cargos)')
 
@@ -23,7 +23,7 @@ exports.run = async (client, message, args) => {
         .setColor('BLUE')
         .setDescription(`O autorole atual é: <@&${db.get(`autorole_${message.guild.id}`)}>`)
 
-    var noargs = new Discord.MessageEmbed()
+    let noargs = new Discord.MessageEmbed()
         .setColor('BLUE') // red
         .setTitle('O Autorole System está desativado')
         .setDescription('Escolha o cargo que todos vão receber assim que entrar no servidor.')
@@ -45,13 +45,13 @@ exports.run = async (client, message, args) => {
     if (args[0] === 'off') {
 
         if (autorole === null) {
-            var noauto = new Discord.MessageEmbed()
+            let noauto = new Discord.MessageEmbed()
                 .setColor('#FF0000')
                 .setTitle('O Autorole System já está desativado.')
             return message.channel.send(noauto)
         }
 
-        var confirm1 = new Discord.MessageEmbed()
+        let confirm1 = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setDescription(`Você deseja desligar o sistema de Autorole? O cargo <@&${autorole}> deixará de ser dado a todos os novos membros.`)
             .setFooter('Auto delete em 1 minuto.')
@@ -68,7 +68,7 @@ exports.run = async (client, message, args) => {
                     msg.delete().catch(err => { return })
                     db.delete(`autorole_${message.guild.id}`)
 
-                    var desativado = new Discord.MessageEmbed()
+                    let desativado = new Discord.MessageEmbed()
                         .setColor('GREEN')
                         .setTitle('<a:Check:836347816036663309> Autorole System foi desativado com sucesso.')
 
@@ -83,12 +83,12 @@ exports.run = async (client, message, args) => {
         })
     }
 
-    var norole = new Discord.MessageEmbed()
+    let norole = new Discord.MessageEmbed()
         .setColor('#FF0000')
         .setTitle('Siga o formato correto')
         .setDescription('`' + prefix + 'setautorole @cargo`')
 
-    var soberol = new Discord.MessageEmbed()
+    let soberol = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setTitle('Este cargo é maior que o meu.')
         .addFields(
@@ -98,15 +98,15 @@ exports.run = async (client, message, args) => {
             }
         )
 
-    var sobcarg = new Discord.MessageEmbed()
+    let sobcarg = new Discord.MessageEmbed()
         .setColor('#FF0000')
         .setDescription('<a:carregando:836101628083437608> Um erro foi encontrado. Buscando solução...')
 
-    var iqual = new Discord.MessageEmbed()
+    let iqual = new Discord.MessageEmbed()
         .setColor('#FF0000') // Red
         .setTitle('Este cargo já foi definido como Autorole!')
 
-    var confirm = new Discord.MessageEmbed()
+    let confirm = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setDescription(`Você deseja definir o cargo ${role} como autorole?`)
 
@@ -124,11 +124,11 @@ exports.run = async (client, message, args) => {
                 msg.delete().catch(err => { return })
                 db.set(`autorole_${message.guild.id}`, role.id)
 
-                var redefine = new Discord.MessageEmbed()
+                let redefine = new Discord.MessageEmbed()
                     .setColor('GREEN')
                     .setDescription(`<a:Check:836347816036663309> O cargo ${role} foi definido como autorole com sucesso.`)
 
-                var timing = new Discord.MessageEmbed()
+                let timing = new Discord.MessageEmbed()
                     .setColor('BLUE')
                     .setDescription(`<a:carregando:836101628083437608> Autenticando o cargo no banco de dados do servidor **${message.guild.name}**...`)
 

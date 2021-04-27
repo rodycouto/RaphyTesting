@@ -12,7 +12,7 @@ exports.run = async (client, message, args) => {
     if (content1.length > 150) { return message.inlineReply("O seu motivo não pode passar de 150 caracteres.") }
 
     if (!args[0]) {
-        var helpafk = new Discord.MessageEmbed()
+        const helpafk = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setTitle('📢 Afk Global System')
             .setDescription('Utilize este comando para avisar que você está offline.')
@@ -52,7 +52,7 @@ exports.run = async (client, message, args) => {
 
         if (content1) {
             db.set(`afk_${message.author.id}+${message.author.id}`, content1)
-            var embed = new Discord.MessageEmbed()
+            const embed = new Discord.MessageEmbed()
                 .setColor('GREEN')
                 .setDescription('```fix\n' + `${content1}` + '```')
             return message.inlineReply(`<a:Check:836347816036663309> Você ativou o modo AFK Global.`, embed)
@@ -61,7 +61,7 @@ exports.run = async (client, message, args) => {
 
     if (content) {
         db.set(`afk_${message.author.id}+${message.guild.id}`, content)
-        var embed = new Discord.MessageEmbed()
+        const embed = new Discord.MessageEmbed()
             .setColor('GREEN')
             .setDescription('```fix\n' + `${content}` + '```')
         return message.inlineReply(`<a:Check:836347816036663309> Você ativou o modo AFK no Servidor.`, embed)

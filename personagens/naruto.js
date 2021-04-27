@@ -3,7 +3,7 @@ const Discord = require('discord.js')
 exports.run = async (client, message, args) => {
 
 
-    var list = [
+    let list = [
         'https://imgur.com/sedJ6yn.gif',
         'https://imgur.com/jsODka2.gif',
         'https://imgur.com/lTnwOaZ.gif',
@@ -23,9 +23,9 @@ exports.run = async (client, message, args) => {
         'https://imgur.com/P0yIRRd.gif'
     ]
 
-    var gif = list[Math.floor(Math.random() * list.length)]
+    let gif = list[Math.floor(Math.random() * list.length)]
 
-    var naruto = new Discord.MessageEmbed()
+    let naruto = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setImage(gif)
 
@@ -39,7 +39,7 @@ exports.run = async (client, message, args) => {
 
             if (reaction.emoji.name === '🔄') { // 1º Embed - Principal
                 reaction.users.remove(user)
-                var naruto = new Discord.MessageEmbed()
+                let naruto = new Discord.MessageEmbed()
                     .setColor('BLUE')
                     .setImage(list[Math.floor(Math.random() * list.length)])
                 msg.edit(naruto)

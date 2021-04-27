@@ -12,7 +12,7 @@ exports.run = async (client, message, args) => {
     if (author1 !== null && timeout1 - (Date.now() - author1) > 0) {
         let time = ms(timeout1 - (Date.now() - author1))
 
-        var presomax = new Discord.MessageEmbed()
+        let presomax = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('🚨 Você está em prisão máxima!')
             .setDescription(`Liberdade em: ${time.hours}h ${time.minutes}m e ${time.seconds}s`)
@@ -20,12 +20,12 @@ exports.run = async (client, message, args) => {
         return message.inlineReply(presomax)
     } else {
 
-        var star = '<:StarPoint:766794021128765469>'
-        var loli = '<:Loli:831571527744356422>'
-        var StarM = '<:starM:832974891635572787>'
+        let star = '<:StarPoint:766794021128765469>'
+        let loli = '<:Loli:831571527744356422>'
+        let StarM = '<:starM:832974891635572787>'
         let loteria = db.get(`loteria`)
 
-        var loja = new Discord.MessageEmbed()
+        let loja = new Discord.MessageEmbed()
             .setColor('YELLOW')
             .setTitle('🏪 Lojinha Maya 24h')
             .setDescription('Aqui na Lojinha Maya, você pode comprar várias coisas para ter acesso a comandos e funções incriveis.')

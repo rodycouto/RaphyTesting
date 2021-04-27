@@ -6,11 +6,11 @@ exports.run = async (client, message, args) => {
     let prefix = db.get(`prefix_${message.guild.id}`)
     if (prefix === null) prefix = "-"
 
-    var content = args.join(' ')
+    let content = args.join(' ')
 
     if (content.length > 600) { return message.inlineReply('<:xis:835943511932665926> O conteúdo a ser votado não pode passar de **600 caracteres.**') }
 
-    var embed = new Discord.MessageEmbed()
+    let embed = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setTitle(`Votação aberta por ${message.author.username}`)
         .setDescription(content)

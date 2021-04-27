@@ -4,14 +4,14 @@ const db = require('quick.db')
 exports.run = async (client, message, args) => {
 
     if (!message.member.hasPermission('KICK_MEMBERS')) {
-        var permss = new Discord.MessageEmbed()
+        let permss = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Permissão Necessária: Expulsar Membros')
         return message.inlineReply(permss)
     }
 
     if (!message.guild.me.hasPermission("KICK_MEMBERS")) {
-        var adm = new Discord.MessageEmbed()
+        let adm = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Eu preciso da permissão "Kickar Membros" para utilizar esta função.')
         return message.inlineReply(adm)
@@ -24,7 +24,7 @@ exports.run = async (client, message, args) => {
         let prefix = db.get(`prefix_${message.guild.id}`)
         if (prefix === null) prefix = "-"
 
-        var nochannel = new Discord.MessageEmbed()
+        let nochannel = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('O logchannel não foi definido.')
             .setDescription('`' + prefix + 'setlogchannel #CanalLog`')
@@ -35,7 +35,7 @@ exports.run = async (client, message, args) => {
         let prefix = db.get(`prefix_${message.guild.id}`)
         if (prefix === null) prefix = "-"
 
-        var logdel = new Discord.MessageEmbed()
+        let logdel = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Parece que o logchannel foi deletado.')
             .setDescription('`' + prefix + 'setlogchannel #CanalLog`')
@@ -46,7 +46,7 @@ exports.run = async (client, message, args) => {
         let prefix = db.get(`prefix_${message.guild.id}`)
         if (prefix === null) prefix = "-"
 
-        var noargs = new Discord.MessageEmbed()
+        let noargs = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Siga o formato correto')
             .setDescription('`' + prefix + 'kick @user Razão do kick (opcional)`')
@@ -57,7 +57,7 @@ exports.run = async (client, message, args) => {
         let prefix = db.get(`prefix_${message.guild.id}`)
         if (prefix === null) prefix = "-"
 
-        var noargs1 = new Discord.MessageEmbed()
+        let noargs1 = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Siga o formato correto')
             .setDescription('`' + prefix + 'kick @user Razão do kick (opcional)`')
@@ -65,28 +65,28 @@ exports.run = async (client, message, args) => {
     }
 
     if (db.get(`whitelist_${member.id}`)) {// Rodrigo Couto
-        var banrody = new Discord.MessageEmbed()
+        let banrody = new Discord.MessageEmbed()
             .setColor('GREEN')
             .setTitle(member.user.username + ' está na whitelist.')
         return message.inlineReply(banrody)
     }
 
     if (member.hasPermission(['ADMINISTRATOR'])) {
-        var nokick = new Discord.MessageEmbed()
+        let nokick = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle(member.user.username + ' é um administrador. Não posso continuar com a expulsão.')
         return message.inlineReply(nokick)
     }
 
     if (!member.kickable) {
-        var nokick = new Discord.MessageEmbed()
+        let nokick = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle(member.user.username + ' tem algum cargo maior que o meu')
         return message.inlineReply(nokick)
     }
 
     if (member.id === message.author.id) {
-        var autokick = new Discord.MessageEmbed()
+        let autokick = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Autokick não é uma opção')
         return message.inlineReply(autokick)
@@ -94,10 +94,10 @@ exports.run = async (client, message, args) => {
 
     if (!reason) { reason = `${message.author.username} não especificou nenhuma razão` }
 
-    var discordserver = 'https://discord.gg/YpFWgJuuUV'
-    var support = 'https://discord.gg/TC26m4ZRV3'
+    let discordserver = 'https://discord.gg/YpFWgJuuUV'
+    let support = 'https://discord.gg/TC26m4ZRV3'
 
-    var kickembed = new Discord.MessageEmbed()
+    let kickembed = new Discord.MessageEmbed()
         .setColor('GRAY')
         .setTitle('Sistema de Kick - ' + message.guild.name)
         .setThumbnail(member.user.displayAvatarURL())
@@ -108,7 +108,7 @@ exports.run = async (client, message, args) => {
         .setFooter('Horário:')
         .setTimestamp()
 
-    var confirm = new Discord.MessageEmbed()
+    let confirm = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setDescription(`Você confirma a expulsão de ${member.user}?`)
 
@@ -122,13 +122,13 @@ exports.run = async (client, message, args) => {
             if (reaction.emoji.name === '✅') { // Sim
                 msg.delete().catch(err => { return })
 
-                var kicked = new Discord.MessageEmbed()
+                let kicked = new Discord.MessageEmbed()
                     .setColor('GREEN')
                     .setTitle(`${member.user.username} foi expulso com sucesso.`)
                     .setDescription(`Relatório enviado ao ${client.channels.cache.get(logchannel)}`)
 
                 member.kick().catch(err => {
-                    var errorembed = new Discord.MessageEmbed()
+                    let errorembed = new Discord.MessageEmbed()
                         .setColor('#FF0000')
                         .setTitle('Um erro ocorreu na expulsão')
                         .setDescription('Error by console.log: \n \n' + err)
@@ -150,7 +150,7 @@ exports.run = async (client, message, args) => {
             }
             if (reaction.emoji.name === '❌') { // Não
                 msg.delete().catch(err => { return })
-                var cancel = new Discord.MessageEmbed()
+                let cancel = new Discord.MessageEmbed()
                     .setColor('GREEN')
                     .setTitle('Comando cancelado.')
 

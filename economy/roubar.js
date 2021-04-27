@@ -7,7 +7,7 @@ exports.run = async (client, message, args) => {
     let prefix = db.get(`prefix_${message.guild.id}`)
     if (prefix === null) prefix = "-"
 
-    var formato = '`' + prefix + 'rob @user`'
+    let formato = '`' + prefix + 'rob @user`'
     let user = message.mentions.members.first()
     let usermoney = db.get(`mpoints_${user.id}`)
     let autormoney = db.get(`mpoints_${message.author.id}`)
@@ -20,7 +20,7 @@ exports.run = async (client, message, args) => {
     if (author1 !== null && timeout1 - (Date.now() - author1) > 0) {
         let time = ms(timeout1 - (Date.now() - author1))
 
-        var presomax = new Discord.MessageEmbed()
+        let presomax = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('🚨 Você está em prisão máxima!')
             .setDescription(`Liberdade em: ${time.hours}h ${time.minutes}m e ${time.seconds}s`)
@@ -28,8 +28,8 @@ exports.run = async (client, message, args) => {
         return message.inlineReply(presomax)
     } else {
 
-        var timeout = 6000000
-        var daily = db.get(`robtime_${message.author.id}`)
+        let timeout = 6000000
+        let daily = db.get(`robtime_${message.author.id}`)
         if (daily !== null && timeout - (Date.now() - daily) > 0) {
             let time = ms(timeout - (Date.now() - daily))
 
@@ -45,17 +45,17 @@ exports.run = async (client, message, args) => {
             if (usermoney === 0) { return message.inlineReply(`<:xis:835943511932665926> ${user.user.username} não possui dinheiro.`) }
             if (usermoney < 0) { return message.inlineReply(`<:xis:835943511932665926> ${user.user.username} está negativado.`) }
 
-            var luck = ['win', 'lose']
-            var result = luck[Math.floor(Math.random() * luck.length)]
-            var amount = Math.floor(Math.random() * 1000) + 1
-            var amount1 = Math.floor(Math.random() * usermoney) + 1
+            let luck = ['win', 'lose']
+            let result = luck[Math.floor(Math.random() * luck.length)]
+            let amount = Math.floor(Math.random() * 1000) + 1
+            let amount1 = Math.floor(Math.random() * usermoney) + 1
 
-            var LoseEmbed = new Discord.MessageEmbed()
+            let LoseEmbed = new Discord.MessageEmbed()
                 .setColor('#FF0000')
                 .setTitle("🚨 A polícia te pegou e você foi preso!")
                 .setDescription(`A fiança custou ${amount}<:StarPoint:766794021128765469>MPoints`)
 
-            var WinEmbed = new Discord.MessageEmbed()
+            let WinEmbed = new Discord.MessageEmbed()
                 .setColor("GREEN")
                 .setTitle(`🔫 Você roubou ${user.user.username} com sucesso!`)
                 .setDescription(`${message.author} obteve um lucro de ${amount1}<:StarPoint:766794021128765469>MPoints com o roubo.`)

@@ -3,12 +3,12 @@ const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
 
-    var level = await db.fetch(`level_${message.author.id}`)
+    let level = await db.fetch(`level_${message.author.id}`)
     if (level < 20) {return message.inlineReply('🚫 Libere este comando no level 20')    }
     if (args[0]) { return message.inlineReply('Por favor, utilize apenas o comando, sem nada na frente. Informações desnecessárias atrapalham meu processamento.') }
 
-    var linkserver = 'https://discord.gg/YpFWgJuuUV'
-    var embed = new Discord.MessageEmbed()
+    let linkserver = 'https://discord.gg/YpFWgJuuUV'
+    const embed = new Discord.MessageEmbed()
         .setColor('#1e3ddf')
         .setTitle('BETA - Dicas da Maya - Global Level System')
         .setDescription('Sistema de XP Global')

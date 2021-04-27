@@ -7,13 +7,9 @@ exports.run = async (client, message, args) => {
     let timeout = 1800000
     let rptimeout = await db.get(`rptimeout_${message.author.id}`)
 
-    if (!user) {
-        return message.inlineReply('Você se esqueceu do `@user`')
-    }
+    if (!user) { return message.inlineReply('Você se esqueceu do `@user`') }
 
-    if (user.id === message.author.id) {
-        return message.inlineReply('Você não pode dar reputação para você mesmo.')
-    }
+    if (user.id === message.author.id) { return message.inlineReply('Você não pode dar reputação para você mesmo.') }
 
     if (rptimeout !== null && timeout - (Date.now() - rptimeout) > 0) {
         let time = ms(timeout - (Date.now() - rptimeout))
@@ -27,7 +23,8 @@ exports.run = async (client, message, args) => {
         db.add(`rp_${user.id}`, amount)
         db.set(`rptimeout_${message.author.id}`, Date.now())
 
-        user.send(`${message.author} te deu uma reputação.`)
         message.inlineReply(`Você deu reputação para ${user}`)
+        let PrivadoDesativado = db.get(`privadooff_${user.id}`)
+        if (PrivadoDesativado) { return } else { user.send(`${message.author} te deu uma reputação.`) }
     }
 }

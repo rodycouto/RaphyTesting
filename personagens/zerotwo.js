@@ -3,7 +3,7 @@ const Discord = require('discord.js')
 exports.run = async (client, message, args) => {
 
 
-    var list = [
+    let list = [
         'https://imgur.com/B8gX2UL.gif',
         'https://imgur.com/2etwv4a.gif',
         'https://imgur.com/NcHlgkV.gif',
@@ -14,9 +14,9 @@ exports.run = async (client, message, args) => {
         'https://imgur.com/xDeE5fc.gif'
     ]
 
-    var gif = list[Math.floor(Math.random() * list.length)]
+    let gif = list[Math.floor(Math.random() * list.length)]
 
-    var Gifs = new Discord.MessageEmbed()
+    let Gifs = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setImage(gif)
 
@@ -30,7 +30,7 @@ exports.run = async (client, message, args) => {
 
             if (reaction.emoji.name === '🔄') { // 1º Embed - Principal
                 reaction.users.remove(user)
-                var Itachi = new Discord.MessageEmbed()
+                let Itachi = new Discord.MessageEmbed()
                     .setColor('BLUE')
                     .setImage(list[Math.floor(Math.random() * list.length)])
                 msg.edit(Itachi)

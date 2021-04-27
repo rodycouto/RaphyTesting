@@ -7,7 +7,7 @@ exports.run = async (client, message, args) => {
     let prefix = db.get(`prefix_${message.guild.id}`)
     if (prefix === null) prefix = "-"
 
-    var baseUrl = "https://corona.lmao.ninja/v2"
+    const baseUrl = "https://corona.lmao.ninja/v2"
     let url, response, corona
 
     try {
@@ -16,7 +16,7 @@ exports.run = async (client, message, args) => {
         corona = response.data
     } catch (error) {
 
-            var noerl = new Discord.MessageEmbed()
+        const noerl = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setDescription(`O argumento ***${args[0]}*** não existe ou os dados não foram publicados pela OMS (Organização Mundial da Saúde)`)
             .addFields(
@@ -28,7 +28,7 @@ exports.run = async (client, message, args) => {
         return message.inlineReply('<a:carregando:836101628083437608> Loading...').then(msg => msg.delete({ timeout: 4000 })).then(msg => message.inlineReply(noerl))
     }
 
-    var embed = new Discord.MessageEmbed()
+    const embed = new Discord.MessageEmbed()
         .setTitle(args[0] ? `${args[0].toUpperCase()} Status` : 'Dados Mundiais da COVID-19')
         .setColor('BLUE')
         .setThumbnail(args[0] ? corona.countryInfo.flag : 'https://i.giphy.com/YPbrUhP9Ryhgi2psz3.gif')

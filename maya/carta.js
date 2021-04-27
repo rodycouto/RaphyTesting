@@ -6,14 +6,14 @@ exports.run = async (client, message, args) => {
     let prefix = db.get(`prefix_${message.guild.id}`)
     if (prefix === null) prefix = "-"
 
-    var help = new Discord.MessageEmbed()
+    let help = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setTitle('💌 Carta de Amor ~ Maya')
         .setDescription('Envie cartas de amor para a pessoa que você ama. Se não tem coragem de dizer pessoalmente, deixa que eu envio a carta pra você.')
         .addField('Comando', '`' + prefix + 'carta @user A sua mensagem em diante`')
         .setFooter('A pessoa que receber a carta, recebe +5 Reputação')
 
-    var FormatoCorreto = new Discord.MessageEmbed()
+    let FormatoCorreto = new Discord.MessageEmbed()
         .setColor('#FF0000')
         .setTitle('Siga o formato correto')
         .setDescription('`' + prefix + 'carta @user A sua mensagem em diante`')
@@ -33,14 +33,14 @@ exports.run = async (client, message, args) => {
     if (bot) { return message.inlineReply('Você não pode mandar cartas para bots.') }
     if (!args.slice(1).join(" ")) { return message.inlineReply(FormatoCorreto) }
 
-    var embedlove = new Discord.MessageEmbed()
+    let embedlove = new Discord.MessageEmbed()
         .setColor('RED')
         .setTitle('💌 Você recebeu uma carta de amor')
         .addField('Autor', message.author)
         .addField('Mensagem', args.slice(1).join(" "))
         .setFooter(`Esta carta de amor foi enviada do servidor ${message.guild.name}`)
 
-    var confirm = new Discord.MessageEmbed()
+    let confirm = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setTitle('Você confirma os dados a baixo?')
         .addField('Mandar carta para', user)
@@ -61,7 +61,7 @@ exports.run = async (client, message, args) => {
                 db.add(`rp_${message.author.id}`, 5)
                 message.mentions.members.first().send("A Maya não se responsabiliza pelo conteúdo presente nesta carta.\nVocê recebeu mais 5 reputação.", embedlove).catch(err => {
                     if (err) {
-                        var errorembed = new Discord.MessageEmbed()
+                        let errorembed = new Discord.MessageEmbed()
                             .setColor('#FF0000')
                             .setTitle('Ocorreu um erro no envio da carta')
                             .setDescription(`Caso você não saiba resolver este erro, entre em contato com o **${prefix}support** ou entre no meu servidor atráves do **${prefix}help**`)

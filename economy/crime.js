@@ -14,7 +14,7 @@ exports.run = async (client, message, args) => {
     if (author1 !== null && timeout1 - (Date.now() - author1) > 0) {
         let time = ms(timeout1 - (Date.now() - author1))
 
-        var presomax = new Discord.MessageEmbed()
+        const presomax = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('🚨 Você está em prisão máxima!')
             .setDescription(`Liberdade em: ${time.hours}h ${time.minutes}m e ${time.seconds}s`)
@@ -38,7 +38,7 @@ exports.run = async (client, message, args) => {
                 return message.inlineReply(`Você está preso! Liberdade em: ${time.minutes}m e ${time.seconds}s`)
             } else {
 
-                var newcrime = new Discord.MessageEmbed()
+                const newcrime = new Discord.MessageEmbed()
                     .setColor('GRAY')
                     .setTitle('🕵️‍♂️ Você está preste a entrar no mundo do crime 🕵️‍♂️ ')
                     .setDescription('O mundo do crime é um lugar perigoso, você pode ser preso e não conseguir fazer mais nada por horas.\n \nTem certeza que deseja entrar no mundo do crime?')
@@ -64,7 +64,7 @@ exports.run = async (client, message, args) => {
                             if (reaction.emoji.name === '🥷') { // Sim
                                 msg.delete().catch(err => { return })
 
-                                var embedcrime = new Discord.MessageEmbed()
+                                const embedcrime = new Discord.MessageEmbed()
                                     .setColor('#FF0000')
                                     .setTitle('🔎 Qual lugar da cidade você deseja roubar? :mag:')
                                     .setDescription('🏠 Casa\n🏦 Mansão\n🏛️ Prefeitura\n🏣 Cartório\n📨 Correios\n💍 Joaleria\n🏢 Shopping\n🏭 Fabrica\n🏩 Motel\n🪙 Banco')
@@ -89,19 +89,19 @@ exports.run = async (client, message, args) => {
                                         if (reaction.emoji.name === '🏠') { // 1
                                             msg.delete().catch(err => { return })
 
-                                            var winlose = ['win', 'lose', 'win', 'win', 'fugiu']
-                                            var result = winlose[Math.floor(Math.random() * winlose.length)]
+                                            let winlose = ['win', 'lose', 'win', 'win', 'fugiu']
+                                            let result = winlose[Math.floor(Math.random() * winlose.length)]
 
-                                            var embedcrime = new Discord.MessageEmbed()
+                                            const embedcrime = new Discord.MessageEmbed()
                                                 .setColor('#575353')
                                                 .setDescription('🥷 Roubando uma casa...')
 
-                                            var fugindo = new Discord.MessageEmbed()
+                                            const fugindo = new Discord.MessageEmbed()
                                                 .setColor('RED')
                                                 .setTitle('🚔 Haa nããão! A policia!!!')
                                                 .setDescription('🏃 Fugindo...')
 
-                                            var fugiu = new Discord.MessageEmbed()
+                                            const fugiu = new Discord.MessageEmbed()
                                                 .setColor('YELLOW')
                                                 .setTitle('Ufa, você escapou!')
                                                 .setDescription('Você perdeu o dinheiro enquanto fugia.')
@@ -111,7 +111,7 @@ exports.run = async (client, message, args) => {
                                                 db.add(`mpoints_${message.author.id}`, amount)
                                                 db.set(`procurado_${message.author.id}`, Date.now())
 
-                                                var win = new Discord.MessageEmbed()
+                                                const win = new Discord.MessageEmbed()
                                                     .setColor('GREEN')
                                                     .setTitle(`${message.author.username} efetuou o roubo com sucesso!`)
                                                     .setDescription(`Com o roubo da casa, você obteve ${amount}<:StarPoint:766794021128765469>MPoints`)
@@ -125,7 +125,7 @@ exports.run = async (client, message, args) => {
                                                 db.subtract(`mpoints_${message.author.id}`, amount)
                                                 db.set(`preso_${message.author.id}`, Date.now())
 
-                                                var lose = new Discord.MessageEmbed()
+                                                const lose = new Discord.MessageEmbed()
                                                     .setColor('#FF0000')
                                                     .setTitle('🚨 Preso!')
                                                     .setDescription(`Você foi preso e perdeu ${amount}<:StarPoint:766794021128765469>MPoints`)
@@ -136,19 +136,19 @@ exports.run = async (client, message, args) => {
                                         if (reaction.emoji.name === '🏦') { // 2
                                             msg.delete().catch(err => { return })
 
-                                            var winlose = ['win', 'lose', 'win', 'fugiu']
-                                            var result = winlose[Math.floor(Math.random() * winlose.length)]
+                                            let winlose = ['win', 'lose', 'win', 'fugiu']
+                                            let result = winlose[Math.floor(Math.random() * winlose.length)]
 
-                                            var embedcrime = new Discord.MessageEmbed()
+                                            const embedcrime = new Discord.MessageEmbed()
                                                 .setColor('#575353')
                                                 .setDescription('🥷 Roubando a mansão...')
 
-                                            var fugindo = new Discord.MessageEmbed()
+                                            const fugindo = new Discord.MessageEmbed()
                                                 .setColor('RED')
                                                 .setTitle('🚔 Haa nããão! A policia!!!')
                                                 .setDescription('🏃 Fugindo...')
 
-                                            var fugiu = new Discord.MessageEmbed()
+                                            const fugiu = new Discord.MessageEmbed()
                                                 .setColor('YELLOW')
                                                 .setTitle('Ufa, você escapou!')
                                                 .setDescription('Você perdeu o dinheiro enquanto fugia.')
@@ -158,7 +158,7 @@ exports.run = async (client, message, args) => {
                                                 db.add(`mpoints_${message.author.id}`, amount)
                                                 db.set(`procurado_${message.author.id}`, Date.now())
 
-                                                var win = new Discord.MessageEmbed()
+                                                const win = new Discord.MessageEmbed()
                                                     .setColor('GREEN')
                                                     .setTitle(`${message.author.username} efetuou o roubo com sucesso!`)
                                                     .setDescription(`Com o roubo da mansão, você obteve ${amount}<:StarPoint:766794021128765469>MPoints`)
@@ -172,7 +172,7 @@ exports.run = async (client, message, args) => {
                                                 db.subtract(`mpoints_${message.author.id}`, amount)
                                                 db.set(`preso_${message.author.id}`, Date.now())
 
-                                                var lose = new Discord.MessageEmbed()
+                                                const lose = new Discord.MessageEmbed()
                                                     .setColor('#FF0000')
                                                     .setTitle('🚨 Preso!')
                                                     .setDescription(`Você foi preso e perdeu ${amount}<:StarPoint:766794021128765469>MPoints`)
@@ -183,19 +183,19 @@ exports.run = async (client, message, args) => {
                                         if (reaction.emoji.name === '🏛️') { // 3
                                             msg.delete().catch(err => { return })
 
-                                            var winlose = ['win', 'lose', 'lose', 'fugiu']
-                                            var result = winlose[Math.floor(Math.random() * winlose.length)]
+                                            let winlose = ['win', 'lose', 'lose', 'fugiu']
+                                            let result = winlose[Math.floor(Math.random() * winlose.length)]
 
-                                            var embedcrime = new Discord.MessageEmbed()
+                                            const embedcrime = new Discord.MessageEmbed()
                                                 .setColor('#575353')
                                                 .setDescription('🥷 Roubando a prefeitura...')
 
-                                            var fugindo = new Discord.MessageEmbed()
+                                            const fugindo = new Discord.MessageEmbed()
                                                 .setColor('RED')
                                                 .setTitle('🚔 Haa nããão! A policia!!!')
                                                 .setDescription('🏃 Fugindo...')
 
-                                            var fugiu = new Discord.MessageEmbed()
+                                            const fugiu = new Discord.MessageEmbed()
                                                 .setColor('YELLOW')
                                                 .setTitle('Ufa, você escapou!')
                                                 .setDescription('Você perdeu o dinheiro enquanto fugia.')
@@ -205,7 +205,7 @@ exports.run = async (client, message, args) => {
                                                 db.add(`mpoints_${message.author.id}`, amount)
                                                 db.set(`procurado_${message.author.id}`, Date.now())
 
-                                                var win = new Discord.MessageEmbed()
+                                                const win = new Discord.MessageEmbed()
                                                     .setColor('GREEN')
                                                     .setTitle(`${message.author.username} efetuou o roubo com sucesso!`)
                                                     .setDescription(`Com o roubo da prefeitura, você obteve ${amount}<:StarPoint:766794021128765469>MPoints`)
@@ -219,7 +219,7 @@ exports.run = async (client, message, args) => {
                                                 db.subtract(`mpoints_${message.author.id}`, amount)
                                                 db.set(`preso_${message.author.id}`, Date.now())
 
-                                                var lose = new Discord.MessageEmbed()
+                                                const lose = new Discord.MessageEmbed()
                                                     .setColor('#FF0000')
                                                     .setTitle('🚨 Preso!')
                                                     .setDescription(`Você foi preso e perdeu ${amount}<:StarPoint:766794021128765469>MPoints`)
@@ -230,19 +230,19 @@ exports.run = async (client, message, args) => {
                                         if (reaction.emoji.name === '🏣') { // 4
                                             msg.delete().catch(err => { return })
 
-                                            var winlose = ['win', 'lose', `win`, 'fugiu']
-                                            var result = winlose[Math.floor(Math.random() * winlose.length)]
+                                            let winlose = ['win', 'lose', `win`, 'fugiu']
+                                            let result = winlose[Math.floor(Math.random() * winlose.length)]
 
-                                            var embedcrime = new Discord.MessageEmbed()
+                                            const embedcrime = new Discord.MessageEmbed()
                                                 .setColor('#575353')
                                                 .setDescription('🥷 Roubando o cartório...')
 
-                                            var fugindo = new Discord.MessageEmbed()
+                                            const fugindo = new Discord.MessageEmbed()
                                                 .setColor('RED')
                                                 .setTitle('🚔 Haa nããão! A policia!!!')
                                                 .setDescription('🏃 Fugindo...')
 
-                                            var fugiu = new Discord.MessageEmbed()
+                                            const fugiu = new Discord.MessageEmbed()
                                                 .setColor('YELLOW')
                                                 .setTitle('Ufa, você escapou!')
                                                 .setDescription('Você perdeu o dinheiro enquanto fugia.')
@@ -252,7 +252,7 @@ exports.run = async (client, message, args) => {
                                                 db.add(`mpoints_${message.author.id}`, amount)
                                                 db.set(`procurado_${message.author.id}`, Date.now())
 
-                                                var win = new Discord.MessageEmbed()
+                                                const win = new Discord.MessageEmbed()
                                                     .setColor('GREEN')
                                                     .setTitle(`${message.author.username} efetuou o roubo com sucesso!`)
                                                     .setDescription(`Com o roubo do cartório, você obteve ${amount}<:StarPoint:766794021128765469>MPoints`)
@@ -266,7 +266,7 @@ exports.run = async (client, message, args) => {
                                                 db.subtract(`mpoints_${message.author.id}`, amount)
                                                 db.set(`preso_${message.author.id}`, Date.now())
 
-                                                var lose = new Discord.MessageEmbed()
+                                                const lose = new Discord.MessageEmbed()
                                                     .setColor('#FF0000')
                                                     .setTitle('🚨 Preso!')
                                                     .setDescription(`Você foi preso e perdeu ${amount}<:StarPoint:766794021128765469>MPoints`)
@@ -277,19 +277,19 @@ exports.run = async (client, message, args) => {
                                         if (reaction.emoji.name === '📨') { // 5
                                             msg.delete().catch(err => { return })
 
-                                            var winlose = ['win', 'lose', `win`, 'fugiu', 'fugiu', 'fugiu']
-                                            var result = winlose[Math.floor(Math.random() * winlose.length)]
+                                            let winlose = ['win', 'lose', `win`, 'fugiu', 'fugiu', 'fugiu']
+                                            let result = winlose[Math.floor(Math.random() * winlose.length)]
 
-                                            var embedcrime = new Discord.MessageEmbed()
+                                            const embedcrime = new Discord.MessageEmbed()
                                                 .setColor('#575353')
                                                 .setDescription('🥷 Roubando os correios...')
 
-                                            var fugindo = new Discord.MessageEmbed()
+                                            const fugindo = new Discord.MessageEmbed()
                                                 .setColor('RED')
                                                 .setTitle('🚔 Haa nããão! A policia!!!')
                                                 .setDescription('🏃 Fugindo...')
 
-                                            var fugiu = new Discord.MessageEmbed()
+                                            const fugiu = new Discord.MessageEmbed()
                                                 .setColor('YELLOW')
                                                 .setTitle('Ufa, você escapou!')
                                                 .setDescription('Você perdeu o dinheiro enquanto fugia.')
@@ -299,7 +299,7 @@ exports.run = async (client, message, args) => {
                                                 db.add(`mpoints_${message.author.id}`, amount)
                                                 db.set(`procurado_${message.author.id}`, Date.now())
 
-                                                var win = new Discord.MessageEmbed()
+                                                const win = new Discord.MessageEmbed()
                                                     .setColor('GREEN')
                                                     .setTitle(`${message.author.username} efetuou o roubo com sucesso!`)
                                                     .setDescription(`Com o roubo do correios, você obteve ${amount}<:StarPoint:766794021128765469>MPoints`)
@@ -312,7 +312,7 @@ exports.run = async (client, message, args) => {
                                                 db.subtract(`mpoints_${message.author.id}`, amount)
                                                 db.set(`preso_${message.author.id}`, Date.now())
 
-                                                var lose = new Discord.MessageEmbed()
+                                                const lose = new Discord.MessageEmbed()
                                                     .setColor('#FF0000')
                                                     .setTitle('🚨 Preso!')
                                                     .setDescription(`Você foi preso e perdeu ${amount}<:StarPoint:766794021128765469>MPoints`)
@@ -323,19 +323,19 @@ exports.run = async (client, message, args) => {
                                         if (reaction.emoji.name === '💍') { // 6
                                             msg.delete().catch(err => { return })
 
-                                            var winlose = ['win', 'lose', 'lose', 'win', 'fugiu']
-                                            var result = winlose[Math.floor(Math.random() * winlose.length)]
+                                            let winlose = ['win', 'lose', 'lose', 'win', 'fugiu']
+                                            let result = winlose[Math.floor(Math.random() * winlose.length)]
 
-                                            var embedcrime = new Discord.MessageEmbed()
+                                            const embedcrime = new Discord.MessageEmbed()
                                                 .setColor('#575353')
                                                 .setDescription('🥷 Roubando a joaleira...')
 
-                                            var fugindo = new Discord.MessageEmbed()
+                                            const fugindo = new Discord.MessageEmbed()
                                                 .setColor('RED')
                                                 .setTitle('🚔 Haa nããão! A policia!!!')
                                                 .setDescription('🏃 Fugindo...')
 
-                                            var fugiu = new Discord.MessageEmbed()
+                                            const fugiu = new Discord.MessageEmbed()
                                                 .setColor('YELLOW')
                                                 .setTitle('Ufa, você escapou!')
                                                 .setDescription('Você perdeu o dinheiro enquanto fugia.')
@@ -345,7 +345,7 @@ exports.run = async (client, message, args) => {
                                                 db.add(`mpoints_${message.author.id}`, amount)
                                                 db.set(`procurado_${message.author.id}`, Date.now())
 
-                                                var win = new Discord.MessageEmbed()
+                                                const win = new Discord.MessageEmbed()
                                                     .setColor('GREEN')
                                                     .setTitle(`${message.author.username} efetuou o roubo com sucesso!`)
                                                     .setDescription(`Com o roubo da joaleria, você obteve ${amount}<:StarPoint:766794021128765469>MPoints`)
@@ -359,7 +359,7 @@ exports.run = async (client, message, args) => {
                                                 db.subtract(`mpoints_${message.author.id}`, amount)
                                                 db.set(`preso_${message.author.id}`, Date.now())
 
-                                                var lose = new Discord.MessageEmbed()
+                                                const lose = new Discord.MessageEmbed()
                                                     .setColor('#FF0000')
                                                     .setTitle('🚨 Preso!')
                                                     .setDescription(`Você foi preso e perdeu ${amount}<:StarPoint:766794021128765469>MPoints`)
@@ -370,19 +370,19 @@ exports.run = async (client, message, args) => {
                                         if (reaction.emoji.name === '🏢') { // 7
                                             msg.delete().catch(err => { return })
 
-                                            var winlose = ['win', 'lose', 'lose', 'win', 'fugiu', 'fugiu']
-                                            var result = winlose[Math.floor(Math.random() * winlose.length)]
+                                            let winlose = ['win', 'lose', 'lose', 'win', 'fugiu', 'fugiu']
+                                            let result = winlose[Math.floor(Math.random() * winlose.length)]
 
-                                            var embedcrime = new Discord.MessageEmbed()
+                                            const embedcrime = new Discord.MessageEmbed()
                                                 .setColor('#575353')
                                                 .setDescription('🥷 Roubando o shopping...')
 
-                                            var fugindo = new Discord.MessageEmbed()
+                                            const fugindo = new Discord.MessageEmbed()
                                                 .setColor('RED')
                                                 .setTitle('🚔 Haa nããão! A policia!!!')
                                                 .setDescription('🏃 Fugindo...')
 
-                                            var fugiu = new Discord.MessageEmbed()
+                                            const fugiu = new Discord.MessageEmbed()
                                                 .setColor('YELLOW')
                                                 .setTitle('Ufa, você escapou!')
                                                 .setDescription('Você perdeu o dinheiro enquanto fugia.')
@@ -392,7 +392,7 @@ exports.run = async (client, message, args) => {
                                                 db.add(`mpoints_${message.author.id}`, amount)
                                                 db.set(`procurado_${message.author.id}`, Date.now())
 
-                                                var win = new Discord.MessageEmbed()
+                                                const win = new Discord.MessageEmbed()
                                                     .setColor('GREEN')
                                                     .setTitle(`${message.author.username} efetuou o roubo com sucesso!`)
                                                     .setDescription(`Com o roubo do shopping, você obteve ${amount}<:StarPoint:766794021128765469>MPoints`)
@@ -406,7 +406,7 @@ exports.run = async (client, message, args) => {
                                                 db.subtract(`mpoints_${message.author.id}`, amount)
                                                 db.set(`preso_${message.author.id}`, Date.now())
 
-                                                var lose = new Discord.MessageEmbed()
+                                                const lose = new Discord.MessageEmbed()
                                                     .setColor('#FF0000')
                                                     .setTitle('🚨 Preso!')
                                                     .setDescription(`Você foi preso e perdeu ${amount}<:StarPoint:766794021128765469>MPoints`)
@@ -417,19 +417,19 @@ exports.run = async (client, message, args) => {
                                         if (reaction.emoji.name === '🏭') { // 8
                                             msg.delete().catch(err => { return })
 
-                                            var winlose = ['win', 'lose', 'fugiu']
-                                            var result = winlose[Math.floor(Math.random() * winlose.length)]
+                                            let winlose = ['win', 'lose', 'fugiu']
+                                            let result = winlose[Math.floor(Math.random() * winlose.length)]
 
-                                            var embedcrime = new Discord.MessageEmbed()
+                                            const embedcrime = new Discord.MessageEmbed()
                                                 .setColor('#575353')
                                                 .setDescription('🥷 Roubando a fabrica...')
 
-                                            var fugindo = new Discord.MessageEmbed()
+                                            const fugindo = new Discord.MessageEmbed()
                                                 .setColor('RED')
                                                 .setTitle('🚔 Haa nããão! A policia!!!')
                                                 .setDescription('🏃 Fugindo...')
 
-                                            var fugiu = new Discord.MessageEmbed()
+                                            const fugiu = new Discord.MessageEmbed()
                                                 .setColor('YELLOW')
                                                 .setTitle('Ufa, você escapou!')
                                                 .setDescription('Você perdeu o dinheiro enquanto fugia.')
@@ -439,7 +439,7 @@ exports.run = async (client, message, args) => {
                                                 db.add(`mpoints_${message.author.id}`, amount)
                                                 db.set(`procurado_${message.author.id}`, Date.now())
 
-                                                var win = new Discord.MessageEmbed()
+                                                const win = new Discord.MessageEmbed()
                                                     .setColor('GREEN')
                                                     .setTitle(`${message.author.username} efetuou o roubo com sucesso!`)
                                                     .setDescription(`Com o roubo da fabrica, você obteve ${amount}<:StarPoint:766794021128765469>MPoints`)
@@ -453,7 +453,7 @@ exports.run = async (client, message, args) => {
                                                 db.subtract(`mpoints_${message.author.id}`, amount)
                                                 db.set(`preso_${message.author.id}`, Date.now())
 
-                                                var lose = new Discord.MessageEmbed()
+                                                const lose = new Discord.MessageEmbed()
                                                     .setColor('#FF0000')
                                                     .setTitle('🚨 Preso!')
                                                     .setDescription(`Você foi preso e perdeu ${amount}<:StarPoint:766794021128765469>MPoints`)
@@ -464,19 +464,19 @@ exports.run = async (client, message, args) => {
                                         if (reaction.emoji.name === '🏩') { // 9
                                             msg.delete().catch(err => { return })
 
-                                            var winlose = ['win', 'lose', 'fugiu', 'win']
-                                            var result = winlose[Math.floor(Math.random() * winlose.length)]
+                                            let winlose = ['win', 'lose', 'fugiu', 'win']
+                                            let result = winlose[Math.floor(Math.random() * winlose.length)]
 
-                                            var embedcrime = new Discord.MessageEmbed()
+                                            const embedcrime = new Discord.MessageEmbed()
                                                 .setColor('#575353')
                                                 .setDescription('🥷 Roubando o motel...')
 
-                                            var fugindo = new Discord.MessageEmbed()
+                                            const fugindo = new Discord.MessageEmbed()
                                                 .setColor('RED')
                                                 .setTitle('🚔 Haa nããão! A policia!!!')
                                                 .setDescription('🏃 Fugindo...')
 
-                                            var fugiu = new Discord.MessageEmbed()
+                                            const fugiu = new Discord.MessageEmbed()
                                                 .setColor('YELLOW')
                                                 .setTitle('Ufa, você escapou!')
                                                 .setDescription('Você perdeu o dinheiro enquanto fugia.')
@@ -486,7 +486,7 @@ exports.run = async (client, message, args) => {
                                                 db.add(`mpoints_${message.author.id}`, amount)
                                                 db.set(`procurado_${message.author.id}`, Date.now())
 
-                                                var win = new Discord.MessageEmbed()
+                                                const win = new Discord.MessageEmbed()
                                                     .setColor('GREEN')
                                                     .setTitle(`${message.author.username} efetuou o roubo com sucesso!`)
                                                     .setDescription(`Com o roubo do motel, você obteve ${amount}<:StarPoint:766794021128765469>MPoints`)
@@ -500,7 +500,7 @@ exports.run = async (client, message, args) => {
                                                 db.subtract(`mpoints_${message.author.id}`, amount)
                                                 db.set(`preso_${message.author.id}`, Date.now())
 
-                                                var lose = new Discord.MessageEmbed()
+                                                const lose = new Discord.MessageEmbed()
                                                     .setColor('#FF0000')
                                                     .setTitle('🚨 Preso!')
                                                     .setDescription(`Você foi preso e perdeu ${amount}<:StarPoint:766794021128765469>MPoints`)
@@ -511,19 +511,19 @@ exports.run = async (client, message, args) => {
                                         if (reaction.emoji.name === '🪙') { // 10
                                             msg.delete().catch(err => { return })
 
-                                            var winlose = ['win', 'lose', 'fugiu', 'win', 'lose', 'lose', 'lose', 'lose', 'lose',]
-                                            var result = winlose[Math.floor(Math.random() * winlose.length)]
+                                            let winlose = ['win', 'lose', 'fugiu', 'win', 'lose', 'lose', 'lose', 'lose', 'lose',]
+                                            let result = winlose[Math.floor(Math.random() * winlose.length)]
 
-                                            var embedcrime = new Discord.MessageEmbed()
+                                            const embedcrime = new Discord.MessageEmbed()
                                                 .setColor('#575353')
                                                 .setDescription('🥷 Roubando o banco...')
 
-                                            var fugindo = new Discord.MessageEmbed()
+                                            const fugindo = new Discord.MessageEmbed()
                                                 .setColor('RED')
                                                 .setTitle('🚔 Haa nããão! A policia!!!')
                                                 .setDescription('🏃 Fugindo...')
 
-                                            var fugiu = new Discord.MessageEmbed()
+                                            const fugiu = new Discord.MessageEmbed()
                                                 .setColor('YELLOW')
                                                 .setTitle('Ufa, você escapou!')
                                                 .setDescription('Você perdeu o dinheiro enquanto fugia.')
@@ -533,7 +533,7 @@ exports.run = async (client, message, args) => {
                                                 db.add(`mpoints_${message.author.id}`, amount)
                                                 db.set(`procurado_${message.author.id}`, Date.now())
 
-                                                var win = new Discord.MessageEmbed()
+                                                const win = new Discord.MessageEmbed()
                                                     .setColor('GREEN')
                                                     .setTitle(`${message.author.username} efetuou o roubo com sucesso!`)
                                                     .setDescription(`Com o roubo do banco, você obteve ${amount}<:StarPoint:766794021128765469>MPoints`)
@@ -547,7 +547,7 @@ exports.run = async (client, message, args) => {
                                                 db.subtract(`mpoints_${message.author.id}`, amount)
                                                 db.set(`preso_${message.author.id}`, Date.now())
 
-                                                var lose = new Discord.MessageEmbed()
+                                                const lose = new Discord.MessageEmbed()
                                                     .setColor('#FF0000')
                                                     .setTitle('🚨 Preso!')
                                                     .setDescription(`Você foi preso e perdeu ${amount}<:StarPoint:766794021128765469>MPoints`)

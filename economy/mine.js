@@ -19,7 +19,7 @@ exports.run = async (client, message, args) => {
         if (author1 !== null && timeout1 - (Date.now() - author1) > 0) {
             let time = ms(timeout1 - (Date.now() - author1))
 
-            var presomax = new Discord.MessageEmbed()
+            let presomax = new Discord.MessageEmbed()
                 .setColor('#FF0000')
                 .setTitle('🚨 Você está em prisão máxima!')
                 .setDescription(`Liberdade em: ${time.hours}h ${time.minutes}m e ${time.seconds}s`)
@@ -30,9 +30,9 @@ exports.run = async (client, message, args) => {
             let prefix = db.get(`prefix_${message.guild.id}`)
             if (prefix === null) { prefix = "-" }
 
-            var canal = db.get(`minechannel_${message.guild.id}`)
+            let canal = db.get(`minechannel_${message.guild.id}`)
             if (canal === null) {
-                var nocanal = new Discord.MessageEmbed()
+                let nocanal = new Discord.MessageEmbed()
                     .setColor('#FF0000')
                     .setTitle('Canal de Mineração não definido')
                     .setDescription('Peça para algúm administrador digitar o comando para habilitar o Canal de Mineração')
@@ -41,7 +41,7 @@ exports.run = async (client, message, args) => {
             }
 
             if (!db.get(`minechannel_${message.guild.id}`)) {
-                var notcanal = new Discord.MessageEmbed()
+                let notcanal = new Discord.MessageEmbed()
                     .setColor('#FF0000')
                     .setTitle('Canal de Mineração excluido.')
                     .setDescription('Parece que o Canal de Mineração foi desativado ou excluido.')
@@ -49,15 +49,15 @@ exports.run = async (client, message, args) => {
                 return message.inlineReply(notcanal)
             }
 
-            var canaloficial = message.channel.id === db.get(`minechannel_${message.guild.id}`)
+            let canaloficial = message.channel.id === db.get(`minechannel_${message.guild.id}`)
             if (!canaloficial) {
                 message.delete().catch(err => { return })
                 return message.inlineReply(`Este não é o canal de mineração. A mina é aqui: ${client.channels.cache.get(canal)}`)
             }
 
-            var picareta = db.get(`minechannel_${message.guild.id}`)
+            let picareta = db.get(`minechannel_${message.guild.id}`)
             if (picareta === null) {
-                var nopicareta = new Discord.MessageEmbed()
+                let nopicareta = new Discord.MessageEmbed()
                     .setColor('#FF0000')
                     .setTitle('❌ Comando bloqueado')
                     .setDescription(`${message.author}, você precisa de uma picareta. Compre uma na ${prefix}loja`)
@@ -65,7 +65,7 @@ exports.run = async (client, message, args) => {
             }
 
             if (!db.get(`picareta_${message.author.id}`)) {
-                var nopicareta = new Discord.MessageEmbed()
+                let nopicareta = new Discord.MessageEmbed()
                     .setColor('#FF0000')
                     .setTitle('❌ Comando bloqueado')
                     .setDescription(`${message.author}, você precisa de uma picareta. Compre uma na ${prefix}loja`)
@@ -74,7 +74,7 @@ exports.run = async (client, message, args) => {
 
             let agua = db.get(`agua_${message.author.id}`)
             if (agua === null) {
-                var nopicareta = new Discord.MessageEmbed()
+                let nopicareta = new Discord.MessageEmbed()
                     .setColor('#FF0000')
                     .setTitle('❌ Comando bloqueado')
                     .setDescription(`${message.author}, você não possui copos de água. Compre alguns na ${prefix}loja`)
@@ -84,7 +84,7 @@ exports.run = async (client, message, args) => {
             if (!db.get(`agua_${message.author.id}`)) { agua = 0 }
 
             if (agua == 0) {
-                var nopicareta = new Discord.MessageEmbed()
+                let nopicareta = new Discord.MessageEmbed()
                     .setColor('#FF0000')
                     .setTitle('❌ Comando bloqueado')
                     .setDescription(`${message.author}, você não possui copos de água. Compre alguns na ${prefix}loja`)
@@ -92,71 +92,71 @@ exports.run = async (client, message, args) => {
             }
 
             if (agua > 0) {
-                var num = ['win', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose']
-                var rand = num[Math.floor(Math.random() * num.length)]
+                let num = ['win', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose']
+                let rand = num[Math.floor(Math.random() * num.length)]
 
-                var vezesmin = db.subtract(`offpicareta_${message.author.id}`, 1)
+                let vezesmin = db.subtract(`offpicareta_${message.author.id}`, 1)
                 if (vezesmin === 0 || vezesmin < 0) {
                     db.delete(`picareta_${message.author.id}`)
-                    var sempicareta = new Discord.MessageEmbed()
+                    let sempicareta = new Discord.MessageEmbed()
                         .setColor('#FF0000')
                         .setTitle('Que peeena')
                         .setDescription(`${message.author}, a sua picareta quebrou. Você precisa comprar outra.`)
                     return message.inlineReply(sempicareta)
                 }
 
-                var a = ['wiin', 'loose', 'loose', 'loose', 'loose', 'loose', 'loose', 'loose', 'loose', 'loose', 'mamute', 'nomamute', 'fossil', 'nomamute', 'nomamute', 'nomamute', 'nomamute']
-                var randa = a[Math.floor(Math.random() * a.length)]
+                let a = ['wiin', 'loose', 'loose', 'loose', 'loose', 'loose', 'loose', 'loose', 'loose', 'loose', 'mamute', 'nomamute', 'fossil', 'nomamute', 'nomamute', 'nomamute', 'nomamute']
+                let randa = a[Math.floor(Math.random() * a.length)]
                 db.set(`minetiming_${message.author.id}`, Date.now())
 
                 if (rand === 'win') {
 
                     if (randa === 'fossil') {
-                        var fossil = db.get(`fossil_${message.author.id}`)
+                        let fossil = db.get(`fossil_${message.author.id}`)
                         if (fossil === null) {
-                            var dinh = Math.floor(Math.random() * 100) + 1
-                            var ossos = Math.floor(Math.random() * 3) + 1
-                            var minerios = Math.floor(Math.random() * 3) + 1
-                            var diamantes = Math.floor(Math.random() * 1) + 1
+                            let dinh = Math.floor(Math.random() * 100) + 1
+                            let ossos = Math.floor(Math.random() * 3) + 1
+                            let minerios = Math.floor(Math.random() * 3) + 1
+                            let diamantes = Math.floor(Math.random() * 1) + 1
                             db.subtract(`agua_${message.author.id}`, 1)
                             db.add(`minerio_${message.author.id}`, minerios)
                             db.add(`ossos_${message.author.id}`, ossos)
                             db.add(`diamond_${message.author.id}`, diamantes)
                             db.add(`mpoints_${message.author.id}`, dinh)
                             db.set(`fossil_${message.author.id}`, "Fossil")
-                            var pescaembed = new Discord.MessageEmbed()
+                            let pescaembed = new Discord.MessageEmbed()
                                 .setColor('GREEN')
                                 .setTitle('⭐ Você adquiriu um item de Classe Especial')
                                 .addField('Classe Especial: <:fossil:831859111578173450> Fossil', `Você obteve: ${dinh}<:StarPoint:766794021128765469>MPoints, ${minerios} 🪨 Minerios, ${ossos} 🦴 Ossos e ${diamantes} 💎 Diamantes`)
                             return message.inlineReply(pescaembed)
                         } else if (!db.get(`fossil_${message.author.id}`)) {
-                            var dinh = Math.floor(Math.random() * 100) + 1
-                            var ossos = Math.floor(Math.random() * 3) + 1
-                            var minerios = Math.floor(Math.random() * 3) + 1
-                            var diamantes = Math.floor(Math.random() * 1) + 1
+                            let dinh = Math.floor(Math.random() * 100) + 1
+                            let ossos = Math.floor(Math.random() * 3) + 1
+                            let minerios = Math.floor(Math.random() * 3) + 1
+                            let diamantes = Math.floor(Math.random() * 1) + 1
                             db.subtract(`agua_${message.author.id}`, 1)
                             db.add(`minerio_${message.author.id}`, minerios)
                             db.add(`ossos_${message.author.id}`, ossos)
                             db.add(`diamond_${message.author.id}`, diamantes)
                             db.add(`mpoints_${message.author.id}`, dinh)
                             db.set(`fossil_${message.author.id}`, "Fossil")
-                            var pescaembed = new Discord.MessageEmbed()
+                            let pescaembed = new Discord.MessageEmbed()
                                 .setColor('GREEN')
                                 .setTitle('⭐ Você adquiriu um item de Classe Especial')
                                 .addField('Classe Especial: <:fossil:831859111578173450> Fossil', `Você obteve: ${dinh}<:StarPoint:766794021128765469>MPoints, ${minerios} 🪨 Minerios, ${ossos} 🦴 Ossos e ${diamantes} 💎 Diamantes`)
                             return message.inlineReply(pescaembed)
                         } else {
 
-                            var dinh = Math.floor(Math.random() * 100) + 1
-                            var ossos = Math.floor(Math.random() * 2) + 1
-                            var minerios = Math.floor(Math.random() * 2) + 1
-                            var diamantes = Math.floor(Math.random() * 2) + 1
+                            let dinh = Math.floor(Math.random() * 100) + 1
+                            let ossos = Math.floor(Math.random() * 2) + 1
+                            let minerios = Math.floor(Math.random() * 2) + 1
+                            let diamantes = Math.floor(Math.random() * 2) + 1
                             db.subtract(`agua_${message.author.id}`, 1)
                             db.add(`minerio_${message.author.id}`, minerios)
                             db.add(`ossos_${message.author.id}`, ossos)
                             db.add(`diamond_${message.author.id}`, diamantes)
                             db.add(`mpoints_${message.author.id}`, dinh)
-                            var pescaembed = new Discord.MessageEmbed()
+                            let pescaembed = new Discord.MessageEmbed()
                                 .setColor('GREEN')
                                 .setTitle('⛏️ Você cavou itens valiosos!')
                                 .addField('<:StarPoint:766794021128765469> <:StarPoint:766794021128765469> Você achou novos itens! <:StarPoint:766794021128765469> <:StarPoint:766794021128765469>', `Você obteve: ${dinh}<:StarPoint:766794021128765469>MPoints, ${minerios} 🪨 Minerios, ${ossos} 🦴 Ossos e ${diamantes} 💎 Diamantes`)
@@ -167,40 +167,40 @@ exports.run = async (client, message, args) => {
 
                     if (randa === "loose") {
 
-                        var dinh = Math.floor(Math.random() * 80) + 1
-                        var ossos = Math.floor(Math.random() * 2) + 1
-                        var minerios = Math.floor(Math.random() * 2) + 1
-                        var diamantes = Math.floor(Math.random() * 1) + 1
+                        let dinh = Math.floor(Math.random() * 80) + 1
+                        let ossos = Math.floor(Math.random() * 2) + 1
+                        let minerios = Math.floor(Math.random() * 2) + 1
+                        let diamantes = Math.floor(Math.random() * 1) + 1
                         db.subtract(`agua_${message.author.id}`, 1)
                         db.add(`minerio_${message.author.id}`, minerios)
                         db.add(`ossos_${message.author.id}`, ossos)
                         db.add(`diamond_${message.author.id}`, diamantes)
                         db.add(`mpoints_${message.author.id}`, dinh)
-                        var pescaembed = new Discord.MessageEmbed()
+                        let pescaembed = new Discord.MessageEmbed()
                             .setColor('GREEN')
                             .setTitle('⛏️ Você cavou itens valiosos!')
                             .addField('<:StarPoint:766794021128765469> <:StarPoint:766794021128765469> Você achou novos itens! <:StarPoint:766794021128765469> <:StarPoint:766794021128765469>', `Você obteve: ${dinh}<:StarPoint:766794021128765469>MPoints, ${minerios} 🪨 Minerios, ${ossos} 🦴 Ossos e ${diamantes} 💎 Diamantes`)
                         return message.inlineReply(pescaembed)
                     }
 
-                    var mamute = db.get(`mamute_${message.author.id}`)
+                    let mamute = db.get(`mamute_${message.author.id}`)
                     if (randa === "mamute") {
                         if (mamute === null) {
                             db.set(`mamute_${message.author.id}`, "Mamute")
-                            var pescaembed = new Discord.MessageEmbed()
+                            let pescaembed = new Discord.MessageEmbed()
                                 .setColor('GREEN')
                                 .setTitle('⭐ Você adquiriu um item de Clase Especial')
                                 .setDescription(`**Mamute Pré Histórico:** 🦣, *sons de mamute*`)
                             return message.inlineReply(pescaembed)
                         } else if (!db.get(`mamute_${message.author.id}`)) {
                             db.set(`mamute_${message.author.id}`, "Mamute")
-                            var pescaembed = new Discord.MessageEmbed()
+                            let pescaembed = new Discord.MessageEmbed()
                                 .setColor('GREEN')
                                 .setTitle('⭐ Você adquiriu um item de Clase Especial')
                                 .setDescription(`**Mamute Pré Histórico:** 🦣, *sons de mamute*`)
                             return message.inlineReply(pescaembed)
                         } else {
-                            var looli = new Discord.MessageEmbed()
+                            let looli = new Discord.MessageEmbed()
                                 .setColor('BLUE')
                                 .setTitle('Há um mamute por perto')
                                 .setDescription(`🦣 *Sons de mamute*`)
@@ -209,7 +209,7 @@ exports.run = async (client, message, args) => {
                     }
 
                     if (randa === "nomamute") {
-                        var looli = new Discord.MessageEmbed()
+                        let looli = new Discord.MessageEmbed()
                             .setColor('BLUE')
                             .setTitle('Há um mamute por perto')
                             .setDescription(`🦣 *Sons de mamute*`)
@@ -218,11 +218,11 @@ exports.run = async (client, message, args) => {
                 }
 
                 if (rand === 'lose') {
-                    var dinh = Math.floor(Math.random() * 70) + 1
-                    var minerios = Math.floor(Math.random() * 2) + 1
+                    let dinh = Math.floor(Math.random() * 70) + 1
+                    let minerios = Math.floor(Math.random() * 2) + 1
                     db.subtract(`agua_${message.author.id}`, 1)
                     db.add(`minerio_${message.author.id}`, minerios)
-                    var pescaembed = new Discord.MessageEmbed()
+                    let pescaembed = new Discord.MessageEmbed()
                         .setColor('GREEN')
                         .setTitle('⛏️ Você minerou com sucesso!')
                         .setDescription(`Com a mineração, você obteve 🪨 ${minerios} minerios.`)

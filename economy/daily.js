@@ -4,9 +4,9 @@ const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
 
-  var timeout = 86400000 // 24hrs
-  var amountmoney = 5
-  var amountxp = 300
+  let timeout = 86400000 // 24hrs
+  let amountmoney = 5
+  let amountxp = 300
 
   let timeout1 = 9140000
   let author1 = await db.fetch(`pego_${message.author.id}`)
@@ -14,7 +14,7 @@ exports.run = async (client, message, args) => {
   if (author1 !== null && timeout1 - (Date.now() - author1) > 0) {
     let time = ms(timeout1 - (Date.now() - author1))
 
-    var presomax = new Discord.MessageEmbed()
+    const presomax = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('🚨 Você está em prisão máxima!')
       .setDescription(`Liberdade em: ${time.hours}h ${time.minutes}m e ${time.seconds}s`)

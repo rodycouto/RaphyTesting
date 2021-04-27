@@ -3,14 +3,14 @@ const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
 
-	var member = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member || message.mentions.users.first()
-	var bot = member.bot
+	let member = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member || message.mentions.users.first()
+	let bot = member.bot
 
 	let prefix = db.get(`prefix_${message.guild.id}`)
 	if (prefix === null) prefix = "-"
 
 	if (!args[0]) {
-		var noargs = new Discord.MessageEmbed()
+		let noargs = new Discord.MessageEmbed()
 			.setColor('BLUE')
 			.setTitle('Casamento')
 			.setDescription('Você pode se casar no Sistema Maya. Siga o comando e se case. Veja também em `' + prefix + 'perfil`')
@@ -23,11 +23,11 @@ exports.run = async (client, message, args) => {
 		return message.inlineReply(noargs)
 	}
 
-	var level = await db.get(`level_${member.id}`)
+	let level = await db.get(`level_${member.id}`)
 	if (level === null) level = 0
 
 	if (level < 10) {
-		var block = new Discord.MessageEmbed()
+		let block = new Discord.MessageEmbed()
 			.setColor('#FF0000')
 			.setTitle('🚫  O casal precisa atingir o level 10')
 		return message.inlineReply(block)

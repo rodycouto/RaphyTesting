@@ -4,14 +4,14 @@ exports.run = async (client, message, args) => {
 
   if (args[0]) { return message.inlineReply('Por favor, utilize apenas o comando, sem nada na frente. Informações desnecessárias atrapalham meu processamento.') }
 
-  var game = 'Ddtank'
-  var link1 = 'http://www.337.com/pt/ddtank/'
-  var site = 'Site Oficial'
-  var win = 'Microsoft Windows'
-  var mc = 'MacOS'
-  var li = 'Linux'
+  let game = 'Ddtank'
+  let link1 = 'http://www.337.com/pt/ddtank/'
+  let site = 'Site Oficial'
+  let win = 'Microsoft Windows'
+  let mc = 'MacOS'
+  let li = 'Linux'
 
-  var GameEmbed = new Discord.MessageEmbed()
+  let GameEmbed = new Discord.MessageEmbed()
     .setColor('BLUE')
     .setTitle(`${game}`)
     .addField(`${site}`, `${link1}`)

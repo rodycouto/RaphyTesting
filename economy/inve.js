@@ -64,7 +64,7 @@ exports.run = async (client, message, args) => {
     if (arma === null) { arma = "" }
     if (!db.get(`arma_${user.id}`)) { arma = "" }
 
-    var xusos = (db.get(`offpicareta_${user.id}`) + 1)
+    let xusos = (db.get(`offpicareta_${user.id}`) + 1)
     let picareta = await db.get(`picareta_${user.id}`)
     if (picareta) { picareta = `\n⛏️ Picareta | Uso restante: ${xusos}` }
     if (picareta === null) { picareta = "" }
@@ -125,7 +125,7 @@ exports.run = async (client, message, args) => {
     if (nada2) { nada2 = 'Não há nada aqui' }
     if (!nada2) { nada2 = '' }
 
-    var Embed = new Discord.MessageEmbed()
+    let Embed = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setTitle(`📖 **Inventário de ${user.user.username}**`)
         .addField('Itens Comprados', `${nada}${arma}${picareta}${vara}${machado}${cartas}`)

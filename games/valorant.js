@@ -4,12 +4,12 @@ exports.run = async (client, message, args) => {
 
   if (args[0]) { return message.inlineReply('Por favor, utilize apenas o comando, sem nada na frente. Informações desnecessárias atrapalham meu processamento.') }
 
-  var game = 'Valorant'
-  var link1 = 'https://playvalorant.com/pt-br/'
-  var site = 'Site Oficial'
-  var win = 'Microsoft Windows'
+  let game = 'Valorant'
+  let link1 = 'https://playvalorant.com/pt-br/'
+  let site = 'Site Oficial'
+  let win = 'Microsoft Windows'
 
-  var GameEmbed = new Discord.MessageEmbed()
+  let GameEmbed = new Discord.MessageEmbed()
     .setColor('BLUE')
     .setTitle(`${game}`)
     .addField(`${site}`, `${link1}`)

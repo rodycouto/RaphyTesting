@@ -3,10 +3,10 @@ const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
 
-    var user = message.mentions.members.first()
+    let user = message.mentions.members.first()
 
     if (!args[0]) {
-        var embed1 = new Discord.MessageEmbed()
+        const embed1 = new Discord.MessageEmbed()
             .setColor('#9D24DD')
             .setTitle(`${message.author.username}`)
             .setDescription(`🆔 \`${message.author.id}\``)
@@ -14,7 +14,7 @@ exports.run = async (client, message, args) => {
     }
 
     if (user) {
-        var idembed = new Discord.MessageEmbed()
+        const idembed = new Discord.MessageEmbed()
             .setColor('#9D24DD')
             .setTitle(`${user.user.username}`)
             .setDescription(`🆔 \`${user.user.id}\``)
@@ -25,7 +25,7 @@ exports.run = async (client, message, args) => {
         let prefix = db.get(`prefix_${message.guild.id}`)
         if (prefix === null) prefix = "-"
 
-        var no = new Discord.MessageEmbed()
+        const no = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Comando não reconhecido.')
             .setDescription('Neste comando, é preciso marcar alguém ou mandar apenas o comando sem conteúdo algúm.')

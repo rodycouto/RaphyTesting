@@ -12,7 +12,7 @@ exports.run = async (client, message, args) => {
     if (author1 !== null && timeout1 - (Date.now() - author1) > 0) {
         let time = ms(timeout1 - (Date.now() - author1))
 
-        var presomax = new Discord.MessageEmbed()
+        let presomax = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('🚨 Você está em prisão máxima!')
             .setDescription(`Liberdade em: ${time.hours}h ${time.minutes}m e ${time.seconds}s`)
@@ -23,7 +23,7 @@ exports.run = async (client, message, args) => {
         let user = message.mentions.members.first()
 
         if (!args[0]) {
-            var noargs = new Discord.MessageEmbed()
+            let noargs = new Discord.MessageEmbed()
                 .setColor('BLUE')
                 .setTitle('<:StarPoint:766794021128765469> Sistema de Vendas Maya')
                 .setDescription('Aqui você pode vender seus itens em troca de MPoints. É muito simples, basta usar o comando, assim você pode vender os itens obtidos.\n \nDigite o nome do item com meu prefixo que eu te falo mais informações sobre ele.')
@@ -73,7 +73,7 @@ exports.run = async (client, message, args) => {
             if (peixes = args[1] || peixes > args[1]) {
                 db.subtract(`peixes_${message.author.id}`, args[1])
                 db.add(`mpoints_${message.author.id}`, args[1] * 3)
-                var buyarma = new Discord.MessageEmbed()
+                let buyarma = new Discord.MessageEmbed()
                     .setColor('GREEN')
                     .setTitle('<a:Check:836347816036663309> Venda aprovada')
                     .setDescription(`${message.author} vendeu 🐟 ${args[1]} peixes e obteve ${args[1] * 3}<:StarPoint:766794021128765469>MPoints`)
@@ -92,7 +92,7 @@ exports.run = async (client, message, args) => {
             if (ossos = args[1] || ossos > args[1]) {
                 db.subtract(`ossos_${message.author.id}`, args[1])
                 db.add(`mpoints_${message.author.id}`, args[1] * 2)
-                var buyarma = new Discord.MessageEmbed()
+                let buyarma = new Discord.MessageEmbed()
                     .setColor('GREEN')
                     .setTitle('<a:Check:836347816036663309> Venda aprovada')
                     .setDescription(`${message.author} vendeu 🦴 ${args[1]} ossos e obteve ${args[1] * 2}<:StarPoint:766794021128765469>MPoints`)
@@ -111,7 +111,7 @@ exports.run = async (client, message, args) => {
             if (camarao = args[1] || camarao > args[1]) {
                 db.subtract(`camarao_${message.author.id}`, args[1])
                 db.add(`mpoints_${message.author.id}`, args[1] * 4)
-                var buyarma = new Discord.MessageEmbed()
+                let buyarma = new Discord.MessageEmbed()
                     .setColor('GREEN')
                     .setTitle('<a:Check:836347816036663309> Venda aprovada')
                     .setDescription(`${message.author} vendeu 🍤 ${args[1]} camarões e obteve ${args[1] * 4}<:StarPoint:766794021128765469>MPoints`)
@@ -130,7 +130,7 @@ exports.run = async (client, message, args) => {
             if (minerio = args[1] || minerio > args[1]) {
                 db.subtract(`minerio_${message.author.id}`, args[1])
                 db.add(`mpoints_${message.author.id}`, args[1] * 4)
-                var buyarma = new Discord.MessageEmbed()
+                let buyarma = new Discord.MessageEmbed()
                     .setColor('GREEN')
                     .setTitle('<a:Check:836347816036663309> Venda aprovada')
                     .setDescription(`${message.author} vendeu 🪨 ${args[1]} minerios e obteve ${args[1] * 4}<:StarPoint:766794021128765469>MPoints`)
@@ -146,12 +146,12 @@ exports.run = async (client, message, args) => {
             if (diamond == 0) { return message.inlineReply(`❌ ${message.author}, você não tem diamantes para vender.`) }
             if (diamond < 0) { return message.inlineReply(`❌ ${message.author}, você não tem diamantes para vender.`) }
 
-            var amoutrand = Math.floor(Math.random() * 6000) + 1
+            let amoutrand = Math.floor(Math.random() * 6000) + 1
 
             if (diamond = args[1] || diamond > args[1]) {
                 db.subtract(`diamond_${message.author.id}`, args[1])
                 db.add(`mpoints_${message.author.id}`, args[1] * amoutrand)
-                var buyarma = new Discord.MessageEmbed()
+                let buyarma = new Discord.MessageEmbed()
                     .setColor('GREEN')
                     .setTitle('<a:Check:836347816036663309> Venda aprovada')
                     .setDescription(`${message.author} vendeu 💎 ${args[1]} diamantes e obteve ${args[1] * amoutrand}<:StarPoint:766794021128765469>MPoints`)
@@ -171,7 +171,7 @@ exports.run = async (client, message, args) => {
             if (rosas = args[1] || rosas > args[1]) {
                 db.subtract(`rosas_${message.author.id}`, args[1])
                 db.add(`mpoints_${message.author.id}`, args[1] * 3)
-                var buyarma = new Discord.MessageEmbed()
+                let buyarma = new Discord.MessageEmbed()
                     .setColor('GREEN')
                     .setTitle('<a:Check:836347816036663309> Venda aprovada')
                     .setDescription(`${message.author} vendeu 🌹 ${args[1]} rosas e obteve ${args[1] * 3}<:StarPoint:766794021128765469>MPoints`)
@@ -190,7 +190,7 @@ exports.run = async (client, message, args) => {
             if (apple = args[1] || apple > args[1]) {
                 db.subtract(`apple_${message.author.id}`, args[1])
                 db.add(`mpoints_${message.author.id}`, args[1] * 2)
-                var buyarma = new Discord.MessageEmbed()
+                let buyarma = new Discord.MessageEmbed()
                     .setColor('GREEN')
                     .setTitle('<a:Check:836347816036663309> Venda aprovada')
                     .setDescription(`${message.author} vendeu 🍎 ${args[1]} maças e obteve ${args[1] * 2}<:StarPoint:766794021128765469>MPoints`)

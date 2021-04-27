@@ -2,10 +2,10 @@ const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
 
-    var linksupport = 'https://discord.gg/TC26m4ZRV3'
-    var linkservidor = 'https://discord.gg/YpFWgJuuUV'
+    let linksupport = 'https://discord.gg/TC26m4ZRV3'
+    let linkservidor = 'https://discord.gg/YpFWgJuuUV'
 
-    var Support = new Discord.MessageEmbed()
+    let Support = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setTitle('💬 Centralzinha de Suporte 💬')
         .setURL('https://discord.gg/TC26m4ZRV3')

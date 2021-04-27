@@ -5,23 +5,23 @@ exports.run = async (client, message, args) => {
 
     if (!message.member.hasPermission("ADMINISTRATOR")) {
 
-        var noperm = new Discord.MessageEmbed()
+        let noperm = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Permissão Necessária: Administrador')
 
         return message.inlineReply(noperm)
     }
 
-    var channel = message.mentions.channels.first() || message.channel
+    let channel = message.mentions.channels.first() || message.channel
 
     if (!db.get(`blockchannel_${channel.id}`)) {
-        var ok = new Discord.MessageEmbed()
+        let ok = new Discord.MessageEmbed()
             .setColor('GREEN')
             .setDescription(`${channel} não está desbloqueado.`)
         return message.inlineReply(ok)
     }
 
-    var confirm = new Discord.MessageEmbed()
+    let confirm = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setDescription(`Você deseja desbloquear todos os meus comandos no canal ${channel}?`)
 
@@ -36,7 +36,7 @@ exports.run = async (client, message, args) => {
                 msg.delete().catch(err => { return })
 
                 db.delete(`blockchannel_${channel.id}`, channel.id)
-                var ok = new Discord.MessageEmbed()
+                let ok = new Discord.MessageEmbed()
                     .setColor('GREEN')
                     .setDescription(`Meus comandos no canal ${channel} foram desbloqueados.`)
                 return message.inlineReply(ok)

@@ -12,7 +12,7 @@ exports.run = async (client, message, args) => {
   if (author1 !== null && timeout1 - (Date.now() - author1) > 0) {
     let time = ms(timeout1 - (Date.now() - author1))
 
-    var presomax = new Discord.MessageEmbed()
+    let presomax = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('🚨 Você está em prisão máxima!')
       .setDescription(`Liberdade em: ${time.hours}h ${time.minutes}m e ${time.seconds}s`)
@@ -20,7 +20,7 @@ exports.run = async (client, message, args) => {
     return message.inlineReply(presomax)
   } else {
 
-    var embed = new Discord.MessageEmbed()
+    let embed = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle(`${message.author.username} está pedindo um pouco de dinheiro`)
       .setDescription(`${prefix}doar ${message.author} Valor`)

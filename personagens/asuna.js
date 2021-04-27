@@ -3,7 +3,7 @@ const Discord = require('discord.js')
 exports.run = async (client, message, args) => {
 
 
-    var list = [
+    let list = [
         'https://imgur.com/36uEWal.gif',
         'https://imgur.com/NGOVLNg.gif',
         'https://imgur.com/EgTCBQ6.gif',
@@ -22,7 +22,7 @@ exports.run = async (client, message, args) => {
 
     let gif = list[Math.floor(Math.random() * list.length)]
 
-    var asuna = new Discord.MessageEmbed()
+    let asuna = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setImage(gif)
 
@@ -36,7 +36,7 @@ exports.run = async (client, message, args) => {
 
             if (reaction.emoji.name === '🔄') { // 1º Embed - Principal
                 reaction.users.remove(user)
-                var asuna = new Discord.MessageEmbed()
+                let asuna = new Discord.MessageEmbed()
                     .setColor('BLUE')
                     .setImage(list[Math.floor(Math.random() * list.length)])
                 msg.edit(asuna)

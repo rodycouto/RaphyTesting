@@ -4,18 +4,18 @@ exports.run = async (client, message, args) => {
   
   if (args[0]) { return message.inlineReply('Por favor, utilize apenas o comando, sem nada na frente. Informações desnecessárias atrapalham meu processamento.') }
 
-  var game = 'Uno - Ubisoft'
-  var link1 = 'https://www.ubisoft.com/pt-br/game/uno/uno'
-  var link2 = 'https://store.steampowered.com/search/?term=uno'
-  var st = 'Steam'
-  var site = 'Site Oficial'
-  var win = 'Microsoft Windows'
-  var mc = 'MacOS'
-  var ios = 'iOS'
-  var an = 'Android'
-  var li = 'Linux'
+  let game = 'Uno - Ubisoft'
+  let link1 = 'https://www.ubisoft.com/pt-br/game/uno/uno'
+  let link2 = 'https://store.steampowered.com/search/?term=uno'
+  let st = 'Steam'
+  let site = 'Site Oficial'
+  let win = 'Microsoft Windows'
+  let mc = 'MacOS'
+  let ios = 'iOS'
+  let an = 'Android'
+  let li = 'Linux'
 
-  var GameEmbed = new Discord.MessageEmbed()
+  let GameEmbed = new Discord.MessageEmbed()
     .setColor('BLUE')
     .setTitle(`${game}`)
     .addField(`${site}`, `${link1}`)

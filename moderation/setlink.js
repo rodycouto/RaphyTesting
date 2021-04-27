@@ -4,14 +4,14 @@ const db = require('quick.db')
 exports.run = async (client, message, args) => {
 
     if (!message.member.hasPermission('ADMINISTRATOR')) {
-        var permss = new Discord.MessageEmbed()
+        let permss = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Permissão Necessária: ADMINISTRADOR')
         return message.inlineReply(permss)
     }
 
     if (!message.guild.me.hasPermission("MANAGE_MESSAGES")) {
-      var adm = new Discord.MessageEmbed()
+      let adm = new Discord.MessageEmbed()
         .setColor('#FF0000')
         .setTitle('Eu preciso da permissão "Manusear Mensagens" para utilizar esta função.')
       return message.channel.send(adm)
@@ -24,7 +24,7 @@ exports.run = async (client, message, args) => {
 
     if (!args[0]) {
 
-        var format = new Discord.MessageEmbed()
+        let format = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('🔗 Sistema Ant-link')
             .setDescription('O meu sistem detecta links que membros enviam no servidor e eu deleto avisando o membro que não pode enviar links.')
@@ -38,7 +38,7 @@ exports.run = async (client, message, args) => {
             return message.inlineReply('O sistema ant-link já está ativado.')
         }
 
-        var confirm = new Discord.MessageEmbed()
+        let confirm = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setTitle('Você deseja ativar o sistema de ant-link?')
 
@@ -52,7 +52,7 @@ exports.run = async (client, message, args) => {
                 if (reaction.emoji.name === '✅') { // Sim
                     msg.delete().catch(err => { return })
                     db.set(`nolink_${message.guild.id}`, "ON")
-                    var ok = new Discord.MessageEmbed()
+                    let ok = new Discord.MessageEmbed()
                         .setColor('GREEN')
                         .setTitle('Sistema Ant-Link ativado com sucesso!')
                     return message.inlineReply(ok)
@@ -70,7 +70,7 @@ exports.run = async (client, message, args) => {
             return message.inlineReply('O sistema ant-link já está desativado.')
         }
 
-        var confirm = new Discord.MessageEmbed()
+        let confirm = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setTitle('Você deseja desativar o sistema de ant-link?')
 
@@ -84,7 +84,7 @@ exports.run = async (client, message, args) => {
                 if (reaction.emoji.name === '✅') { // Sim
                     msg.delete().catch(err => { return })
                     db.delete(`nolink_${message.guild.id}`)
-                    var ok = new Discord.MessageEmbed()
+                    let ok = new Discord.MessageEmbed()
                         .setColor('GREEN')
                         .setTitle('Sistema Ant-Link desativado com sucesso!')
                     return message.inlineReply(ok)

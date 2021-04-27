@@ -9,9 +9,9 @@ exports.run = async (client, message, args) => {
     let money = db.get(`mpoints_${message.author.id}`)
     let Options = ["pedra", "papel", "tesoura"]
     let random = ['win', 'lose', 'draw']
-    var result = random[Math.floor(Math.random() * random.length)]
+    let result = random[Math.floor(Math.random() * random.length)]
 
-    var noargs = new Discord.MessageEmbed()
+    const noargs = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setTitle('👊 ✋ ✌️ Jokempo')
         .setDescription('Você pode jogar jokempo e ganhar ou perder 10 <:StarPoint:766794021128765469>MPoints')
@@ -25,17 +25,17 @@ exports.run = async (client, message, args) => {
 
     if (['pedra', 'rock'].includes(args[0])) {
 
-        var lose = new Discord.MessageEmbed()
+        const lose = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setTitle('😭 | Eu Perdiiii')
             .setDescription('Você 👊 x ✌️ Maya\nVocê ganhou 10<:StarPoint:766794021128765469>MPoints')
 
-        var win = new Discord.MessageEmbed()
+        const win = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setTitle('😌 | Eu Ganheeei')
             .setDescription('Você 👊 x ✋ Maya\nVocê perdeu 10<:StarPoint:766794021128765469>MPoints')
 
-        var draw = new Discord.MessageEmbed()
+        const draw = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setTitle('😕 | Deu empate')
             .setDescription('Você 👊 x 👊 Maya\nNinguém ganhou nada que pena')
@@ -55,17 +55,17 @@ exports.run = async (client, message, args) => {
 
     } else if (['papel', 'paper'].includes(args[0])) {
 
-        var lose = new Discord.MessageEmbed()
+        const lose = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setTitle('😭 | Eu Perdiiii')
             .setDescription('Você ✋ x 👊 Maya\nVocê ganhou 10<:StarPoint:766794021128765469>MPoints')
 
-        var win = new Discord.MessageEmbed()
+        const win = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setTitle('😌 | Eu Ganheeei')
             .setDescription('Você ✋ x ✌️ Maya\nVocê perdeu 10<:StarPoint:766794021128765469>MPoints')
 
-        var draw = new Discord.MessageEmbed()
+        const draw = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setTitle('😕 | Deu empate')
             .setDescription('Você ✋ x ✋ Maya\nNinguém ganhou nada que pena')
@@ -84,17 +84,17 @@ exports.run = async (client, message, args) => {
 
     } else if (['tesoura', 'sissors'].includes(args[0])) {
 
-        var lose = new Discord.MessageEmbed()
+        const lose = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setTitle('😭 | Eu Perdiiii')
             .setDescription('Você ✌️ x ✋ Maya\nVocê ganhou 10<:StarPoint:766794021128765469>MPoints')
 
-        var win = new Discord.MessageEmbed()
+        const win = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setTitle('😌 | Eu Ganheeei')
             .setDescription('Você ✌️ x 👊 Maya\nVocê perdeu 10<:StarPoint:766794021128765469>MPoints')
 
-        var draw = new Discord.MessageEmbed()
+        const draw = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setTitle('😕 | Deu empate')
             .setDescription('Você ✌️ x ✌️ Maya\nNinguém ganhou nada que pena')

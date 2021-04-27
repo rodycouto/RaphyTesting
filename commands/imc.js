@@ -6,10 +6,10 @@ exports.run = async (client, message, args) => {
     let prefix = db.get(`prefix_${message.guild.id}`)
     if (prefix === null) { prefix = "-" }
 
-    var weight = args[0]
-    var height = args[1]
+    let weight = args[0]
+    let height = args[1]
 
-    var imcError = new Discord.MessageEmbed()
+    const imcError = new Discord.MessageEmbed()
         .setColor("BLUE")
         .setTitle('📝 Indice de Massa Corporal - BETA')
         .setDescription('`' + prefix + 'imc Peso Altura`' + '\n \n**Atenção**\nPeso em **Kilogramas** e Altura em **Centimentros**\n \n')
@@ -28,7 +28,7 @@ exports.run = async (client, message, args) => {
     if (!args[0] || !args[1]) { return message.inlineReply(imcError) }
     if (isNaN(args[0]) || isNaN(args[1])) { return message.inlineReply(imcError) }
 
-    var imc = (weight / ((height * height) / 10000)).toFixed(2)
+    let imc = (weight / ((height * height) / 10000)).toFixed(2)
 
     if (args[0] && args[1]) {
         let category;
@@ -37,7 +37,7 @@ exports.run = async (client, message, args) => {
         if (imc > 30) category = "Obesidade"
         if (imc < 24.9 && imc > 18.5) category = "Padrão"
 
-        var embed = new Discord.MessageEmbed()
+        const embed = new Discord.MessageEmbed()
             .setColor("BLUE")
             .setTitle(`📉 Índice de Massa Corporal`)
             .addField('Peso', weight)

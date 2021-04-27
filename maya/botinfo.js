@@ -3,7 +3,7 @@ const os = require('os')
 
 exports.run = async (client, message, args) => {
 
-    var embed = new Discord.MessageEmbed()
+    let embed = new Discord.MessageEmbed()
         .setThumbnail(client.user.displayAvatarURL())
         .setTitle('📃 Centralzinha de Informações 📃')
         .setColor('BLUE')
@@ -15,7 +15,7 @@ exports.run = async (client, message, args) => {
             }
         )
 
-    var embed2 = new Discord.MessageEmbed()
+    let embed2 = new Discord.MessageEmbed()
         .setThumbnail(client.user.displayAvatarURL())
         .setTitle('⚙️ Centralzinha Tecnica ⚙️')
         .setColor("BLUE")
@@ -26,7 +26,7 @@ exports.run = async (client, message, args) => {
             }
         )
 
-    var Thanks = new Discord.MessageEmbed()
+    let Thanks = new Discord.MessageEmbed()
         .setColor('GREEN')
         .setThumbnail(client.user.displayAvatarURL())
         .setTitle(':hearts: OBRIGADA a todos que me ajuda a crescer! :hearts:')
@@ -38,7 +38,7 @@ exports.run = async (client, message, args) => {
             }
         )
 
-    var support = new Discord.MessageEmbed()
+    let support = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setTitle('💬 Centralzinha de Suporte 💬')
         .setURL('https://discord.gg/TC26m4ZRV3')

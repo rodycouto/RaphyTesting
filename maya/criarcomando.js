@@ -4,7 +4,7 @@ const db = require('quick.db')
 exports.run = async (client, message, args) => {
 
     if (!message.member.hasPermission('ADMINISTRATOR')) {
-        var permss = new Discord.MessageEmbed()
+        let permss = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Permissão Necessária: ADMINISTRADOR')
         return message.inlineReply(permss)
@@ -14,7 +14,7 @@ exports.run = async (client, message, args) => {
         let prefix = db.get(`prefix_${message.guild.id}`)
         if (prefix === null) prefix = "-"
 
-        var noargs = new Discord.MessageEmbed()
+        let noargs = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Siga o formato correto')
             .setDescription('`' + prefix + 'criarcomando Nome Resposta`')
@@ -29,7 +29,7 @@ exports.run = async (client, message, args) => {
 
     let commandName = args[0].toLowerCase()
     if (commandName.length > 10) {
-        var toname = new Discord.MessageEmbed()
+        let toname = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('O nome do comando não pode ultrapassar 10 letras')
         return message.inlineReply(toname)
@@ -40,7 +40,7 @@ exports.run = async (client, message, args) => {
         let prefix = db.get(`prefix_${message.guild.id}`)
         if (prefix === null) prefix = "-"
 
-        var noargs = new Discord.MessageEmbed()
+        let noargs = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Siga o formato correto')
             .setDescription('`' + prefix + 'criarcomando Nome Resposta`')
@@ -54,7 +54,7 @@ exports.run = async (client, message, args) => {
     }
 
     if (commandResponse.length > 30) {
-        var toname = new Discord.MessageEmbed()
+        let toname = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('A resposta do comando não pode ultrapassar 30 letras')
             .setFooter('Meu banco de dados também sente dor sabia?')
@@ -63,7 +63,7 @@ exports.run = async (client, message, args) => {
 
     let database = db.get(`guildConfigurations_${message.guild.id}.commands`)
     if (database && database.find(x => x.name === commandName.toLowerCase())) {
-        var existe = new Discord.MessageEmbed()
+        let existe = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Este comando já existe')
         return message.inlineReply(existe)
@@ -78,7 +78,7 @@ exports.run = async (client, message, args) => {
     let prefix = db.get(`prefix_${message.guild.id}`)
     if (prefix === null) prefix = "-"
 
-    var embed = new Discord.MessageEmbed()
+    let embed = new Discord.MessageEmbed()
         .setColor('GREEN')
         .setTitle('O comando `' + prefix + commandName.toLowerCase() + '` foi adicionado ao servidor!')
 

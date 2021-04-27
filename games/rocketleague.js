@@ -4,10 +4,10 @@ exports.run = async (client, message, args) => {
 
   if (args[0]) { return message.inlineReply('Por favor, utilize apenas o comando, sem nada na frente. Informações desnecessárias atrapalham meu processamento.') }
 
-  var game = 'Rocket League - Epic Games'
-  var link1 = 'https://www.epicgames.com/store/pt-BR/product/rocket-league/home'
+  let game = 'Rocket League - Epic Games'
+  let link1 = 'https://www.epicgames.com/store/pt-BR/product/rocket-league/home'
 
-  var GameEmbed = new Discord.MessageEmbed()
+  let GameEmbed = new Discord.MessageEmbed()
     .setColor('BLUE')
     .setTitle(`${game}`)
     .addField(`Epic Games`, `${link1}`)

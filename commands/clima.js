@@ -7,7 +7,7 @@ exports.run = async (client, message, args) => {
   let prefix = db.get(`prefix_${message.guild.id}`)
   if (prefix === null) { prefix = "-" }
 
-  var noargs = new Discord.MessageEmbed()
+  const noargs = new Discord.MessageEmbed()
     .setColor('BLUE')
     .setTitle('⛅ Estação de Tempo da Maya')
     .setDescription('• Aqui você pode ver o clima de qualquer lugar do mundo, explore o clima dos paises e cidades.')
@@ -21,7 +21,7 @@ exports.run = async (client, message, args) => {
 
   await weather.find({ search: city, degreeType: degreetype }, function (err, result) {
 
-    var noresult = new Discord.MessageEmbed()
+    const noresult = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Parece que ocorreu um erro no meu sistema de busca')
       .setDescription('`Nenhuma cidade/estado foi encontrado`')
@@ -32,7 +32,7 @@ exports.run = async (client, message, args) => {
     let current = result[0].current
     let location = result[0].location
 
-    let embed = new Discord.MessageEmbed()
+    const embed = new Discord.MessageEmbed()
       .setColor('BLUE')
       .setAuthor(current.observationpoint)
       .setDescription(`> ${current.skytext}`)

@@ -18,25 +18,25 @@ exports.run = async (client, message, args) => {
     let prefix = db.get(`prefix_${message.guild.id}`)
     if (prefix === null) { prefix = "-" }
 
-    var guri = message.guild.roles.cache.get("759901493591146549")
-    var guria = message.guild.roles.cache.get("759901620875689985")
+    let guri = message.guild.roles.cache.get("759901493591146549")
+    let guria = message.guild.roles.cache.get("759901620875689985")
 
-    var mais18 = message.guild.roles.cache.get("759902317750517760")
-    var menos18 = message.guild.roles.cache.get("759902206085955606")
+    let mais18 = message.guild.roles.cache.get("759902317750517760")
+    let menos18 = message.guild.roles.cache.get("759902206085955606")
 
-    var sudeste = message.guild.roles.cache.get("759900199736442890")
-    var sul = message.guild.roles.cache.get("759900115271549007")
-    var norte = message.guild.roles.cache.get("759900915929972816")
-    var centrooeste = message.guild.roles.cache.get("759901046428008519")
-    var nordeste = message.guild.roles.cache.get("759900384377700412")
+    let sudeste = message.guild.roles.cache.get("759900199736442890")
+    let sul = message.guild.roles.cache.get("759900115271549007")
+    let norte = message.guild.roles.cache.get("759900915929972816")
+    let centrooeste = message.guild.roles.cache.get("759901046428008519")
+    let nordeste = message.guild.roles.cache.get("759900384377700412")
 
-    var solteiro = message.guild.roles.cache.get("759899479750344753")
-    var namorando = message.guild.roles.cache.get("759899737650102282")
+    let solteiro = message.guild.roles.cache.get("759899479750344753")
+    let namorando = message.guild.roles.cache.get("759899737650102282")
 
-    var verificado = message.guild.roles.cache.get("755450811969962084")
-    var naoverificado = message.guild.roles.cache.get("833762390482747402")
+    let verificado = message.guild.roles.cache.get("755450811969962084")
+    let naoverificado = message.guild.roles.cache.get("833762390482747402")
 
-    var registro = new Discord.MessageEmbed()
+    let registro = new Discord.MessageEmbed()
         .setColor("BLUE")
         .setTitle(`🌙 Bem-vindo ao Registro da ${message.guild.name}`)
         .setDescription("O registro é bem fácil, é muito importante que você siga a sequência corretamente.\n \n**📜 Opções**\nHomem | Mulher\n-18 | +18\nSudeste, Sul, Norte, Centro, Nordeste\nSolteiro | Namorando\n \nEscolha apenas um de cada!")

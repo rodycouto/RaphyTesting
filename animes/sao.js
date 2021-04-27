@@ -2,7 +2,7 @@ const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
 
-  var lista = [
+  let lista = [
     'https://imgur.com/XhwPW1b.png',
     'https://imgur.com/14iUC8B.gif',
     'https://imgur.com/v0t7ljo.png',
@@ -64,7 +64,7 @@ exports.run = async (client, message, args) => {
 
   let saophotos = lista[Math.floor(Math.random() * lista.length)]
 
-  var SAOEmbed = new Discord.MessageEmbed()
+  const SAOEmbed = new Discord.MessageEmbed()
     .setTitle('📺 SAO - Sword Art Online')
     .setColor('BLUE')
     .setImage(saophotos)
@@ -80,7 +80,7 @@ exports.run = async (client, message, args) => {
       if (reaction.emoji.name === '🔄') { // 1º Embed - Principal
         reaction.users.remove(user).catch(err => { return })
 
-        let SAOEmbed1 = new Discord.MessageEmbed()
+        const SAOEmbed1 = new Discord.MessageEmbed()
           .setTitle('📺 SAO - Sword Art Online')
           .setColor('BLUE')
           .setImage(lista[Math.floor(Math.random() * lista.length)])

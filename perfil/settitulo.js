@@ -10,21 +10,21 @@ exports.run = async (client, message, args) => {
     let prefix = db.get(`prefix_${message.guild.id}`)
     if (prefix === null) prefix = "-"
 
-    var help = new Discord.MessageEmbed()
+    let help = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setTitle('🔰 Permissão Título')
         .setDescription('Escolha um título para seu perfil. Se auto nomeie e mostre a todos o quão grandioso/a você é!\n' + 'Exemplo: `' + prefix + 'settitulo Rei do Discord`')
 
-    var embed1 = new Discord.MessageEmbed()
+    let embed1 = new Discord.MessageEmbed()
         .setColor('#FF0000') // RED 
         .setTitle('Siga o formato correto')
         .setDescription('Exemplo: `' + prefix + 'settitulo Rei do Discord`')
 
-    var iqualstats = new Discord.MessageEmbed()
+    let iqualstats = new Discord.MessageEmbed()
         .setColor('#ff0000')
         .setDescription('Esse já é seu título.')
 
-    var confirm = new Discord.MessageEmbed()
+    let confirm = new Discord.MessageEmbed()
         .setColor('BLUE')
         .addFields(
             {
@@ -49,14 +49,14 @@ exports.run = async (client, message, args) => {
             if (reaction.emoji.name === '✅') { // Check
                 msg.delete().catch(err => { return })
                 db.set(`titulo_${message.author.id}`, status)
-                var embednewstatus = new Discord.MessageEmbed()
+                let embednewstatus = new Discord.MessageEmbed()
                     .setColor("GREEN")
                     .setTitle('Título alterado com sucesso!')
                 message.inlineReply(embednewstatus)
             }
             if (reaction.emoji.name === '❌') { // MPEmbed
                 msg.delete().catch(err => { return })
-                var cancel = new Discord.MessageEmbed()
+                let cancel = new Discord.MessageEmbed()
                     .setColor("GREEN")
                     .setTitle('Comando cancelado.')
                 message.inlineReply(cancel)

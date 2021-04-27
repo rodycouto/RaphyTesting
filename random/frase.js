@@ -2,7 +2,7 @@ const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
 
-    var list = [
+    let list = [
         '⠀\nCreio no riso e nas lágrimas como antídotos contra o ódio e o terror. \n Charles Chaplin',
         '⠀\nSeja como for o que penses, creio que é melhor dizê-lo com boas palavras. \n William Shakespeare',
         '⠀\nEu acredito no amor. Eu creio que pode existir alguma chance e eu sempre acho que pode ser diferente. Talvez essa seja a explicação de todas decepções. \n Pequena Sereia',
@@ -23,10 +23,10 @@ exports.run = async (client, message, args) => {
         '⠀\nHá pessoas que ficam com você quando sobra tempo, e há pessoas que arranjam tempo pra ficar com você. \nLucas - Luquisquiss'
     ]
 
-    var rand = list[Math.floor(Math.random() * list.length)]
+    let rand = list[Math.floor(Math.random() * list.length)]
     let user = client.users.cache.get(args[0])
 
-    var HelpEmbed = new Discord.MessageEmbed()
+    let HelpEmbed = new Discord.MessageEmbed()
         .setColor('BLUE')
         .addFields(
             {

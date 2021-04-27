@@ -13,7 +13,7 @@ exports.run = async (client, message, args) => {
   let every = db.all().filter(i => i.ID.startsWith("xp_")).sort((a, b) => b.data - a.data);
   let rank = every.map(x => x.ID).indexOf(`xp_${user.id}`) + 1
 
-  var card = new canvacord.Rank()
+  let card = new canvacord.Rank()
     .setUsername(user.username)
     .setDiscriminator(user.discriminator)
     .setRank(rank)
@@ -23,7 +23,7 @@ exports.run = async (client, message, args) => {
     .setStatus(user.presence.status)
     .setAvatar(user.displayAvatarURL({ format: "png", size: 1024 }))
 
-  var img = await card.build().catch(err => { message.inlineReply('Um erro foi detectado na execução de CANVACORD' + err) })
+  let img = await card.build().catch(err => { message.inlineReply('Um erro foi detectado na execução de CANVACORD' + err) })
 
   return message.inlineReply("<a:carregando:836101628083437608> Carregando...").then(m => m.delete({ timeout: 5000 })).then(msg => msg.channel.send(new Discord.MessageAttachment(img, "rank.png")))
 }

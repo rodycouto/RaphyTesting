@@ -3,7 +3,7 @@ const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
 
-    var canal = client.channels.cache.get('830982931937624114')
+    let canal = client.channels.cache.get('830982931937624114')
 
     let prefix = db.get(`prefix_${message.guild.id}`)
     if (prefix === null) { prefix = "-" }
@@ -16,7 +16,7 @@ exports.run = async (client, message, args) => {
     let tema = args[0]
     let link = args[1]
 
-    var noargs = new Discord.MessageEmbed()
+    let noargs = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setTitle('📢 Envie Gifs')
         .setDescription('Por causa de tantos comandos e TANTOS gifs, ficou ruim para apenas uma pessoa pegar todos os gifs, então, este comando foi feito.\n \nEnvie gifs pra Maya! Só seguir os requisitos.')
@@ -25,12 +25,12 @@ exports.run = async (client, message, args) => {
         .setImage('https://imgur.com/F1nJKHZ.gif')
         .setFooter('O Gif será enviado para o meu servidor, você pode encontra-lo no comando ' + prefix + 'help')
 
-    var formato = new Discord.MessageEmbed()
+    let formato = new Discord.MessageEmbed()
         .setColor('#FF0000')
         .setTitle('Por favor, siga o formato correto')
         .setDescription('`' + prefix + 'gif Naruto LinkDoImigur`\n' + '`' + prefix + 'gif Naruto https://imgur.com/D5KT1S`')
 
-    var newgif = new Discord.MessageEmbed()
+    let newgif = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setTitle('📢 Novo Gif')
         .addField('Enviado por', message.author, true)

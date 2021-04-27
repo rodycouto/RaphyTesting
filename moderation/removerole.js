@@ -17,7 +17,7 @@ exports.run = async (client, message, args) => {
     if (!user.roles.cache.has(role.id)) { return message.inlineReply(`<:xis:835943511932665926> ${user.user.username} não possui este cargo.`) }
 
     if (!role.editable) {
-        var soberol = new Discord.MessageEmbed()
+        let soberol = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setTitle('Meu cargo não é alto o suficiente.')
             .addFields(
@@ -27,7 +27,7 @@ exports.run = async (client, message, args) => {
                 }
             )
 
-        var sobcarg = new Discord.MessageEmbed()
+        let sobcarg = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setDescription('<a:carregando:836101628083437608> Um erro foi encontrado. Buscando solução...')
 
@@ -39,7 +39,7 @@ exports.run = async (client, message, args) => {
 
     user.roles.remove(role).catch(err => { if (err) { return message.inlineReply(`<:xis:835943511932665926> Não tenho poder suficiente para adicionar o cargo ${role}`) } })
 
-    var sucess = new Discord.MessageEmbed()
+    let sucess = new Discord.MessageEmbed()
         .setColor('GREEN')
         .setDescription(`O cargo ${role} foi removido de ${user.user.username} com sucesso.`)
     return message.inlineReply(sucess)

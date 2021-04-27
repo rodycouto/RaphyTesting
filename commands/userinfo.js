@@ -4,11 +4,11 @@ const moment = require('moment')
 exports.run = async (client, message, args) => {
 
     let user = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member
-    var flags = { DISCORD_EMPLOYEE: 'Discord Employee', DISCORD_PARTNER: 'Discord Partner', BUGHUNTER_LEVEL_1: 'Bug Hunter (Level 1)', BUGHUNTER_LEVEL_2: 'Bug Hunter (Level 2)', HYPESQUAD_EVENTS: 'HypeSquad Events', HOUSE_BRAVERY: 'House of Bravery', HOUSE_BRILLIANCE: 'House of Brilliance', HOUSE_BALANCE: 'House of Balance', EARLY_SUPPORTER: 'Early Supporter', TEAM_USER: 'Team User', SYSTEM: 'System', VERIFIED_BOT: 'Verified Bot', VERIFIED_DEVELOPER: 'Verified Bot Developer' }
+    let flags = { DISCORD_EMPLOYEE: 'Discord Employee', DISCORD_PARTNER: 'Discord Partner', BUGHUNTER_LEVEL_1: 'Bug Hunter (Level 1)', BUGHUNTER_LEVEL_2: 'Bug Hunter (Level 2)', HYPESQUAD_EVENTS: 'HypeSquad Events', HOUSE_BRAVERY: 'House of Bravery', HOUSE_BRILLIANCE: 'House of Brilliance', HOUSE_BALANCE: 'House of Balance', EARLY_SUPPORTER: 'Early Supporter', TEAM_USER: 'Team User', SYSTEM: 'System', VERIFIED_BOT: 'Verified Bot', VERIFIED_DEVELOPER: 'Verified Bot Developer' }
     let roles = user.roles.cache.sort((a, b) => b.position - a.position).map(role => role.toString()).slice(0, -1)
     let userFlags = user.user.flags.toArray()
 
-    let embed = new Discord.MessageEmbed()
+    const embed = new Discord.MessageEmbed()
         .setTitle(`📝 Informações sobre ${user.user.username}`)
         .setColor(`#f3f3f3`)
         .setThumbnail(user.user.displayAvatarURL({ dynamic: true }))

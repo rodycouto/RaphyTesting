@@ -3,7 +3,7 @@ const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
 
-  var list = [
+  let list = [
     'https://imgur.com/ox15B5R.gif',
     'https://imgur.com/vpv5tE0.gif',
     'https://imgur.com/JpMuTSR.gif',
@@ -16,7 +16,7 @@ exports.run = async (client, message, args) => {
     'https://imgur.com/Jz4722z.gif'
   ]
 
-  var list1 = [
+  let list1 = [
     'https://imgur.com/ox15B5R.gif',
     'https://imgur.com/vpv5tE0.gif',
     'https://imgur.com/JpMuTSR.gif',
@@ -29,8 +29,8 @@ exports.run = async (client, message, args) => {
     'https://imgur.com/Jz4722z.gif'
   ]
 
-  var rand = list[Math.floor(Math.random() * list.length)]
-  var rand1 = list1[Math.floor(Math.random() * list1.length)]
+  let rand = list[Math.floor(Math.random() * list.length)]
+  let rand1 = list1[Math.floor(Math.random() * list1.length)]
   let user = message.mentions.users.first()
 
   let prefix = db.get(`prefix_${message.guild.id}`)
@@ -39,7 +39,7 @@ exports.run = async (client, message, args) => {
   if (!user) { return message.inlineReply('`' + prefix + 'highfive @user`') }
 
   if (user.id === '821471191578574888') {
-    var embed1 = new Discord.MessageEmbed()
+    let embed1 = new Discord.MessageEmbed()
       .setColor('BLUE')
       .setDescription(`${message.author.username} & ${user.username} mandaram um HIGHFIVE!`)
       .setImage(rand)
@@ -48,12 +48,12 @@ exports.run = async (client, message, args) => {
 
   if (user.id === message.author.id) { return message.inlineReply('Você não pode usar este comando com você mesmo.') }
 
-  var embed = new Discord.MessageEmbed()
+  let embed = new Discord.MessageEmbed()
     .setColor('BLUE')
     .setDescription(`Highfive ${user}?`)
     .setFooter('Clique em 🔁 para aceitar o highfive')
 
-  var embed2 = new Discord.MessageEmbed()
+  let embed2 = new Discord.MessageEmbed()
     .setColor('BLUE')
     .setDescription(`${message.author.username} & ${user.username} mandaram um HIGHFIVE!`)
     .setImage(rand1)

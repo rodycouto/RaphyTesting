@@ -4,7 +4,7 @@ exports.run = async (client, message, args) => {
 
 
 
-  var list = [
+  let list = [
     'https://imgur.com/gVpxrzK.gif',
     'https://imgur.com/Nemm1pQ.gif',
     'https://imgur.com/Uq9PWC2.gif',
@@ -14,9 +14,9 @@ exports.run = async (client, message, args) => {
     'https://imgur.com/uzx2f68.gif'
   ]
 
-  var rand = list[Math.floor(Math.random() * list.length)]
+  let rand = list[Math.floor(Math.random() * list.length)]
 
-  var embed = new Discord.MessageEmbed()
+  let embed = new Discord.MessageEmbed()
     .setColor('#000000')
     .setDescription(`${message.author} booom!`)
     .setImage(rand)

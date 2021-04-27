@@ -2,7 +2,7 @@ const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
 
-    var list = [
+    let list = [
         'https://imgur.com/aXAIvkS.gif',
         'https://imgur.com/MZjgryh.gif',
         'https://imgur.com/7KtfCMh.gif',
@@ -25,7 +25,7 @@ exports.run = async (client, message, args) => {
 
     let gif = list[Math.floor(Math.random() * list.length)]
 
-    var kimetsu = new Discord.MessageEmbed()
+    const kimetsu = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setImage(gif)
 
@@ -39,7 +39,7 @@ exports.run = async (client, message, args) => {
 
             if (reaction.emoji.name === '🔄') { // 1º Embed - Principal
                 reaction.users.remove(user).catch(err => { return })
-                let kimetsu = new Discord.MessageEmbed()
+                const kimetsu = new Discord.MessageEmbed()
                     .setColor('BLUE')
                     .setImage(list[Math.floor(Math.random() * list.length)])
                 msg.edit(kimetsu)

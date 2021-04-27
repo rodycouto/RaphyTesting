@@ -1,4 +1,5 @@
 const Discord = require("discord.js")
+const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
 
@@ -6,7 +7,8 @@ exports.run = async (client, message, args) => {
   let avatar = user.avatarURL({ dynamic: true, format: "png", size: 1024 })
   let linkavatar = user.displayAvatarURL()
 
-  let embed = new Discord.MessageEmbed()
+
+  const embed = new Discord.MessageEmbed()
     .setColor(`BLUE`)
     .setDescription(`[Baixar](${linkavatar}) avatar de ${user}`)
     .setImage(avatar)
@@ -18,7 +20,13 @@ exports.run = async (client, message, args) => {
 
     msg.awaitReactions((reaction, member) => {
 
-      if (reaction.emoji.name === '📨') { member.send(embed).catch(err => { return }) }
+      if (reaction.emoji.name === '📨') {
+        let PrivadoDesativado = db.get(`privadooff_${member.id}`)
+        if (PrivadoDesativado) {
+           return message.channel.send(`<:xis:835943511932665926> ${member}, você desativou minhas mensagens no seu privado. Este recurso está bloqueado para você.`) 
+          } else { 
+            member.send(embed).catch(err => { return }) }
+      }
       if (message.author.id !== member.id) return
       if (reaction.emoji.name === '❌') {
         message.delete().catch(err => { return })

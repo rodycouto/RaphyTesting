@@ -3,14 +3,14 @@ const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
 
-    var canal = client.channels.cache.get('836260631593746493')
+    let canal = client.channels.cache.get('836260631593746493')
 
     let prefix = db.get(`prefix_${message.guild.id}`)
     if (prefix === null) { prefix = "-" }
 
     let mensagem = args.join(" ")
 
-    var noargs = new Discord.MessageEmbed()
+    let noargs = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setTitle('<a:engrenagem:836101651331940383> Reporte bugs/erros')
         .setDescription('Com este comando, você reporta bugs/erros direto pro meu criador. Assim tudo é resolvido de maneira rápida!')
@@ -19,7 +19,7 @@ exports.run = async (client, message, args) => {
 
     if (!args[0]) { return message.inlineReply(noargs) }
 
-    var newideia = new Discord.MessageEmbed()
+    let newideia = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setTitle('📢 Nova Bug Recebido')
         .addField('Enviado por', message.author, true)

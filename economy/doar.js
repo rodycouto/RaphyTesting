@@ -13,7 +13,7 @@ exports.run = async (client, message, args) => {
     if (author1 !== null && timeout1 - (Date.now() - author1) > 0) {
         let time = ms(timeout1 - (Date.now() - author1))
 
-        var presomax = new Discord.MessageEmbed()
+        let presomax = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('🚨 Você está em prisão máxima!')
             .setDescription(`Liberdade em: ${time.hours}h ${time.minutes}m e ${time.seconds}s`)
@@ -46,7 +46,7 @@ exports.run = async (client, message, args) => {
             if (!quantia) { return message.inlineReply('<:xis:835943511932665926> Use o comando de forma correta! `' + prefix + 'doar rosas @user quantidade`') }
             if (isNaN(quantia)) { return message.inlineReply(`<:xis:835943511932665926> **${quantia}** não é um número!`) }
 
-            var ConfirmRosas = new Discord.MessageEmbed()
+            let ConfirmRosas = new Discord.MessageEmbed()
                 .setColor('BLUE')
                 .setTitle('<a:attention:836101248183959562> Confirmação...')
                 .setDescription(`Você confirma o envio de ${args[2]} 🌹 Rosas para ${user}?`)
@@ -81,7 +81,7 @@ exports.run = async (client, message, args) => {
                 if (money === '0') { return message.inlineReply('<:xis:835943511932665926> Você não tem dinheiro para doar.') }
                 if (money < '0') { return message.inlineReply('<:xis:835943511932665926> Você não pode doar dinheiro estando negativado.') }
 
-                var confirm = new Discord.MessageEmbed() // Doar all
+                let confirm = new Discord.MessageEmbed() // Doar all
                     .setColor('BLUE')
                     .setTitle('Confirmação...')
                     .setDescription(`<a:attention:836101248183959562> Confirmar transação no valor de ${money}<:StarPoint:766794021128765469>MPoints para ${user}?`)
@@ -116,7 +116,7 @@ exports.run = async (client, message, args) => {
                 if (money < args[2]) { return message.inlineReply('<:xis:835943511932665926> Você não tem todo esse dinheiro para doar.') }
                 if (isNaN(args[2])) { return message.inlineReply(`<:xis:835943511932665926> **${args[2]}** não é um número.`) }
 
-                var confirm2 = new Discord.MessageEmbed() // Doar quantia
+                let confirm2 = new Discord.MessageEmbed() // Doar quantia
                     .setColor('BLUE')
                     .setTitle('Confirmação...')
                     .setDescription(`<a:attention:836101248183959562> Confirmar transação no valor de ${args[1]}<:StarPoint:766794021128765469>MPoints para ${user}?`)

@@ -1,12 +1,13 @@
 const Discord = require("discord.js")
 const convert = require("parse-ms")
+const db = require('quick.db')
 const ms = require('parse-ms')
 
 exports.run = async (client, message, args) => {
 
   let user = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member
   let avatar = user.user.displayAvatarURL({ format: 'png' })
-  var fotospot = 'https://imgur.com/vw6z7v4.png'
+  let fotospot = 'https://imgur.com/vw6z7v4.png'
   if (message.mentions.users.first()) {
     user = message.mentions.users.first()
   } else {
@@ -34,7 +35,7 @@ exports.run = async (client, message, args) => {
     let seconds = timeConvert.seconds < 10 ? `0${timeConvert.seconds}` : timeConvert.seconds
     let time = `${minutes}:${seconds}`
 
-    let embed = new Discord.MessageEmbed()
+    const embed = new Discord.MessageEmbed()
       .setAuthor(`${user.username} está escutando...`, (avatar))
       .setColor(0x1ED768)
       .setDescription(`**Nome:**\n[${name}](${url})`)
@@ -46,13 +47,18 @@ exports.run = async (client, message, args) => {
       .setFooter('Spotify e Discord fazendo seu dia melhor.', fotospot)
 
     await message.inlineReply(embed).then(msg => {
-      msg.react('📨')
+      msg.react('📨').catch(err => { return })
       setTimeout(function () { msg.reactions.removeAll() }, 30000)
 
       msg.awaitReactions((reaction, member) => {
 
         if (reaction.emoji.name === '📨') {
-          member.send(embed).catch(err => { return })
+          let PrivadoDesativado = db.get(`privadooff_${member.id}`)
+          if (PrivadoDesativado) {
+            return message.inlineReply(`<:xis:835943511932665926> ${member}, você desativou minhas mensagens no seu privado. Este recurso está bloqueado para você.`)
+          } else {
+            member.send(embed).catch(err => { return })
+          }
         }
       })
     })

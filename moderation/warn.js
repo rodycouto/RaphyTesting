@@ -12,7 +12,7 @@ exports.run = async (client, message, args) => {
   if (logchannel === null) { return message.inlineReply(new Discord.MessageEmbed().setColor('#FF0000').setTitle('Não há Canal Log registrado.').setDescription('`' + prefix + 'setlogchannel #CanalLog`')) }
   if (!client.channels.cache.get(logchannel)) { return message.inlineReply(new Discord.MessageEmbed().setColor('#FF0000').setTitle('Parece que o canal log foi excluido.').setDescription('`' + prefix + 'setlogchannel #CanalLog`')) }
 
-  var user = message.mentions.members.first()
+  let user = message.mentions.members.first()
   if (!user) { return message.inlineReply('`' + prefix + 'warn @user Razão (opcional)`') }
 
   if (db.get(`whitelist_${user.id}`)) { return message.inlineReply(`${user.user.username} está na whitelist e não pode ser punido.`) }
@@ -28,7 +28,6 @@ exports.run = async (client, message, args) => {
 
   if (warnings === null) {
     db.set(`warnings_${message.guild.id}_${user.id}`, 1)
-    user.send(new Discord.MessageEmbed().setColor('BLUE').setTitle('Alerta de Aviso').setDescription(`Você recebeu um aviso no servidor ${message.guild.name}\n \nRazão: ${reason}`)).catch(err => { return })
 
     let warnings = db.get(`warnings_${message.guild.id}_${user.id}`)
     let msg1 = new Discord.MessageEmbed()
@@ -57,10 +56,9 @@ exports.run = async (client, message, args) => {
 
     message.inlineReply(`<a:Check:836347816036663309> Warn adicionado! Estou enviando mais informações no ${client.channels.cache.get(logchannel)}.`)
     client.channels.cache.get(logchannel).send(msg1)
-
+    if (PrivadoDesativado) { return } else { user.send(new Discord.MessageEmbed().setColor('BLUE').setTitle('Alerta de Aviso').setDescription(`Você recebeu um aviso no servidor ${message.guild.name}\n \nRazão: ${reason}`)).catch(err => { return }) }
   } else if (warnings !== null) {
     db.add(`warnings_${message.guild.id}_${user.id}`, 1)
-    user.send(new Discord.MessageEmbed().setColor('BLUE').setTitle('Alerta de Aviso').setDescription(`Você recebeu um aviso no servidor **${message.guild.name}**`).addField('Razão', `Razão: ${reason}`)).catch(err => { return })
 
     let msg2 = new Discord.MessageEmbed()
       .setTitle(`Sistema de Avisos ${message.guild.name}`)
@@ -88,5 +86,8 @@ exports.run = async (client, message, args) => {
 
     message.inlineReply(`<a:Check:836347816036663309> O Warn foi um sucesso! Estou enviando mais informações no ${client.channels.cache.get(logchannel)}.`)
     client.channels.cache.get(logchannel).send(msg2)
+    
+  let PrivadoDesativado = db.get(`privadooff_${user.id}`)
+    if (PrivadoDesativado) { return } else { user.send(new Discord.MessageEmbed().setColor('BLUE').setTitle('Alerta de Aviso').setDescription(`Você recebeu um aviso no servidor ${message.guild.name}\n \nRazão: ${reason}`)).catch(err => { return }) }
   }
 }

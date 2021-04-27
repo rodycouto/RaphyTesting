@@ -45,17 +45,17 @@ exports.run = async (client, message, args) => {
     let niver = await `⠀\n🎉 ${db.get(`aniversario_${user.id}`)}`
     if (niver === `⠀\n🎉 null`) { niver = "⠀\n:tada: Sem aniversário definido" }
 
-    var estrela = '<:starM:832974891635572787>'
-    var noestrela = '<:nostar:832972978009538591>'
+    let estrela = '<:starM:832974891635572787>'
+    let noestrela = '<:nostar:832972978009538591>'
 
-    var star1 = db.get(`estrela1_${user.id}`)
-    var star2 = db.get(`estrela2_${user.id}`)
-    var star3 = db.get(`estrela3_${user.id}`)
-    var star4 = db.get(`estrela4_${user.id}`)
-    var star5 = db.get(`estrela5_${user.id}`)
+    let star1 = db.get(`estrela1_${user.id}`)
+    let star2 = db.get(`estrela2_${user.id}`)
+    let star3 = db.get(`estrela3_${user.id}`)
+    let star4 = db.get(`estrela4_${user.id}`)
+    let star5 = db.get(`estrela5_${user.id}`)
 
     if (user.id === '821471191578574888') {
-        var perfil = new Discord.MessageEmbed()
+        let perfil = new Discord.MessageEmbed()
             .setDescription(`📃 **Perfil Pessoal de ${user.user.username}** ${estrela}${estrela}${estrela}${estrela}${estrela}`)
             .setColor('#BF3BFC')
             .addFields(
@@ -88,7 +88,7 @@ exports.run = async (client, message, args) => {
         return message.inlineReply(perfil)
     }
 
-    var perfilembed = new Discord.MessageEmbed()
+    let perfilembed = new Discord.MessageEmbed()
         .setColor('#BF3BFC')
         .addFields(
             {

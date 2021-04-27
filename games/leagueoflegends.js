@@ -4,13 +4,13 @@ exports.run = async (client, message, args) => {
 
   if (args[0]) { return message.inlineReply('Por favor, utilize apenas o comando, sem nada na frente. Informações desnecessárias atrapalham meu processamento.') }
 
-  var game = 'League of Legends'
-  var link1 = 'https://na.leagueoflegends.com/pt-br/'
-  var site = 'Site Oficial'
-  var win = 'Microsoft Windows'
-  var mc = 'MacOS'
+  let game = 'League of Legends'
+  let link1 = 'https://na.leagueoflegends.com/pt-br/'
+  let site = 'Site Oficial'
+  let win = 'Microsoft Windows'
+  let mc = 'MacOS'
 
-  var GameEmbed = new Discord.MessageEmbed()
+  let GameEmbed = new Discord.MessageEmbed()
     .setColor('BLUE')
     .setTitle(`${game}`)
     .addField(`${site}`, `${link1}`)

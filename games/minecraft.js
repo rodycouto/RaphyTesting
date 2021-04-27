@@ -4,21 +4,21 @@ exports.run = async (client, message, args) => {
 
   if (args[0]) { return message.inlineReply('Por favor, utilize apenas o comando, sem nada na frente. Informações desnecessárias atrapalham meu processamento.') }
 
-  var game = 'Minecraft'
-  var link1 = 'https://www.minecraft.net/pt-pt'
-  var link2 = 'https://play.google.com/store/apps/details?id=com.mojang.minecraftpe&hl=pt'
-  var ps = 'Play Store'
-  var pt = 'PlayStation'
-  var site = 'Site Oficial'
-  var win = 'Microsoft Windows'
-  var nsw = 'Nintendo Switch'
-  var x = 'Xbox'
-  var mc = 'MacOS'
-  var ios = 'iOS'
-  var an = 'Android'
-  var li = 'Linux'
+  let game = 'Minecraft'
+  let link1 = 'https://www.minecraft.net/pt-pt'
+  let link2 = 'https://play.google.com/store/apps/details?id=com.mojang.minecraftpe&hl=pt'
+  let ps = 'Play Store'
+  let pt = 'PlayStation'
+  let site = 'Site Oficial'
+  let win = 'Microsoft Windows'
+  let nsw = 'Nintendo Switch'
+  let x = 'Xbox'
+  let mc = 'MacOS'
+  let ios = 'iOS'
+  let an = 'Android'
+  let li = 'Linux'
 
-  var GameEmbed = new Discord.MessageEmbed()
+  let GameEmbed = new Discord.MessageEmbed()
     .setColor('BLUE')
     .setTitle(`${game}`)
     .addField(`${site}`, `${link1}`)

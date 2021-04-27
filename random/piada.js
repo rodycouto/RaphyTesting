@@ -2,7 +2,7 @@ const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
 
-    var list = [
+    let list = [
         'O que é um pontinho amarelo em cima do prédio?\n||Um Fandangos suicida||',
         'Por que ele um Doritos quer se matar?\n||Porque a casa dele é um saco||',
         'Por que o bombeiro não caminha?\n||Porque ele socorre||',
@@ -40,9 +40,9 @@ exports.run = async (client, message, args) => {
         'Visitando os EUA fiquei impressionada com o nível da educação pública americana\n||Várias crianças de 3-4 anos já falando inglês||'
     ]
 
-    var rand = list[Math.floor(Math.random() * list.length)]
+    let rand = list[Math.floor(Math.random() * list.length)]
 
-    var PiadaEmbed = new Discord.MessageEmbed()
+    let PiadaEmbed = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setTitle('Piadinha saindo do forno...')
         .setDescription(rand)

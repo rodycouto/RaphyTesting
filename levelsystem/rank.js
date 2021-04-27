@@ -7,7 +7,7 @@ exports.run = async (client, message, args) => {
     if (prefix === null) { prefix = "-" }
 
     if (!args[0]) {
-        var rank = new Discord.MessageEmbed()
+        let rank = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setTitle('🌐 Ranking Global')
             .setDescription('Aqui você pode ver os top 10 globais em experiência e dinheiro.')
@@ -38,7 +38,7 @@ exports.run = async (client, message, args) => {
             })
         }
 
-        var embedxp = new Discord.MessageEmbed()
+        let embedxp = new Discord.MessageEmbed()
             .setTitle("👑 Ranking Global - XP")
             .setColor("YELLOW")
         lb.forEach(d => {
@@ -68,7 +68,7 @@ exports.run = async (client, message, args) => {
             })
         } 
 
-        var embedxp = new Discord.MessageEmbed()
+        let embedxp = new Discord.MessageEmbed()
             .setColor("YELLOW")
             .setTitle("👑 Ranking Global - MPoints")
         lb.forEach(d => {

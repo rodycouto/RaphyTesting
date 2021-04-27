@@ -2,7 +2,7 @@ const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
 
-  var Random = new Discord.MessageEmbed()
+  let Random = new Discord.MessageEmbed()
     .setColor('#FF0000')
     .setImage('https://imgur.com/RcrfOc3.gif')
 

@@ -3,7 +3,7 @@ const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
 
-  var list = [
+  let list = [
     'https://imgur.com/l5xFcJ2.gif',
     'https://imgur.com/YoFsXOx.gif',
     'https://imgur.com/HNxV16F.gif',
@@ -13,7 +13,7 @@ exports.run = async (client, message, args) => {
     'https://imgur.com/HaPqlac.gif'
   ]
 
-  var rand = list[Math.floor(Math.random() * list.length)]
+  let rand = list[Math.floor(Math.random() * list.length)]
   let user = message.mentions.users.first()
 
   let prefix = db.get(`prefix_${message.guild.id}`)
@@ -23,7 +23,7 @@ exports.run = async (client, message, args) => {
   if (user.id === '821471191578574888') {return message.inlineReply('O que foi que eu fiz? o-o')  }
   if (user.id === message.author.id) {    return message.inlineReply('Você não pode usar este comando com você mesmo.')  }
 
-  var embed = new Discord.MessageEmbed()
+  let embed = new Discord.MessageEmbed()
     .setColor('#000000')
     .setDescription(`${message.author} estou de olho em você ${user}`)
     .setImage(rand)

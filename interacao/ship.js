@@ -8,12 +8,12 @@ exports.run = async (client, message, args) => {
   if (user.id === '821471191578574888') { return message.inlineReply("Foi maaal, eu não tenho a capacidade de amar ninguém. (ainda)") }
   if (user.id === message.author.id) { return message.inlineReply('Você não pode usar este comando com você mesmo.') }
 
-  var love = Math.random() * 100
-  var loveIndex = Math.floor(love / 10)
-  var loveLevel = "💖".repeat(loveIndex) + "💔".repeat(10 - loveIndex)
-  var avatar = message.author.displayAvatarURL({ format: 'png' })
+  let love = Math.random() * 100
+  let loveIndex = Math.floor(love / 10)
+  let loveLevel = "💖".repeat(loveIndex) + "💔".repeat(10 - loveIndex)
+  let avatar = message.author.displayAvatarURL({ format: 'png' })
 
-  var embed = new Discord.MessageEmbed()
+  let embed = new Discord.MessageEmbed()
     .setAuthor(message.author.username, avatar)
     .setColor("RED")
     .setThumbnail(user.user.displayAvatarURL({ dynamic: true }))

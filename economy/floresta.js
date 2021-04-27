@@ -17,6 +17,7 @@ exports.run = async (client, message, args) => {
     let bola = db.get(`bola_${message.author.id}`)
     let floresta2 = db.get(`floresta2_${message.author.id}`)
     let remedio = db.get(`remedio_${message.author.id}`)
+    let PrivadoDesativado = db.get(`privadooff_${message.author.id}`)
 
     const Cammum1 = new Discord.MessageEmbed()
         .setColor('BLUE')
@@ -39,14 +40,16 @@ exports.run = async (client, message, args) => {
     if (['continue', 'continua'].includes(args[0].toLowerCase())) {
         if (!dog) { return message.inlineReply('<:xis:835943511932665926> Você ainda não achou o Brown!') }
         if (dog === null) { return message.inlineReply('<:xis:835943511932665926> Você ainda não achou o Brown!') }
+        if (PrivadoDesativado) { return message.inlineReply('<:xis:835943511932665926> Ative as mensagens privadas para continuar a história. `' + prefix + 'privado`') }
 
-        message.inlineReply('<a:Check:836347816036663309> Eu mandei a história no seu privado, se você não recebeu, ative as mensagens diretas poxa...').then(m => message.author.send(CammumContinue1).catch(err => { return }))
+        if (PrivadoDesativado === null) {
+            message.channel.send('<a:Check:836347816036663309> Eu mandei a história no seu privado, se você não recebeu, ative as mensagens diretas poxa...')
+            message.author.send(CammumContinue1).catch(err => { return })
 
-        if (!remedio) { return message.author.send('Encontre os remédios do Velho Welter para continuar a história...').catch(err => { return }) }
-        if (remedio === null) { return message.author.send('Encontre os remédios do Velho Welter para continuar a história...').catch(err => { return }) }
-        if (!bola) { return message.author.send('<:xis:835943511932665926> Encontre a bolinha do Brown para continuar a história...!').catch(err => { return }) }
-        if (bola === null) { return message.author.send('<:xis:835943511932665926> Encontre a bolinha do Brown para continuar a história...!').catch(err => { return }) }
-        if (remedio) { return message.author.send('Escrevendo a história...') }
+            if (remedio === null) { return message.author.send('Encontre os remédios do Velho Welter para continuar a história...').catch(err => { return }) }
+            if (bola === null) { return message.author.send('<:xis:835943511932665926> Encontre a bolinha do Brown para continuar a história...!').catch(err => { return }) }
+            if (remedio) { return message.author.send('Escrevendo a história...') }
+        }
     } else {
         return message.inlineReply('Hey, usa `' + prefix + 'floresta` pra ver os comandos da Floresta.')
     }
