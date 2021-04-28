@@ -41,7 +41,7 @@ exports.run = async (client, message, args) => {
     let support = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setTitle('💬 Centralzinha de Suporte 💬')
-        .setURL('https://discord.gg/TC26m4ZRV3')
+        .setURL('https://discord.gg/YpFWgJuuUV')
         .setDescription('A Central de Suporte consegue atender a qualquer problema ou crítica que você tenha :heart:')
         .setThumbnail('https://imgur.com/KyjyfRg.gif')
         .addFields(
@@ -57,7 +57,7 @@ exports.run = async (client, message, args) => {
             },
             {
                 name: 'Central de Suporte',
-                value: `[Clique aqui](https://discord.gg/TC26m4ZRV3)`,
+                value: `[Clique aqui](https://discord.gg/YpFWgJuuUV)`,
                 inline: true
             }
         )

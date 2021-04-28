@@ -3,54 +3,44 @@ const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
 
-    let perms = message.member.hasPermission("ADMINISTRATOR")
-    if (!perms) {
-        let noperms = new Discord.MessageEmbed()
-            .setColor('#FF0000')
-            .setTitle('Permissão Necessária: Administrador')
-        return message.inlineReply(noperms)
-    }
+    if (message.member.hasPermission("ADMINISTRATOR")) { return message.inlineReply('<:xis:835943511932665926> Permissão Necessária: Administrador') }
+    if (!message.guild.me.hasPermission("MANAGE_CHANNELS")) { return message.inlineReply('<:xis:835943511932665926> Eu preciso da permissão "Manusear Canais" para utilizar esta função.') }
 
-    if (!message.guild.me.hasPermission("MANAGE_CHANNELS")) {
-        let adm = new Discord.MessageEmbed()
-            .setColor('#FF0000')
-            .setTitle('Eu preciso da permissão "Manusear Canais" para utilizar esta função.')
-        return message.inlineReply(adm)
-    }
+    let prefix = db.get(`prefix_${message.guild.id}`)
+    if (prefix === null) prefix = "-"
 
-    if (!args[0]) {
-        let prefix = db.get(`prefix_${message.guild.id}`)
-        if (prefix === null) prefix = "-"
+    let alert = new Discord.MessageEmbed()
+        .setColor('#FF0000')
+        .setTitle('Utilize este comando somente em caso de EMERGÊNCIA!')
+        .setDescription('Este comando tem um alto poder de impacto em todo o servidor. Quando ativado, o cargo *everyone* será bloqueado de falar em todos os canais de textos e conectar/falar em canais de voz.')
+        .addFields(
+            {
+                name: '`' + prefix + 'lockdown on`',
+                value: '**Todos** os canais serão bloqueados',
+                inline: true
+            },
+            {
+                name: '`' + prefix + 'lockdown off`',
+                value: '**Todos** os canais serão liberados',
+                inline: true
+            }
+        )
 
-        let alert = new Discord.MessageEmbed()
-            .setColor('#FF0000')
-            .setTitle('Utilize este comando somente em caso de EMERGÊNCIA!')
-            .setDescription('Este comando tem um alto poder de impacto em todo o servidor. Quando ativado, o cargo *everyone* será bloqueado de falar em todos os canais de textos e conectar/falar em canais de voz.')
-            .addFields(
-                {
-                    name: '`' + prefix + 'lockdown on`',
-                    value: '**Todos** os canais serão bloqueados',
-                    inline: true
-                },
-                {
-                    name: '`' + prefix + 'lockdown off`',
-                    value: '**Todos** os canais serão liberados',
-                    inline: true
-                }
-            )
-        return message.inlineReply(alert)
-    }
+    if (!args[0]) { return message.inlineReply(alert) }
 
     let channels = message.guild.channels.cache.filter(ch => ch.type !== 'category')
 
     if (args[0] === 'on') {
 
-        let confirmon = new Discord.MessageEmbed()
+        let ConfirmOn = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setTitle('Você confirma o bloqueio de todos os canais de texto/voz do servidor?')
-        await message.inlineReply(confirmon).then(msg => {
-            msg.react('✅') // Check
-            msg.react('❌') // X
+            .setFooter('Cancelamento em 30 segundos.')
+
+        await message.inlineReply(ConfirmOn).then(msg => {
+            msg.react('✅').catch(err => { return }) // Check
+            msg.react('❌').catch(err => { return }) // X
+            setTimeout(function () { msg.reactions.removeAll().catch(err => { return }) }, 30000)
 
             msg.awaitReactions((reaction, user) => {
                 if (message.author.id !== user.id) return
@@ -68,12 +58,13 @@ exports.run = async (client, message, args) => {
 
                     let ok = new Discord.MessageEmbed()
                         .setColor('GREEN')
-                        .setDescription(`${message.author.username} colocou o servidor em estado de Lockdown.`)
+                        .setDescription(`${message.author.username} colocou o servidor em estado de Lockdown!`)
 
                     let info = new Discord.MessageEmbed()
                         .setColor('BLUE')
                         .setTitle('Todos os canais de texto e de voz foram bloqueados para @everyone.')
-                    return message.inlineReply(ok).then(m => m.inlineReply(info))
+                        
+                    return message.inlineReply(ok).then(m => m.channel.send(info))
                 }
                 if (reaction.emoji.name === '❌') { // Não
                     msg.delete().catch(err => { return })

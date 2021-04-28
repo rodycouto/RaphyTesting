@@ -43,7 +43,7 @@ exports.run = async (client, message, args) => {
                     value: '<:starM:832974891635572787> `Estrela1` 500.000 <:StarPoint:766794021128765469>MPoints\n<:starM:832974891635572787><:starM:832974891635572787> `Estrela2` 1.000.000 <:StarPoint:766794021128765469>MPoints\n<:starM:832974891635572787><:starM:832974891635572787><:starM:832974891635572787> `Estrela3` 2.000.000 <:StarPoint:766794021128765469>MPoints\n<:starM:832974891635572787><:starM:832974891635572787><:starM:832974891635572787><:starM:832974891635572787> `Estrela4` 4.000.000 <:StarPoint:766794021128765469>MPoints\n<:starM:832974891635572787><:starM:832974891635572787><:starM:832974891635572787><:starM:832974891635572787><:starM:832974891635572787> `Estrela5` 10.000.000 <:StarPoint:766794021128765469>MPoints\n🔰 `Título` 10.000<:StarPoint:766794021128765469>MPoints'
                 }
             )
-            .setFooter(`${prefix}buy | ${prefix}itens | ${prefix}vender | ${prefix}doar`)
+            .setFooter(`${prefix}buy | ${prefix}itens | ${prefix}vender | ${prefix}doar | ${prefix}slot`)
         return message.inlineReply(loja)
     }
 }

@@ -5,6 +5,9 @@ exports.run = async (client, message, args) => {
 
     let user = message.mentions.members.first() || message.member
 
+    let prefix = db.get(`prefix_${message.guild.id}`)
+    if (prefix === null) { prefix = "-" }
+
     let title = await db.get(`title_${user.id}`)
     if (title) (title = "🔰 Título")
     if (title === null) { title = "" }
@@ -134,6 +137,7 @@ exports.run = async (client, message, args) => {
         .setColor('BLUE')
         .setTitle(`📖 **Inventário de ${user.user.username}**`)
         .addField('Itens Comprados', `${nada}${arma}${picareta}${vara}${machado}${cartas}`)
+        .setFooter(`${prefix}buy | ${prefix}itens | ${prefix}vender | ${prefix}shop | ${prefix}doar`)
     if (!medalha) { Embed.addField('Itens Obtidos', `${nada2}${title}${faca}${loli}${fossil}${mamute}${bola}${cachorro}${remedio}`) }
     if (medalha) { Embed.addField('Itens Obtidos', `${nada2}${title}${faca}${loli}${fossil}${mamute}\n🏅 Medalha Cammum${dogname}`) }
     Embed.addField('Mantimentos', `🐟 ${peixes} Peixes\n🥘 ${comida} Comidas\n🪱 ${iscas} Iscas\n🥤 ${agua} Água\n🎟️ ${fichas} Fichas\n🍤 ${camarao} Camarões\n🦴 ${ossos} Ossos\n🌹 ${rosas} Rosas\n🍎 ${apple} Maça\n🪨 ${minerio} Minérios\n💎 ${diamond} Diamantes`)

@@ -4,7 +4,7 @@ const db = require('quick.db')
 exports.run = async (client, message, args) => {
 
   let linkgithub = 'https://github.com/rodycouto/MayaCommands/blob/main/README.md'
-  let linksupport = 'https://discord.gg/TC26m4ZRV3'
+  let linksupport = 'https://discord.gg/YpFWgJuuUV'
   let linkservidor = 'https://discord.gg/YpFWgJuuUV'
   let mercadopago = 'https://mpago.la/2jYiNDg'
   let invitebot = 'https://discord.com/api/oauth2/authorize?client_id=821471191578574888&permissions=8&scope=bot'
