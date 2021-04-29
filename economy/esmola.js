@@ -45,7 +45,7 @@ exports.run = async (client, message, args) => {
 
           if (reaction.emoji.name === '✅') {
             let money = db.get(`mpoints_${member.id}`)
-            if (member.id === '821471191578574888') { return }
+            if (member.id === '837147659898191902') { return }
             if (member.id === message.author.id) { return }
             if (money < 50) { return message.channel.send(`${member}, você não tem 50 <:StarPoint:766794021128765469>MPoints na carteira para ajudar ${message.author}`) }
             db.subtract(`mpoints_${member.id}`, 50)

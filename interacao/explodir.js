@@ -31,7 +31,7 @@ exports.run = async (client, message, args) => {
   if (prefix === null) prefix = "-"
 
   if (!user) { return message.reply('`' + prefix + 'explodir @user`') }
-  if (user.id === '821471191578574888') { return message.inlineReply('Paaara, não é pra me explodir :cry:') }
+  if (user.id === '837147659898191902') { return message.inlineReply('Paaara, não é pra me explodir :cry:') }
   if (user.id === message.author.id) { return message.inlineReply('Você não pode usar este comando com você mesmo.') }
 
   let avatar = message.author.displayAvatarURL({ format: 'png' })

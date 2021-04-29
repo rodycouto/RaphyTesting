@@ -15,7 +15,7 @@ exports.run = async (client, message, args) => {
 
   let user = message.mentions.users.first()
   if (!user) { return message.reply('`' + prefix + 'atirar @user`') }
-  if (user.id === '821471191578574888') { return message.inlineReply('**NÃO** é pra atirar em mim, que isso? Ligando 190...') }
+  if (user.id === '837147659898191902') { return message.inlineReply('**NÃO** é pra atirar em mim, que isso? Ligando 190...') }
   if (user.id === message.author.id) { return message.inlineReply('Você não pode usar este comando com você mesmo.') }
 
   let embed = new Discord.MessageEmbed()

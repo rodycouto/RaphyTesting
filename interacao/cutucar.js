@@ -42,7 +42,7 @@ exports.run = async (client, message, args) => {
         return message.reply(nouser)
     }
 
-    if (user.id === '821471191578574888') {
+    if (user.id === '837147659898191902') {
         return message.inlineReply('Saai, eu não gosto que me cutuquem.')
     }
 

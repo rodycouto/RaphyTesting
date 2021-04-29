@@ -36,7 +36,7 @@ exports.run = async (client, message, args) => {
   if (prefix === null) prefix = "-"
 
   if (!user) { return message.reply('`' + prefix + 'beijar @user`') }
-  if (user.id === '821471191578574888') { return message.inlineReply('Aiin, eu sou timida') }
+  if (user.id === '837147659898191902') { return message.inlineReply('Aiin, eu sou timida') }
   if (user.id === message.author.id) { return message.inlineReply('Você não pode usar este comando com você mesmo.') }
   if (message.mentions.bot) { return message.inlineReply('Você não pode beijar bots.') }
 

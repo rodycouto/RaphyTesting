@@ -40,7 +40,7 @@ exports.run = async (client, message, args) => {
         } else {
 
             if (!user) { return message.inlineReply(formato) }
-            if (user.id === '821471191578574888') { return message.inlineReply('❓ Você realmente quer me roubar?') }
+            if (user.id === '837147659898191902') { return message.inlineReply('❓ Você realmente quer me roubar?') }
             if (user.id === message.author.id) { return message.inlineReply(`<:xis:835943511932665926> Você não pode roubar você mesmo.`) }
             if (usermoney === 0) { return message.inlineReply(`<:xis:835943511932665926> ${user.user.username} não possui dinheiro.`) }
             if (usermoney < 0) { return message.inlineReply(`<:xis:835943511932665926> ${user.user.username} está negativado.`) }

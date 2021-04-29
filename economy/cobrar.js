@@ -39,7 +39,7 @@ exports.run = async (client, message, args) => {
             return message.inlineReply(cobre)
         }
 
-        if (user.id === '821471191578574888') { return message.inlineReply('Sai pra lá, eu não to devendo ninguém :cry:') }
+        if (user.id === '837147659898191902') { return message.inlineReply('Sai pra lá, eu não to devendo ninguém :cry:') }
         if (user.id == message.author.id) { return message.inlineReply('Você não pode cobrar você mesmo.') }
         if (!args[1]) { return message.inlineReply(correto) }
         if (args[1] < '0') { return message.inlineReply('Diga um valor maior que 0') }

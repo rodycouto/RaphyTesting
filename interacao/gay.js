@@ -11,7 +11,7 @@ exports.run = async (client, message, args) => {
   if (prefix === null) prefix = "-"
 
   if (!user) { return message.inlineReply('`' + prefix + 'gay @user`') }
-  if (user.id === '821471191578574888') { return message.inlineReply('Eu não tenho gênero, eu acho.') }
+  if (user.id === '837147659898191902') { return message.inlineReply('Eu não tenho gênero, eu acho.') }
   if (user.id === message.author.id) { return message.inlineReply('Você não pode usar este comando com você mesmo.') }
 
   let rand = ['YELLOW', 'RED', 'GREEN', 'PURPLE']

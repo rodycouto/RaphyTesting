@@ -22,7 +22,7 @@ exports.run = async (client, message, args) => {
         return message.inlineReply(embed1)
     }
 
-    if (user.id === '821471191578574888') {
+    if (user.id === '837147659898191902') {
         return message.inlineReply('Uma nota pra mim? Que tal infinito?')
     }
 

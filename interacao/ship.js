@@ -5,7 +5,7 @@ exports.run = async (client, message, args) => {
   let user = message.mentions.members.first()
 
   if (!user) { return message.inlineReply("`-ship @user`") }
-  if (user.id === '821471191578574888') { return message.inlineReply("Foi maaal, eu não tenho a capacidade de amar ninguém. (ainda)") }
+  if (user.id === '837147659898191902') { return message.inlineReply("Foi maaal, eu não tenho a capacidade de amar ninguém. (ainda)") }
   if (user.id === message.author.id) { return message.inlineReply('Você não pode usar este comando com você mesmo.') }
 
   let love = Math.random() * 100

@@ -54,7 +54,7 @@ exports.run = async (client, message, args) => {
     let star4 = db.get(`estrela4_${user.id}`)
     let star5 = db.get(`estrela5_${user.id}`)
 
-    if (user.id === '821471191578574888') {
+    if (user.id === '837147659898191902') {
         let perfil = new Discord.MessageEmbed()
             .setDescription(`📃 **Perfil Pessoal de ${user.user.username}** ${estrela}${estrela}${estrela}${estrela}${estrela}`)
             .setColor('#BF3BFC')

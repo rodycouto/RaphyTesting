@@ -62,7 +62,7 @@ exports.run = async (client, message, args) => {
 
   if (!user) { return message.inlineReply('`' + prefix + 'hug @user`') }
 
-  if (user.id === '821471191578574888') {
+  if (user.id === '837147659898191902') {
     let avatar = message.author.displayAvatarURL({ format: 'png' })
     let embed1 = new Discord.MessageEmbed()
       .setColor('BLUE')

@@ -38,7 +38,7 @@ exports.run = async (client, message, args) => {
 
   if (!user) { return message.inlineReply('`' + prefix + 'highfive @user`') }
 
-  if (user.id === '821471191578574888') {
+  if (user.id === '837147659898191902') {
     let embed1 = new Discord.MessageEmbed()
       .setColor('BLUE')
       .setDescription(`${message.author.username} & ${user.username} mandaram um HIGHFIVE!`)

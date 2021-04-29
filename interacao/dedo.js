@@ -25,7 +25,7 @@ exports.run = async (client, message, args) => {
   if (prefix === null) prefix = "-"
 
   if (!user) { return message.reply('`' + prefix + 'dedo @user`') }
-  if (user.id === '821471191578574888') { return message.inlineReply('Paaara, não me mostra o dedo :cry:') }
+  if (user.id === '837147659898191902') { return message.inlineReply('Paaara, não me mostra o dedo :cry:') }
   if (user.id === message.author.id) { return message.inlineReply('Você não pode usar este comando com você mesmo.') }
 
   let avatar = message.author.displayAvatarURL({ format: 'png' })

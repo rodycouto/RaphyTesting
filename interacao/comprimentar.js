@@ -46,7 +46,7 @@ exports.run = async (client, message, args) => {
 
   if (!user) {return message.reply('`' + prefix + 'comprimentar @user`')  }
 
-  if (user.id === '821471191578574888') { // Naya
+  if (user.id === '837147659898191902') { // Naya
     let avatar = message.author.displayAvatarURL({ format: 'png' })
     let embed1 = new Discord.MessageEmbed()
       .setColor('BLUE')

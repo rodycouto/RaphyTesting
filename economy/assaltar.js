@@ -60,7 +60,7 @@ exports.run = async (client, message, args) => {
                 if (arma === null) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, é necessário que você tenha uma **🔫 Arma** para utilizar este comando.`) }
                 if (!db.get(`arma_${message.author.id}`)) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, é necessário que você tenha uma **🔫 Arma** para utilizar este comando.`) }
                 if (args[1]) { return message.inlineReply(formato) }
-                if (user.id == '821471191578574888') { return message.inlineReply('<:xis:835943511932665926> Você não pode me assaltar, que coisa feia!') }
+                if (user.id == '837147659898191902') { return message.inlineReply('<:xis:835943511932665926> Você não pode me assaltar, que coisa feia!') }
                 if (user.id == message.author.id) { return message.inlineReply(`<:xis:835943511932665926> Você não pode assaltar você mesmo.`) }
                 if (usermoney === 0) { return message.inlineReply(`<:xis:835943511932665926> ${user} não possui dinheiro algúm.`) }
                 if (usermoney < 0) { return message.inlineReply(`<:xis:835943511932665926> ${user} está individado, tenha coração!`) }

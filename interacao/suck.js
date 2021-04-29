@@ -29,7 +29,7 @@ exports.run = async (client, message, args) => {
    if (prefix === null) prefix = "-"
 
    if (!user) { return message.reply('`' + prefix + 'suck @user`') }
-   if (user.id === '821471191578574888') { return message.inlineReply('Sai daqui pervertido') }
+   if (user.id === '837147659898191902') { return message.inlineReply('Sai daqui pervertido') }
    if (user.id === message.author.id) { return message.inlineReply('Você não pode usar este comando com você mesmo.') }
 
    let avatar = message.author.displayAvatarURL({ format: 'png' })

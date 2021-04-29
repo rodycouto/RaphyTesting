@@ -12,7 +12,7 @@ exports.run = async (client, message, args) => {
   const member = message.mentions.users.first() || message.author;
 
   if (member.id === message.author.id) { return message.inlineReply('Você não pode usar este comando com você mesmo.') }
-  if (member.id === "821471191578574888") { return message.inlineReply('Não usa isso comigo boboca.') }
+  if (member.id === "837147659898191902") { return message.inlineReply('Não usa isso comigo boboca.') }
 
   const memberAvatar = member.displayAvatarURL({ dynamic: false, format: 'png' })
   const image = await canvacord.affect(memberAvatar)
