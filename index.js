@@ -181,7 +181,7 @@ client.on("message", async (message) => {
     } catch (err) { }
 
     try {
-        const commandFile = require(`./maya/${command}.js`)
+        const commandFile = require(`./naya/${command}.js`)
         return commandFile.run(client, message, args)
     } catch (err) { }
 
@@ -246,14 +246,14 @@ client.on("guildMemberAdd", (member) => {
 })
 
 client.on("ready", () => {
-    let activities = ['Me marca que eu falo o prefixo', '@maya', '+300 Comandos Onlines', '#FiqueEmCasa']
+    let activities = ['Me marca que eu falo o prefixo', '@naya', '+300 Comandos Onlines', '#FiqueEmCasa']
     i = 0
     setInterval(() => client.user.setActivity(`${activities[i++ % activities.length]}`, { type: "WATCHING" }), 7000)
 })
 
 client.on('guildCreate', guild => {
     let channel = guild.channels.cache.find(channel => channel.type === 'text' && channel.permissionsFor(guild.me).has('SEND_MESSAGES'))
-    let helpgit = 'https://github.com/rodycouto/MayaCommands/blob/main/README.md'
+    let helpgit = 'https://github.com/rodycouto/NayaCommands/blob/main/README.md'
 
     const newguild = new Discord.MessageEmbed()
         .setColor('BLUE')
@@ -283,7 +283,7 @@ client.on('guildDelete', guild => {
 })
 
 client.once("ready", () => {
-    let envi = client.channels.cache.get('830964037461344296')
+    let envi = client.channels.cache.get('837145820767322153')
     console.log(`Loguei com sucesso!`)
     if (!envi) { return } else if (envi) { return envi.send(`Cheguei ( ͡° ͜ʖ ͡°)`) }
 })

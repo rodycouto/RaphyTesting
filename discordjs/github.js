@@ -3,8 +3,8 @@ const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
 
-    let gitlink = "https://github.com/rodycouto/Naya-GitHub.git"
-    let linksupport = "https://docs.google.com/forms/d/e/1FAIpQLSeEMnYYmlaVv_nG4PBdPD8CA6Q-MdBi-9KW_xVrqjs2MG5AqQ/viewform?usp=sf_link"
+    let gitlink = "https://github.com/rodycouto/Bot-Naya"
+    let linksupport = "https://discord.gg/YpFWgJuuUV"
     let gitdance = "https://imgur.com/C78LrtY.gif"
 
     let level = await db.fetch(`level_${message.author.id}`)
