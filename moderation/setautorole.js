@@ -108,7 +108,10 @@ exports.run = async (client, message, args) => {
     if (!role) { return message.channel.send(norole) }
     if (!role.editable) { return message.channel.send(sobcarg).then(msg => msg.delete({ timeout: 4000 })).then(msg => msg.channel.send(soberol)) }
     if (role.id === autorole) { return message.inlineReply(iqual) }
-    if (role.comparePositionTo(message.member.roles.highest) > -1) { return message.inlineReply(`<:xis:835943511932665926> Você não tem permissão para gerenciar o cargo ${role}.`) }
+
+    if (!message.guild.owner) {
+        if (role.comparePositionTo(message.member.roles.highest) > -1) { return message.inlineReply(`<:xis:835943511932665926> Você não tem permissão para gerenciar o cargo ${role}.`) }
+    }
 
     await message.channel.send(confirm).then(msg => {
         msg.react('✅') // Check

@@ -149,7 +149,10 @@ exports.run = async (client, message, args) => {
    if (member.id === message.guild.owner.id) { return message.inlineReply('<:xis:835943511932665926> Mutar o dono do servidor não é uma opção.') }
    if (member.id === '837147659898191902') { return message.inlineReply('<:zeroT:832643202439708682> iiiii quer mutar, vê se pode.') }
    if (member.hasPermission('ADMINISTRATOR')) { return message.inlineReply('<:xis:835943511932665926> Este pessoa é um administrador. Eu não posso continuar o mute.') }
-   if (member.roles.highest.comparePositionTo(message.member.roles.highest) > -1) { return message.inlineReply(`<:xis:835943511932665926> Você não pode mutar alguém com o mesmo cargo ou um cargo maior que o seu.`) }
+
+   if (!message.guild.owner) {
+      if (member.roles.highest.comparePositionTo(message.member.roles.highest) > -1) { return message.inlineReply(`<:xis:835943511932665926> Você não pode mutar alguém com o mesmo cargo ou um cargo maior que o seu.`) }
+   }
 
    let time = args[1]
    if (!time) {
