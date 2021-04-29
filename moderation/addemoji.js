@@ -9,6 +9,8 @@ exports.run = async (client, message, args) => {
     let prefix = db.get(`prefix_${message.guild.id}`)
     if (prefix === null) prefix = "-"
 
+    return message.inlineReply('⚠️ Comando em reforma')
+
     const match = /<(a?):(.+):(\d+)>/u.exec(message.content)
     if (!match) { return message.reply('Hey! Adicione um emoji customizado! `' + prefix + 'addemoji SeuEmoji`') }
 
