@@ -20,7 +20,7 @@ exports.run = async (client, message, args) => {
       .addField('Me ajude a ficar online', `<:mercadopago:837459585077870592> [Doar R$1,00](${mercadopago}) no Mercado Pago\n<:picpay:837458560904462356> Doe via PIX para o meu PicPay ` + '`' + prefix + 'pix`' + `\n <a:moneyjump:836308674506129408> Loteria: ${db.get('loteria')} <:StarPoint:766794021128765469>MPoints`, true)
       .setFooter(`${prefix}gif | ${prefix}ideianaya | ${prefix}bug`)
     return message.inlineReply(`Heey! Tudo bem ${message.author}?`, newhelp)
-  } v
+  }
 
   if (['categoria', 'categorias'].includes(args[0].toLowerCase())) {
     let catego = new Discord.MessageEmbed()
