@@ -5,6 +5,9 @@ const ms = require('parse-ms')
 exports.run = async (client, message, args) => {
     message.delete({ timeout: 10000 }).catch(err => { return })
 
+    let prefix = db.get(`prefix_${message.guild.id}`)
+    if (prefix === null) prefix = "-"
+    
     if (db.get(`noglobalchat_${message.author.id}`)) {
         message.delete().catch(err => { return })
         return message.channel.send(`<:xis:835943511932665926> ${message.author}, você foi banido do chat global! Acha que foi um engano? \`` + prefix + 'support`').then(msg => msg.delete({ timeout: 6000 })).catch(err => { return })
@@ -17,9 +20,6 @@ exports.run = async (client, message, args) => {
         let time = ms(timeout1 - (Date.now() - author1))
         return message.channel.send(`${message.author}, <:xis:835943511932665926> Espere o sistema global esfriar os motores... ${time.minutes}m e ${time.seconds}s`)
     } else {
-
-        let prefix = db.get(`prefix_${message.guild.id}`)
-        if (prefix === null) prefix = "-"
 
         let CanalServer = message.guild.channels.cache.find(ch => ch.name === "naya-global-chat")
         if (!CanalServer) {
