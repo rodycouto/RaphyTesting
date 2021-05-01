@@ -9,14 +9,17 @@ exports.run = async (client, message, args) => {
         return message.channel.send('⚠️ Este é um comando restrito para Moderadores do Chat Global.')
     }
 
-    let id = args[1]
+    let prefix = db.get(`prefix_${message.guild.id}`)
+    if (prefix === null) prefix = "-"
+
+    let id = args[0]
     if (!id) { return message.inlineReply('`' + prefix + 'banchat ID`') }
     if (id.length < 17) { return message.channel.send("Isso não é um ID") }
-    if (isNaN(id)) { return message.channel.send("Isso não é um número.") }
+    if (isNaN(id)) { return message.channel.send("Hey, isso não é um número.") }
     if (args[1]) { return message.channel.send('Nada além do ID do usuário, por favor.') }
 
     db.add(`noglobalchat_${id}`, id)
-    message.channel.send(`📢 ${user} foi banido e não consegue mais falar no chat global!`)
+    message.channel.send(`📢 <@${id}> foi banido e não consegue mais falar no chat global!`)
 
     client.guilds.cache.forEach(guild => {
 
@@ -24,6 +27,6 @@ exports.run = async (client, message, args) => {
 
         if (!CanaisValidos) return
 
-        return CanaisValidos.send(`📢 ${user.username} foi banido e não consegue mais falar no chat global!`)
+        return CanaisValidos.send(`📢 *${id}* foi banido e não consegue mais falar no chat global!`)
     })
 }
