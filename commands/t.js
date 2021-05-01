@@ -26,7 +26,7 @@ exports.run = async (client, message, args) => {
             .setColor("#6959CD")
         message.inlineReply(translateEmbed)
     }).catch(err => {
-        message.inlineReply("Eu tive um problema com a tradução.\n`Tente novamente usando o padrão do comando, se o problema persistir, por favor, user o comando de `-sup`")
+        message.inlineReply("Eu tive um problema com a tradução.\nTente novamente usando o padrão do comando, se o problema persistir, por favor, use o comando `" + prefix + 'support`')
         console.log(err)
     })
 }
