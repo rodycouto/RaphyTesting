@@ -228,16 +228,18 @@ exports.run = async (client, message, args) => {
         if (!id) { return message.inlineReply('`' + prefix + 'remove blacklistid ID`') }
 
         db.delete(`blacklist_${id}`, id)
-        return message.inlineReply(`Você removeu <@${user}> da blacklist.`)
+        return message.inlineReply(`Você removeu <@${id}> da blacklist.`)
     }
 
-    if (['vip'].includes(args[0])) {
+    if (['vipid'].includes(args[0])) {
 
         let id = args[1]
         if (!id) { return message.inlineReply('`' + prefix + 'remove vipid ID`') }
+        if (id.length < 17) { return message.channel.send("Isso não é um ID") }
+        if (isNaN(args[1])) { return message.channel.send("Isso não é um número.") }
 
         db.delete(`vip_${id}`, id)
-        return message.inlineReply(`Você removeu <@${user}> da lista vip.`)
+        return message.inlineReply(`Você removeu <@${id}> da lista vip.`)
     }
 
     if (['vip'].includes(args[0])) {
@@ -248,7 +250,6 @@ exports.run = async (client, message, args) => {
         return message.inlineReply(`Você removeu ${user} da lista vip.`)
     }
 
-
     if (['whitelist'].includes(args[0])) {
 
         if (!user) { return message.inlineReply('`' + prefix + 'remove whitelist @user`') }
@@ -257,13 +258,35 @@ exports.run = async (client, message, args) => {
         return message.inlineReply(`Você removeu ${user} da whitelist.`)
     }
 
+    if (['moderadorglobal', 'modglobal', 'modchat', 'modchatglobal'].includes(args[0])) {
+
+        let id = args[1]
+        if (!id) { return message.inlineReply('`' + prefix + 'remove modchat ID`') }
+        if (id.length < 17) { return message.channel.send("Isso não é um ID") }
+        if (isNaN(args[1])) { return message.channel.send("Isso não é um número.") }
+
+        db.delete(`moderadoreschatglobal_${id}`, id)
+        return message.channel.send(`<@${id}>  foi removido do No Global Chat com sucesso e agora consegue mais falar no chat global!`)
+    }
+
+    if (['nochat', 'noglobal', 'ban', 'block', 'banlist', 'nogloabalchat', 'banchat'].includes(args[0])) {
+
+        let id = args[1]
+        if (!id) { return message.inlineReply('`' + prefix + 'remove banchat ID`') }
+        if (id.length < 17) { return message.channel.send("Isso não é um ID") }
+        if (isNaN(id)) { return message.channel.send("Isso não é um número.") }
+
+        db.delete(`noglobalchat_${id}`, id)
+        return message.channel.send(`${user} foi removido do No Global Chat com sucesso e agora consegue mais falar no chat global!`)
+    }
+
     if (['whitelistid'].includes(args[0])) {
 
         let id = args[1]
         if (!id) { return message.inlineReply('`' + prefix + 'remove whitelistid ID`') }
 
         db.delete(`whitelist_${id}`, id)
-        return message.inlineReply(`Você removeu <@${user}> da whitelist.`)
+        return message.inlineReply(`Você removeu <@${id}> da whitelist.`)
     }
 
     if (['timeout', 'tempo', 'cooldown'].includes(args[0])) {
