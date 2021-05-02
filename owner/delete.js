@@ -39,6 +39,18 @@ exports.run = async (client, message, args) => {
         return message.channel.send(`As comidas de ${user} foram deletadas`)
     }
 
+    if (['estrelas', 'estrela'].includes(args[0])) {
+
+        if (!user) { return message.channel.send('`' + prefix + 'delete estrelas @user`') }
+
+        db.delete(`estrela1_${user.id}`)
+        db.delete(`estrela2_${user.id}`)
+        db.delete(`estrela3_${user.id}`)
+        db.delete(`estrela4_${user.id}`)
+        db.delete(`estrela5_${user.id}`)
+        return message.channel.send(`<:starM:832974891635572787> Estrelas deletadas do slot de ${user}`)
+    }
+
     if (['moneyid', 'mpid'].includes(args[0])) {
 
         let id = args[1]
