@@ -11,12 +11,13 @@ exports.run = async (client, message, args) => {
 
     let Mensagem = args.join(" ")
 
-    client.guilds.cache.forEach(guild => {
+    let ServidoresAtivados = db.fetch(`globalchat_${message.guild.id}`)
+    if (message.channel.id === ServidoresAtivados) {
 
-        let CanaisValidos = guild.channels.cache.find(ch => ch.name === "naya-global-chat")
-
-        if (!CanaisValidos) return
-
-        return CanaisValidos.send(`📢 ${Mensagem}\n \n*~ Naya Global System*`)
-    })
+        client.guilds.cache.forEach(Canal => {
+            try {
+                client.channels.cache.get(db.fetch(`globalchat_${Canal.id}`)).send(`📢 ${Mensagem}\n \n*~ Naya Global System*`)
+            } catch (e) { return }
+        })
+    }
 }

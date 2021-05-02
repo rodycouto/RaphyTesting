@@ -9,7 +9,7 @@ exports.run = async (client, message, args) => {
 
    if (!message.member.hasPermission("MANAGE_ROLES")) { return message.inlineReply('<:xis:835943511932665926> Permissão Necessária: Gerenciar Roles (cargos)') }
    if (!message.guild.me.hasPermission("MANAGE_ROLES")) { return message.inlineReply('<:xis:835943511932665926> Eu preciso da permissão "Gerenciar Cargos & Gerenciar Canais" para executar este comando.') }
-   if (!message.guild.me.hasPermission("MANAGEL_CHANNELS")) { return message.inlineReply('<:xis:835943511932665926> Eu preciso da permissão "Gerenciar Cargos & Gerenciar Canais" para executar este comando.') }
+   if (!message.guild.me.hasPermission("MANAGE_CHANNELS")) { return message.inlineReply('<:xis:835943511932665926> Eu preciso da permissão "Gerenciar Cargos & Gerenciar Canais" para executar este comando.') }
 
    const nolog = new Discord.MessageEmbed()
       .setColor('#8B0000')
@@ -256,7 +256,7 @@ exports.run = async (client, message, args) => {
       .setColor('#8B0000')
       .addFields(
          {
-            name: 'Usuário destumado com sucesso!',
+            name: 'Usuário desmutado com sucesso!',
             value: member.user.tag,
             inline: true
          },

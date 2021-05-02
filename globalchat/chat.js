@@ -37,34 +37,34 @@ exports.run = async (client, message, args) => {
             return message.channel.send(`${message.author}, <:xis:835943511932665926> Você foi mutado, espere mais... ${time.minutes}m e ${time.seconds}s`).then(msg => msg.delete({ timeout: 5000 }).catch(err => { return }))
         } else {
 
-            let CanalServer = message.guild.channels.cache.find(ch => ch.name === "naya-global-chat")
+            let CanalDoGlobalChat = db.get(`globalchat_${message.guild.id}`)
+            let CanalServer = message.channel.id === CanalDoGlobalChat
+
+            let ConfirmaCanal = message.channel.id === db.get(`globalchat_${message.guild.id}`)
+            if (!ConfirmaCanal) { return message.channel.send(`<:xis:835943511932665926> Este não é o Global Chat! Vem cá, é aqui: ${client.channels.cache.get(CanalDoGlobalChat)}`).then(msg => msg.delete({ timeout: 7000 }).catch(err => { return })) }
+
             if (!CanalServer) {
 
                 const SetGlobalChatEmbed = new Discord.MessageEmbed()
                     .setColor('BLUE')
                     .setTitle('💬 Naya Global Chat System')
                     .setDescription('Fale com os outros servidores em um único chat. Isso é um experiência única!')
-                    .addField('Crie o canal', '`' + prefix + 'createchannel naya-global-chat`')
-                    .addField('Valide o canal', '`' + prefix + 'setglobalchat #naya-global-chat`')
-                    .addField('Desative o Canal', '`' + prefix + 'setglobalchat off` ou `' + prefix + 'deletechannel #naya-global-chat`')
+                    .addField('Crie o canal', '`' + prefix + 'createchannel NomeDoCanal`')
+                    .addField('Valide o canal', '`' + prefix + 'setglobalchat #canal`')
+                    .addField('Desative o Canal', '`' + prefix + 'setglobalchat off` ou `' + prefix + 'deletechannel #canal`')
 
-                return message.channel.send('<:xis:835943511932665926> O canal Global Chat não existe neste servidor!', SetGlobalChatEmbed)
+                return message.channel.send('<:xis:835943511932665926> O Global Chat não existe neste servidor!', SetGlobalChatEmbed)
             }
-
-            let CanalDoGlobalChat = db.get(`globalchat_${message.guild.id}`)
 
             const SemCanalDefinido = new Discord.MessageEmbed()
                 .setColor('BLUE')
                 .setTitle('📢 Naya Global Chat System')
                 .setDescription('Com este comando, você consegue conversar com todos os servidores que eu estou.\nLinks não são permitidos.')
-                .addField('Crie o canal', '`' + prefix + 'createchannel naya-global-chat`')
+                .addField('Crie o canal', '`' + prefix + 'createchannel NomeDoCanal`')
                 .addField('Valide o canal', '`' + prefix + 'setglobalchat #canal`')
-                .addField('Desative o Canal', '`' + prefix + 'setglobalchat off` ou `' + prefix + 'deletechannel #naya-global-chat`')
+                .addField('Desative o Canal', '`' + prefix + 'setglobalchat off` ou `' + prefix + 'deletechannel #canal`')
 
             if (CanalDoGlobalChat === null) { return message.channel.send('<:xis:835943511932665926> O canal não foi autenticado!', SemCanalDefinido) }
-
-            let ConfirmaCanal = message.channel.id === db.get(`globalchat_${message.guild.id}`)
-            if (!ConfirmaCanal) { return message.channel.send(`<:xis:835943511932665926> Este não é o Global Chat! Vem cá, é aqui: ${client.channels.cache.get(CanalDoGlobalChat)}`).then(msg => msg.delete({ timeout: 7000 }).catch(err => { return })) }
 
             if (!db.get(`globalchat_${message.guild.id}`)) {
                 return message.channel.send('<:xis:835943511932665926> Parece que o Global Chat foi excluido... Use `' + prefix + 'setglobalchat` Para mais informações.')
@@ -83,21 +83,17 @@ exports.run = async (client, message, args) => {
                 let rody = message.author.id === '451619591320371213'
                 let ModeradorServidor = db.get(`modserver_${message.author.id}`)
 
-                if (!MensagemGlobal) { return message.channel.send("<:xis:835943511932665926> Você precisa dizer algo para ser enviado no Global Chat.").then(msg => msg.delete({ timeout: 5000 }).catch(err => { return })) }
-                if (MensagemGlobal.length > 200) { return message.channel.send('<:xis:835943511932665926> Heeey! A mensagem não pode ter mais que **200 caracteres**.').then(msg => msg.delete({ timeout: 5000 }).catch(err => { return })) }
-                if (MensagemGlobal.length < 4) { return message.channel.send('<:xis:835943511932665926> Heeey! A mensagem não pode ter menos que **4 caracteres**.').then(msg => msg.delete({ timeout: 5000 }).catch(err => { return })) }
+                if (!MensagemGlobal) { return message.channel.send("<:xis:835943511932665926> Você precisa dizer algo para ser enviado no Global Chat.\n`" + prefix +  'chat sua mensagem`').then(msg => msg.delete({ timeout: 5000 }).catch(err => { return })) }
+                if (MensagemGlobal.length > 300) { return message.channel.send('<:xis:835943511932665926> Heeey! A mensagem não pode ter mais que **300 caracteres**.').then(msg => msg.delete({ timeout: 5000 }).catch(err => { return })) }
+                if (MensagemGlobal.length < 3) { return message.channel.send('<:xis:835943511932665926> Heeey! A mensagem não pode ter menos que **3 caracteres**.').then(msg => msg.delete({ timeout: 5000 }).catch(err => { return })) }
                 if (AchaLink(MensagemGlobal) === true) { return message.channel.send(`${message.author}, Por favor, não envie links no Global Chat.`).then(msg => msg.delete({ timeout: 5000 }).catch(err => { return })) }
                 if (['xvideos', 'pornhub', 'redtube'].includes(MensagemGlobal)) {
                     message.delete().catch(err => { return })
                     message.channel.send('<:xis:835943511932665926> Eu nem preciso dizer o motivo desta mensagem ser bloqueada, não é?').then(msg => msg.delete({ timeout: 5000 }).catch(err => { return }))
                 }
 
-                client.guilds.cache.forEach(guild => {
-
-                    if (!rody) { db.set(`globaltiming_${message.author.id}`, Date.now()) }
-                    let CanaisValidos = guild.channels.cache.find(ch => ch.name === "naya-global-chat")
-
-                    if (!CanaisValidos) return
+                let ServidoresAtivados = db.fetch(`globalchat_${message.guild.id}`)
+                if (message.channel.id === ServidoresAtivados) {
 
                     let GlobalChatEmbedMensagem = new Discord.MessageEmbed()
                         .setColor('BLUE')
@@ -126,8 +122,13 @@ exports.run = async (client, message, args) => {
                         GlobalChatEmbedMensagem.setDescription(`<a:engrenagem:836101651331940383> Criador da Naya\n\`\`\`txt\n${MensagemGlobal}\n\`\`\``)
                     }
 
-                    return CanaisValidos.send(GlobalChatEmbedMensagem)
-                })
+                    client.guilds.cache.forEach(Canal => {
+                        if (!rody) { db.set(`globaltiming_${message.author.id}`, Date.now()) }
+                        try {
+                            client.channels.cache.get(db.fetch(`globalchat_${Canal.id}`)).send(GlobalChatEmbedMensagem)
+                        } catch (e) { return }
+                    })
+                }
             }
         }
     }

@@ -16,7 +16,8 @@ exports.run = async (client, message, args) => {
     if (args[1]) { return message.inlineReply('<:xis:835943511932665926> Sem informações além do @user, por favor.') }
 
     let user = message.mentions.members.first()
-
+    if (user.id === '837147659898191902') { return message.inlineReply('Eu não tenho essa coisa, para com isso!') }
+    
     let pintos = [
         '3====================D',
         '3===================D',
@@ -38,7 +39,7 @@ exports.run = async (client, message, args) => {
         '3===D',
         '3==D',
         '3=D',
-        'Não sei achei nada aqui :cry:'
+        'Não achei nada aqui :cry:'
     ]
     let piinto = pintos[Math.floor(Math.random() * pintos.length)]
 

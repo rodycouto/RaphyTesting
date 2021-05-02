@@ -19,12 +19,13 @@ exports.run = async (client, message, args) => {
 
     db.delete(`noglobalchat_${id}`)
 
-    client.guilds.cache.forEach(guild => {
+    let ServidoresAtivados = db.fetch(`globalchat_${message.guild.id}`)
+    if (message.channel.id === ServidoresAtivados) {
 
-        let CanaisValidos = guild.channels.cache.find(ch => ch.name === "naya-global-chat")
-
-        if (!CanaisValidos) return
-
-        return CanaisValidos.send(`📢 *(${id})* teve o banimento removido por ${message.author.tag}!`)
-    })
+        client.guilds.cache.forEach(Canal => {
+            try {
+                client.channels.cache.get(db.fetch(`globalchat_${Canal.id}`)).send(`📢 *(${id})* teve o banimento removido por ${message.author.tag}!`)
+            } catch (e) { return }
+        })
+    }
 }

@@ -84,7 +84,7 @@ exports.run = async (client, message, args) => {
         .setColor('GREEN')
         .addFields(
             {
-                name: 'Usuário destumado',
+                name: 'Usuário desmutado',
                 value: member.user.tag
             },
             {

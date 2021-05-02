@@ -33,7 +33,7 @@ exports.run = async (client, message, args) => {
     let newgif = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setTitle('📢 Novo Gif')
-        .addField('Enviado por', `${message.author.tag} *(${messa.author.id})*`, true)
+        .addField('Enviado por', `${message.author.tag} *(${message.author.id})*`, true)
         .addField('Servidor', message.guild.name, true)
         .addField('Tema', tema, true)
         .addField('Link do Gif', `[link](${link})`, true)

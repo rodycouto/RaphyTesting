@@ -28,7 +28,6 @@ exports.run = async (client, message, args) => {
         .addField('Servidor', message.guild.name, true)
         .addField('Sugestão', mensagem)
 
-
     if (mensagem.length < 10) { return message.inlineReply('Por favor, escreva mais de 10 caracteres.') }
     if (mensagem.length > 150) { return message.inlineReply('Por favor, não ultrapasse mais de 150 caracteres.') }
 
