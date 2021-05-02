@@ -8,6 +8,8 @@ exports.run = async (client, message, args) => {
   let prefix = db.get(`prefix_${message.guild.id}`)
   if (prefix === null) prefix = "-"
 
+  let PrivadoDesativado = db.get(`privadooff_${message.author.id}`)
+
   let logchannel = db.get(`logchannel_${message.guild.id}`)
   if (logchannel === null) { return message.inlineReply(new Discord.MessageEmbed().setColor('#8B0000').setTitle('Não há Canal Log registrado.').setDescription('`' + prefix + 'setlogchannel #CanalLog`')) }
   if (!client.channels.cache.get(logchannel)) { return message.inlineReply(new Discord.MessageEmbed().setColor('#8B0000').setTitle('Parece que o canal log foi excluido.').setDescription('`' + prefix + 'setlogchannel #CanalLog`')) }

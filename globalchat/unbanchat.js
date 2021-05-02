@@ -12,12 +12,12 @@ exports.run = async (client, message, args) => {
     if (prefix === null) prefix = "-"
 
     let id = args[0]
-    if (!id) { return message.inlineReply('`' + prefix + 'banchat ID`') }
+    if (!id) { return message.inlineReply('`' + prefix + 'unbanchat ID`') }
     if (id.length < 17) { return message.channel.send("Isso não é um ID") }
     if (isNaN(id)) { return message.channel.send("Hey, isso não é um número.") }
     if (args[1]) { return message.channel.send('Nada além do ID do usuário, por favor.') }
 
-    db.add(`noglobalchat_${id}`, id)
+    db.delete(`noglobalchat_${id}`)
 
     client.guilds.cache.forEach(guild => {
 
@@ -25,6 +25,6 @@ exports.run = async (client, message, args) => {
 
         if (!CanaisValidos) return
 
-        return CanaisValidos.send(`📢 *(${id})* foi banido do chat global por ${message.author.tag}!`)
+        return CanaisValidos.send(`📢 *(${id})* teve o banimento removido por ${message.author.tag}!`)
     })
 }
