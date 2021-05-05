@@ -12,7 +12,7 @@ exports.run = async (client, message, args) => {
     'https://imgur.com/1mtbsEI.gif'
   ]
 
-  let avatar = message.author.displayAvatarURL({ format: 'png' })
+  let avatar = message.author.displayAvatarURL({ dynamic: true, format: "png", size: 1024 })
   let rand = list[Math.floor(Math.random() * list.length)]
   let user = message.mentions.users.first() || client.users.cache.get(args[0])
 
