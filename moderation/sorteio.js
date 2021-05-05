@@ -12,11 +12,11 @@ exports.run = async (client, message, args) => {
   const format = new Discord.MessageEmbed()
     .setColor('#8B0000')
     .setTitle('Siga o formato correto')
-    .setDescription('`' + prefix + 'sorteio 1s/m/h #CanalDoSorteio Prêmio`')
+    .setDescription('`' + prefix + 'giveaway 1s/m/h #CanalDoSorteio Prêmio`')
     .addFields(
       {
         name: 'Exemplo',
-        value: '`' + prefix + 'sorteio 2h #Sorteios Cargo Mod`\n \nO sorteio acaba em 2 horas no canal #Sorteios, prêmio: Cargo Mod'
+        value: '`' + prefix + 'giveaway 2h #Sorteios Cargo Mod`\n \nO sorteio acaba em 2 horas no canal #Sorteios, prêmio: Cargo Mod'
       }
     )
 
@@ -47,7 +47,7 @@ exports.run = async (client, message, args) => {
     if (m.reactions.cache.get("🎉").count <= 1) { return channel.send('<:xis:835943511932665926> Sorteio cancelado por falta de participantes.') }
 
     let winner = m.reactions.cache.get("🎉").users.cache.filter((u) => !u.bot).random()
-    let avatar = winner.displayAvatarURL({ dynamic: true, format: "png", size: 1024 })
+    let avatar = winner.displayAvatarURL({ dynamic: true })
 
     let winembed = new Discord.MessageEmbed()
       .setColor(`#067aff`)

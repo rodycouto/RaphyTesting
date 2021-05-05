@@ -18,6 +18,9 @@ exports.run = async (client, message, args) => {
 
   let vip = db.get(`vip_${user.id}`)
 
+  let color = await db.get(`color_${user.id}`)
+  if (color === null) color = '#6F6C6C'
+
   let list = [
     'Pessoas podem te roubar, tenha cuidado.',
     'Mantenha seu dinheiro no banco',
@@ -41,9 +44,8 @@ exports.run = async (client, message, args) => {
   let frase = list[Math.floor(Math.random() * list.length)]
 
   const embed = new Discord.MessageEmbed()
-    .setColor('BLUE')
-    .setAuthor(`Finanças de ${user.user.tag}`, user.user.displayAvatarURL())
-    .setThumbnail(user.user.displayAvatarURL({ dynamic: true }))
+    .setColor(color)
+    .setAuthor(`Finanças de ${user.user.tag}`, user.user.displayAvatarURL({ dynamic: true }))
     .setDescription(frase)
     .addFields(
       {
@@ -58,7 +60,6 @@ exports.run = async (client, message, args) => {
       }
     )
   if (vip) {
-    embed.setColor('#EFFF00')
     embed.setDescription(`<a:vip:837441854332338227> ${frase}`)
     embed.setFooter(`${user.user.username} é um membro vip. | ${prefix}vip`)
   }

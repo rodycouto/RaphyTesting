@@ -1,21 +1,12 @@
 // Sharding Soon
 const Discord = require("discord.js")
-const translate = require("@k3rn31p4nic/google-translate-api")
 require("./inlineReply") // Remove in Discord.js V13
 const client = new Discord.Client({})
 const { token } = require("./config.json")
 const db = require("quick.db")
+const ms = require("parse-ms")
 client.commands = new Discord.Collection()
 client.aliases = new Discord.Collection()
-
-client.translate = async (text, message) => {
-    const lang = await db.get(`lang_${message.guild.id}`)
-    if (lang === null) lang = 'portuguese'
-    if (!db.get(`lang_${message.guild.id}`)) lang = 'portuguese'
-
-    const translated = await translate(text, { from: 'pt', to: lang })
-    return translated.text
-}
 
 function is_url(str) {
     let regexp = /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/;
@@ -27,17 +18,7 @@ function is_url(str) {
 client.on("message", async (message) => {
 
     if (message.author.bot) return // no bots
-    if (message.channel.type == "dm") {
-
-        const dmEmbed = new Discord.MessageEmbed()
-            .setColor('BLUE')
-            .setTitle('💬 Nova mensagem no privado')
-            .setDescription(`**Usuário:** ${message.author.tag}\n:id: ${message.author.id}\n \n` + '**Conteúdo** ```' + `${message.content}` + '```')
-            .setTimestamp()
-
-        const canal = client.channels.cache.get('831154821204803634')
-        if (!canal) { return } else { return canal.send(dmEmbed) }
-    }
+    if (message.channel.type == "dm") return
     xp(message)
 
     let prefix = db.get(`prefix_${message.guild.id}`)
@@ -116,125 +97,144 @@ client.on("message", async (message) => {
         }
     }
 
-    if (!message.member.hasPermission("ADMINISTRATOR")) {
-        if (db.get(`blockchannel_${message.channel.id}`)) {
-            message.delete().catch(err => { return })
-            return message.channel.send('<:xis:835943511932665926> **COMANDOS BLOQUEADOS** | Apenas administradores podem usar meus comandos neste canal.').then(msg => msg.delete({ timeout: 4000 })).catch(err => { return })
+    if (message.content === '-_-') return
+    if (message.content === "-'") return
+    if (message.content === "-.-") return
+
+    let timeout = 3000
+    let author = await db.fetch(`commandcooldown_${message.author.id}`)
+    let respostinhas = ['Calminha coisa fofa!', 'Tem um tempinho pra usar outro comando, calma aí!', 'Calma, não tão rápido.', 'Cooldown é de 3 segundos, calma.', 'Tá com pressa? Pera um pouquinho.']
+    let reposta = respostinhas[Math.floor(Math.random() * respostinhas.length)]
+
+    if (author !== null && timeout - (Date.now() - author) > 0) {
+        let time = ms(timeout - (Date.now() - author))
+        return message.inlineReply(`⏲️ | ${reposta}`)
+    } else {
+        db.set(`commandcooldown_${message.author.id}`, Date.now())
+
+        if (!message.member.hasPermission("ADMINISTRATOR")) {
+            if (db.get(`blockchannel_${message.channel.id}`)) {
+                message.delete().catch(err => { return })
+                return message.channel.send('<:xis:835943511932665926> **COMANDOS BLOQUEADOS** | Apenas administradores podem usar meus comandos neste canal.').then(msg => msg.delete({ timeout: 4000 })).catch(err => { return })
+            }
         }
+
+        if (message.content.startsWith(`${prefix}check`)) { message.react("✅") }
+        if (message.content.startsWith(`${prefix}inline`)) { return message.inlineReply("<a:Check:836347816036663309> Inline Reply funcionando corretamente") }
+
+        try {
+            const commandFile = require(`./afksystem/${command}.js`)
+            return commandFile.run(client, message, args)
+        } catch (err) { }
+
+        try {
+            const commandFile = require(`./vip/${command}.js`)
+            return commandFile.run(client, message, args)
+        } catch (err) { }
+
+        try {
+            const commandFile = require(`./globalchat/${command}.js`)
+            return commandFile.run(client, message, args)
+        } catch (err) { }
+
+        try {
+            const commandFile = require(`./registro/${command}.js`)
+            return commandFile.run(client, message, args)
+        } catch (err) { }
+
+        try {
+            const commandFile = require(`./personagens/${command}.js`)
+            return commandFile.run(client, message, args)
+        } catch (err) { }
+
+        try {
+            const commandFile = require(`./commands/${command}.js`)
+            return commandFile.run(client, message, args)
+        } catch (err) { }
+
+        try {
+            const commandFile = require(`./levelsystem/${command}.js`)
+            return commandFile.run(client, message, args)
+        } catch (err) { }
+
+        try {
+            const commandFile = require(`./games/${command}.js`)
+            return commandFile.run(client, message, args)
+        } catch (err) { }
+
+        try {
+            const commandFile = require(`./owner/${command}.js`)
+            return commandFile.run(client, message, args)
+        } catch (err) { }
+
+        try {
+            const commandFile = require(`./economy/${command}.js`)
+            return commandFile.run(client, message, args)
+        } catch (err) { }
+
+        try {
+            const commandFile = require(`./quiz/${command}.js`)
+            return commandFile.run(client, message, args)
+        } catch (err) { }
+
+        try {
+            const commandFile = require(`./animes/${command}.js`)
+            return commandFile.run(client, message, args)
+        } catch (err) { }
+
+        try {
+            const commandFile = require(`./help/${command}.js`)
+            return commandFile.run(client, message, args)
+        } catch (err) { }
+
+        try {
+            const commandFile = require(`./interacao/${command}.js`)
+            return commandFile.run(client, message, args)
+        } catch (err) { }
+
+        try {
+            const commandFile = require(`./discordjs/${command}.js`)
+            return commandFile.run(client, message, args)
+        } catch (err) { }
+
+        try {
+            const commandFile = require(`./random/${command}.js`)
+            return commandFile.run(client, message, args)
+        } catch (err) { }
+
+        try {
+            const commandFile = require(`./naya/${command}.js`)
+            return commandFile.run(client, message, args)
+        } catch (err) { }
+
+        try {
+            const commandFile = require(`./perfil/${command}.js`)
+            return commandFile.run(client, message, args)
+        } catch (err) { }
+
+        try {
+            const commandFile = require(`./reacoes/${command}.js`)
+            return commandFile.run(client, message, args)
+        } catch (err) { }
+
+        try {
+            const commandFile = require(`./moderation/${command}.js`)
+            return commandFile.run(client, message, args)
+        } catch (err) { }
+
+        const cmd = client.commands.get(command) || client.commands.find((cmd) => cmd.aliases && cmd.aliases.includes(command))
+        if (cmd) cmd.run(client, message, args)
+        let customCommands = db.get(`guildConfigurations_${message.guild.id}.commands`)
+        if (customCommands) {
+            let customCommandsName = customCommands.find(x => x.name === command)
+            if (customCommandsName) return message.inlineReply(customCommandsName.response)
+        }
+
+        let respostinhas1 = ['Ué... Eu não tenho esse comando.', 'Eita, comando desconhecido!', 'Não existe esse comando na minha lista...', 'Viish... Esse comando não existe.', 'Não tenho esse comando não...']
+        let reposta1 = respostinhas1[Math.floor(Math.random() * respostinhas1.length)]
+    
+        return message.inlineReply(`<:xis:835943511932665926> | ${reposta1}`).then(msg => msg.delete({ timeout: 6000 })).catch(err => { return })
     }
-
-    if (message.content.startsWith(`${prefix}check`)) { message.react("✅") }
-    if (message.content.startsWith(`${prefix}inline`)) { return message.inlineReply("<a:Check:836347816036663309> Inline Reply funcionando corretamente") }
-
-    try {
-        const commandFile = require(`./afksystem/${command}.js`)
-        return commandFile.run(client, message, args)
-    } catch (err) { }
-
-    try {
-        const commandFile = require(`./vip/${command}.js`)
-        return commandFile.run(client, message, args)
-    } catch (err) { }
-
-    try {
-        const commandFile = require(`./globalchat/${command}.js`)
-        return commandFile.run(client, message, args)
-    } catch (err) { }
-
-    try {
-        const commandFile = require(`./registro/${command}.js`)
-        return commandFile.run(client, message, args)
-    } catch (err) { }
-
-    try {
-        const commandFile = require(`./personagens/${command}.js`)
-        return commandFile.run(client, message, args)
-    } catch (err) { }
-
-    try {
-        const commandFile = require(`./commands/${command}.js`)
-        return commandFile.run(client, message, args)
-    } catch (err) { }
-
-    try {
-        const commandFile = require(`./levelsystem/${command}.js`)
-        return commandFile.run(client, message, args)
-    } catch (err) { }
-
-    try {
-        const commandFile = require(`./games/${command}.js`)
-        return commandFile.run(client, message, args)
-    } catch (err) { }
-
-    try {
-        const commandFile = require(`./owner/${command}.js`)
-        return commandFile.run(client, message, args)
-    } catch (err) { }
-
-    try {
-        const commandFile = require(`./economy/${command}.js`)
-        return commandFile.run(client, message, args)
-    } catch (err) { }
-
-    try {
-        const commandFile = require(`./quiz/${command}.js`)
-        return commandFile.run(client, message, args)
-    } catch (err) { }
-
-    try {
-        const commandFile = require(`./animes/${command}.js`)
-        return commandFile.run(client, message, args)
-    } catch (err) { }
-
-    try {
-        const commandFile = require(`./help/${command}.js`)
-        return commandFile.run(client, message, args)
-    } catch (err) { }
-
-    try {
-        const commandFile = require(`./interacao/${command}.js`)
-        return commandFile.run(client, message, args)
-    } catch (err) { }
-
-    try {
-        const commandFile = require(`./discordjs/${command}.js`)
-        return commandFile.run(client, message, args)
-    } catch (err) { }
-
-    try {
-        const commandFile = require(`./random/${command}.js`)
-        return commandFile.run(client, message, args)
-    } catch (err) { }
-
-    try {
-        const commandFile = require(`./naya/${command}.js`)
-        return commandFile.run(client, message, args)
-    } catch (err) { }
-
-    try {
-        const commandFile = require(`./perfil/${command}.js`)
-        return commandFile.run(client, message, args)
-    } catch (err) { }
-
-    try {
-        const commandFile = require(`./reacoes/${command}.js`)
-        return commandFile.run(client, message, args)
-    } catch (err) { }
-
-    try {
-        const commandFile = require(`./moderation/${command}.js`)
-        return commandFile.run(client, message, args)
-    } catch (err) { }
-
-    const cmd = client.commands.get(command) || client.commands.find((cmd) => cmd.aliases && cmd.aliases.includes(command))
-    if (cmd) cmd.run(client, message, args)
-    let customCommands = db.get(`guildConfigurations_${message.guild.id}.commands`)
-    if (customCommands) {
-        let customCommandsName = customCommands.find(x => x.name === command)
-        if (customCommandsName) return message.inlineReply(customCommandsName.response)
-    }
-
-    return message.inlineReply(`Comando desconhecido.`).then(msg => msg.delete({ timeout: 6000 })).catch(err => { return })
 }) // Fim do Client.on('Message')
 
 client.on("guildMemberRemove", (member) => {
@@ -265,16 +265,10 @@ client.on("guildMemberAdd", (member) => {
     return member.roles.add(role)
 })
 
-client.on("guildMemberAdd", (member) => {
-    let role = db.get(`autorole_${member.guild.id}`)
-    if (role === null) { return }
-    return member.roles.add(role)
-})
-
 client.on("ready", () => {
-    let activities = ['Me marca que eu falo o prefixo', '@naya', '+300 Comandos Onlines', '#FiqueEmCasa']
+    let activities = ['Me marca que eu falo o prefixo', '#FiqueEmCasa']
     i = 0
-    setInterval(() => client.user.setActivity(`${activities[i++ % activities.length]}`, { type: "WATCHING" }), 7000)
+    setInterval(() => client.user.setActivity(`${activities[i++ % activities.length]}`, { type: "WATCHING" }), 10000)
 })
 
 client.on('guildCreate', guild => {

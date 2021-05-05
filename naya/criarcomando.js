@@ -53,10 +53,10 @@ exports.run = async (client, message, args) => {
         return message.inlineReply(noargs)
     }
 
-    if (commandResponse.length > 30) {
+    if (commandResponse.length > 50) {
         let toname = new Discord.MessageEmbed()
             .setColor('#8B0000')
-            .setTitle('A resposta do comando não pode ultrapassar 30 letras')
+            .setDescription('<:xis:835943511932665926> A resposta do comando não pode ultrapassar **50 letras**')
             .setFooter('Meu banco de dados também sente dor sabia?')
         return message.inlineReply(toname)
     }

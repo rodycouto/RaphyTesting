@@ -3,78 +3,86 @@ const db = require("quick.db")
 
 exports.run = async (client, message, args) => {
 
-  if (!message.guild.me.hasPermission("MANAGE_NICKNAMES")) {
-    let adm = new Discord.MessageEmbed()
-      .setColor('#8B0000')
-      .setTitle('Eu preciso da permissão "Gerenciar Nicknames (Nomes/Apelidos)" para utilizar esta função.')
-    return message.inlineReply(adm)
-  }
-
   let prefix = db.get(`prefix_${message.guild.id}`)
   if (prefix === null) prefix = "-"
 
-  if (!message.member.hasPermission("MANAGE_NICKNAMES")) {
-    let noperms = new Discord.MessageEmbed()
-      .setColor('#8B0000')
-      .setTitle('Permissão Necessária: Gerenciar Nicknames (Nomes/Apelidos)')
-    return message.inlineReply(noperms)
-  }
+  const Formato = '<:xis:835943511932665926> Siga o formato correto! `' + prefix + 'setnick @user NovoNome`'
+
+  const NoArgsEmbed = new Discord.MessageEmbed()
+    .setColor('BLUE')
+    .setTitle('🛠️ Altere o Nickname')
+    .setDescription('Com este comando você pode alterar o seu nickname.')
+    .addField('Comando Pessoal', '`' + prefix + 'setnick SeuNovoNome`')
+    .addField('Comando Administrativo', '`' + prefix + 'setnick @user NovoNome`')
+
+  if (!args[0]) { return message.inlineReply(NoArgsEmbed) }
 
   let user = message.mentions.users.first()
-  if (!user) {
-    let format = new Discord.MessageEmbed()
-      .setColor('#8B0000')
-      .setTitle('Siga o formato correto')
-      .setDescription('`' + prefix + 'setnick @user NovoNome`')
-    return message.inlineReply(format)
-  }
+  let role = message.mentions.roles.first()
 
-  let nick = args.slice(1).join(" ")
-  if (!nick) {
-    let format = new Discord.MessageEmbed()
-      .setColor('#8B0000')
-      .setTitle('Siga o formato correto')
-      .setDescription('`' + prefix + 'setnick @user NovoNome`')
-    return message.inlineReply(format)
-  }
+  if (user) {
 
-  let linksupport = 'https://discord.gg/YpFWgJuuUV'
-  let member = message.guild.members.cache.get(user.id)
-  member.setNickname(nick).catch(err => {
+    if (!message.guild.me.hasPermission("MANAGE_NICKNAMES")) { return message.inlineReply('<:xis:835943511932665926> Eu preciso da permissão "Gerenciar Nicknames (Nomes/Apelidos)" para utilizar esta função.') }
+    if (!message.member.hasPermission("MANAGE_NICKNAMES")) { return message.inlineReply('<:xis:835943511932665926> Permissão Necessária: Gerenciar Nicknames (Nomes/Apelidos)') }
 
-    if (err) {
-      let erro = new Discord.MessageEmbed()
-        .setColor('#8B0000')
-        .setTitle('Um erro foi encontrado')
-        .setDescription('\n \n`' + err + '`')
-        .addFields(
-          {
-            name: 'Missing Permissions',
-            value: `Algum cargo de ${member} é maior que o meu.`,
-            inline: true
-          },
-          {
-            name: 'Unknow Member',
-            value: `O usuário saiu do servidor.`,
-            inline: true
-          },
-          {
-            name: 'API Connect Problem Asking',
-            value: 'Tente novamente, o servidor reconectou.',
-            inline: true
-          },
-          {
-            name: 'Algum outro erro?',
-            value: `[Support Naya](${linksupport})`
-          }
-        )
+    let nick = args.slice(1).join(" ")
+    if (!nick) { return message.inlineReply(Formato) }
+    if (nick.length > 32) { return message.inlineReply('<:xis:835943511932665926> O tamanho máximo do nome é de **32 caracteres**.') }
 
-      return message.inlineReply(erro)
+    const linksupport = 'https://discord.gg/YpFWgJuuUV'
+    const member = message.guild.members.cache.get(user.id)
+    member.setNickname(nick).catch(err => {
+
+      if (err) {
+        const erro = new Discord.MessageEmbed()
+          .setColor('#8B0000')
+          .setTitle('<a:attention:836101248183959562> Ocorreu um erro')
+          .setDescription('\n \n`' + err + '`')
+          .addFields(
+            {
+              name: 'Missing Permissions',
+              value: 'Eu não tenho cargo suficiente, suba meu cargo.',
+              inline: true
+            },
+            {
+              name: 'Unknow Member',
+              value: 'O usuário saiu do servidor.',
+              inline: true
+            },
+            {
+              name: 'API Connect Problem Asking',
+              value: 'Tente novamente, o servidor reconectou.',
+              inline: true
+            },
+            {
+              name: 'Algum outro erro?',
+              value: `[Support Naya](${linksupport})`
+            }
+          )
+
+        return message.inlineReply(erro)
+      }
+    })
+
+    const sucess = new Discord.MessageEmbed()
+      .setColor('GREEN')
+      .setDescription(`<a:Check:836347816036663309> O nickname de ${user.tag} foi alterado para ${nick}`)
+    return message.inlineReply(sucess)
+
+  } else {
+
+    if (!message.member.hasPermission("CHANGE_NICKNAME")) {
+      return message.inlineReply('<:xis:835943511932665926> Você não tem a permissão "Alterar Apelido".')
+
+    } else {
+
+      const nick = args.join(" ")
+      if (nick.length > 32) { return message.inlineReply('<:xis:835943511932665926> O tamanho máximo do nome é de **32 caracteres**.') }
+
+      const member = message.guild.members.cache.get(message.author.id)
+      if (message.author.id === message.guild.owner.id) return message.inlineReply('Não posso alterar o nome do dono do servidor.')
+
+      member.setNickname(nick).catch(err => { return message.channel.send(`**ERRO:** ${err}`) }).then(msg => msg.channel.send('<a:Check:836347816036663309> Seu nickname foi alterado com sucesso!'))
     }
-  })
-
-  let sucess = new Discord.MessageEmbed()
-    .setColor('GREEN')
-    .setDescription(`<a:Check:836347816036663309> O nickname de ${user.tag} foi alterado para ${nick}`)
-  return message.inlineReply(sucess)
+  }
 }

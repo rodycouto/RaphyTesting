@@ -26,7 +26,7 @@ exports.run = async (client, message, args) => {
             let noamout = new Discord.MessageEmbed()
                 .setColor('#8B0000')
                 .setTitle('Siga o formato correto')
-                .setDescription('`' + prefix + 'dep Valor`\n ' + '`' + prefix + 'dep all`\n ')
+                .setDescription('`' + prefix + 'with Valor`\n ' + '`' + prefix + 'with all`\n ')
             return message.inlineReply(noamout)
         }
 

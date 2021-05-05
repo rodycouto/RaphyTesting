@@ -26,8 +26,11 @@ exports.run = async (client, message, args) => {
         let data = db.get('datasorteio')
         if (data === null) { data = 'Sem data definida' }
 
+        let color = await db.get(`color_${message.author.id}`)
+        if (color === null) color = '#6F6C6C'
+
         let embed = new Discord.MessageEmbed()
-            .setColor('YELLOW')
+            .setColor(color)
             .setTitle('💰 LOTERIA NAYA')
             .setDescription('<:02zero:832667759800352838> Seja bem vindo a Loteria Naya!\nSe você quiser concorrer ao prêmio, compre tickets na `' + prefix + 'loja`')
             .addField('Valor atual', `${prize}<:NPoints:837666759389347910>NPoints`)

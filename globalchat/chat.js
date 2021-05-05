@@ -39,7 +39,7 @@ exports.run = async (client, message, args) => {
 
             let CanalDoGlobalChat = db.get(`globalchat_${message.guild.id}`)
             let CanalServer = message.channel.id === CanalDoGlobalChat
-            
+
             const SemCanalDefinido = new Discord.MessageEmbed()
                 .setColor('BLUE')
                 .setTitle('📢 Naya Global Chat System')
@@ -83,51 +83,52 @@ exports.run = async (client, message, args) => {
                 let rody = message.author.id === '451619591320371213'
                 let ModeradorServidor = db.get(`modserver_${message.author.id}`)
 
-                if (!MensagemGlobal) { return message.channel.send("<:xis:835943511932665926> Você precisa dizer algo para ser enviado no Global Chat.\n`" + prefix +  'chat sua mensagem`').then(msg => msg.delete({ timeout: 5000 }).catch(err => { return })) }
+                if (!MensagemGlobal) { return message.channel.send("<:xis:835943511932665926> Você precisa dizer algo para ser enviado no Global Chat.\n`" + prefix + 'chat sua mensagem`').then(msg => msg.delete({ timeout: 5000 }).catch(err => { return })) }
                 if (MensagemGlobal.length > 300) { return message.channel.send('<:xis:835943511932665926> Heeey! A mensagem não pode ter mais que **300 caracteres**.').then(msg => msg.delete({ timeout: 5000 }).catch(err => { return })) }
                 if (MensagemGlobal.length < 3) { return message.channel.send('<:xis:835943511932665926> Heeey! A mensagem não pode ter menos que **3 caracteres**.').then(msg => msg.delete({ timeout: 5000 }).catch(err => { return })) }
                 if (AchaLink(MensagemGlobal) === true) { return message.channel.send(`${message.author}, Por favor, não envie links no Global Chat.`).then(msg => msg.delete({ timeout: 5000 }).catch(err => { return })) }
-                if (['xvideos', 'pornhub', 'redtube'].includes(MensagemGlobal)) {
+                if (['xvideos', 'pornhub', 'redtube', 'loli', 'poha', 'porra', 'caralho', 'fdp', 'filho da puta', 'vagabundo'].includes(MensagemGlobal)) {
                     message.delete().catch(err => { return })
-                    message.channel.send('<:xis:835943511932665926> Eu nem preciso dizer o motivo desta mensagem ser bloqueada, não é?').then(msg => msg.delete({ timeout: 5000 }).catch(err => { return }))
-                }
+                    message.channel.send('<:xis:835943511932665926> Essa mensagens comtém palavras que não podem ser enviadas.').then(msg => msg.delete({ timeout: 5000 }).catch(err => { return }))
+                } else {
 
-                let ServidoresAtivados = db.fetch(`globalchat_${message.guild.id}`)
-                if (message.channel.id === ServidoresAtivados) {
+                    let ServidoresAtivados = db.fetch(`globalchat_${message.guild.id}`)
+                    if (message.channel.id === ServidoresAtivados) {
 
-                    let GlobalChatEmbedMensagem = new Discord.MessageEmbed()
-                        .setColor('BLUE')
-                        .setAuthor(`${message.author.tag} | ${message.guild.name}`, avatar)
-                        .setDescription(`\`\`\`txt\n${MensagemGlobal}\n\`\`\``)
-                        .setFooter(`${prefix}chat sua mensagem | ${message.author.id}`)
+                        let GlobalChatEmbedMensagem = new Discord.MessageEmbed()
+                            .setColor('BLUE')
+                            .setAuthor(`${message.author.tag} | ${message.guild.name}`, avatar)
+                            .setDescription(`\`\`\`txt\n${MensagemGlobal}\n\`\`\``)
+                            .setFooter(`${prefix}chat sua mensagem | ${message.author.id}`)
 
-                    if (vip) {
-                        GlobalChatEmbedMensagem.setColor('#FDFF00')
-                        GlobalChatEmbedMensagem.setDescription(`<a:vip:837441854332338227> Membro VIP\n\`\`\`txt\n${MensagemGlobal}\n\`\`\``)
-                        GlobalChatEmbedMensagem.setFooter(`${prefix}chat sua mensagem | ${prefix}vip | ${message.author.id}`)
+                        if (vip) {
+                            GlobalChatEmbedMensagem.setColor('#FDFF00')
+                            GlobalChatEmbedMensagem.setDescription(`<a:vip:837441854332338227> Membro VIP\n\`\`\`txt\n${MensagemGlobal}\n\`\`\``)
+                            GlobalChatEmbedMensagem.setFooter(`${prefix}chat sua mensagem | ${prefix}vip | ${message.author.id}`)
+                        }
+
+                        if (moderador) {
+                            GlobalChatEmbedMensagem.setColor('#FF7D00')
+                            GlobalChatEmbedMensagem.setDescription(`🎖️ Moderador Chat Global Naya\n\`\`\`txt\n${MensagemGlobal}\n\`\`\``)
+                        }
+
+                        if (ModeradorServidor) {
+                            GlobalChatEmbedMensagem.setColor('#00FF1A')
+                            GlobalChatEmbedMensagem.setDescription(`✨ Staff Servidor Naya's House\n\`\`\`txt\n${MensagemGlobal}\n\`\`\``)
+                        }
+
+                        if (rody) {
+                            GlobalChatEmbedMensagem.setColor('#FF0000')
+                            GlobalChatEmbedMensagem.setDescription(`<a:engrenagem:836101651331940383> Criador da Naya\n\`\`\`txt\n${MensagemGlobal}\n\`\`\``)
+                        }
+
+                        client.guilds.cache.forEach(Canal => {
+                            if (!rody) { db.set(`globaltiming_${message.author.id}`, Date.now()) }
+                            try {
+                                client.channels.cache.get(db.fetch(`globalchat_${Canal.id}`)).send(GlobalChatEmbedMensagem)
+                            } catch (e) { return }
+                        })
                     }
-
-                    if (moderador) {
-                        GlobalChatEmbedMensagem.setColor('#FF7D00')
-                        GlobalChatEmbedMensagem.setDescription(`🎖️ Moderador Chat Global Naya\n\`\`\`txt\n${MensagemGlobal}\n\`\`\``)
-                    }
-
-                    if (ModeradorServidor) {
-                        GlobalChatEmbedMensagem.setColor('#00FF1A')
-                        GlobalChatEmbedMensagem.setDescription(`✨ Staff Servidor Naya's House\n\`\`\`txt\n${MensagemGlobal}\n\`\`\``)
-                    }
-
-                    if (rody) {
-                        GlobalChatEmbedMensagem.setColor('#FF0000')
-                        GlobalChatEmbedMensagem.setDescription(`<a:engrenagem:836101651331940383> Criador da Naya\n\`\`\`txt\n${MensagemGlobal}\n\`\`\``)
-                    }
-
-                    client.guilds.cache.forEach(Canal => {
-                        if (!rody) { db.set(`globaltiming_${message.author.id}`, Date.now()) }
-                        try {
-                            client.channels.cache.get(db.fetch(`globalchat_${Canal.id}`)).send(GlobalChatEmbedMensagem)
-                        } catch (e) { return }
-                    })
                 }
             }
         }

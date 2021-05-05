@@ -26,25 +26,51 @@ exports.run = async (client, message, args) => {
         let StarM = '<:starM:832974891635572787>'
         let loteria = db.get(`loteria`)
 
-        let loja = new Discord.MessageEmbed()
-            .setColor('YELLOW')
-            .setTitle('🏪 Lojinha Naya 24h')
-            .setDescription('Aqui na Lojinha Naya, você pode comprar várias coisas para ter acesso a comandos e funções incriveis.')
-            .addFields(
-                {
-                    name: 'Disponiveis',
-                    value: '🛡️ `Escudo` (Em Breve)\n🎣 `Vara de Pesca` 140 <:NPoints:837666759389347910>NPoints\n🔫 `Arma` 4.000 <:NPoints:837666759389347910>NPoints\n⛏️ `Picareta` 85 <:NPoints:837666759389347910>NPoints\n🪓 `Machado` 35 <:NPoints:837666759389347910>NPoints\n🎟️ `Fichas` 2 <:NPoints:837666759389347910>NPoints\n💌 `Carta de Amor` 1 <:NPoints:837666759389347910>NPoints\n🥘 `Comida` 2 <:NPoints:837666759389347910>NPoints\n🪱 `Isca` 1 <:NPoints:837666759389347910>NPoints\n🥤 `Água` 1 <:NPoints:837666759389347910>NPoints'
-                },
-                {
-                    name: 'Loteria',
-                    value: '🎫 `Ticket Loteria` 10 <:NPoints:837666759389347910>NPoints' + `\nPrêmio Atual: ${loteria} <:NPoints:837666759389347910>NPoints`
-                },
-                {
-                    name: 'Perfil',
-                    value: '<:starM:832974891635572787> `Estrela1` 500.000 <:NPoints:837666759389347910>NPoints\n<:starM:832974891635572787><:starM:832974891635572787> `Estrela2` 1.000.000 <:NPoints:837666759389347910>NPoints\n<:starM:832974891635572787><:starM:832974891635572787><:starM:832974891635572787> `Estrela3` 2.000.000 <:NPoints:837666759389347910>NPoints\n<:starM:832974891635572787><:starM:832974891635572787><:starM:832974891635572787><:starM:832974891635572787> `Estrela4` 4.000.000 <:NPoints:837666759389347910>NPoints\n<:starM:832974891635572787><:starM:832974891635572787><:starM:832974891635572787><:starM:832974891635572787><:starM:832974891635572787> `Estrela5` 10.000.000 <:NPoints:837666759389347910>NPoints\n🔰 `Título` 10.000<:NPoints:837666759389347910>NPoints'
-                }
-            )
-            .setFooter(`${prefix}buy | ${prefix}itens | ${prefix}vender | ${prefix}doar | ${prefix}slot`)
-        return message.inlineReply(loja)
+        let color = await db.get(`color_${message.author.id}`)
+        if (color === null) color = '#6F6C6C'
+
+        if (args[0] === 'vip') {
+
+            const loja = new Discord.MessageEmbed()
+                .setColor(color)
+                .setTitle('🏪 Lojinha VIP Naya 24h')
+                .setDescription('Aqui na Lojinha VIP, você pode comprar itens exclusivos que né... Só os vips podem.')
+                .addFields(
+                    {
+                        name: 'Cores',
+                        value: '🟥 `Vermelho` 10000 <:NPoints:837666759389347910>NPoints\n🟧 `Laranja` 10000 <:NPoints:837666759389347910>NPoints\n⬜ `Branco` 10000 <:NPoints:837666759389347910>NPoints'
+                    },
+                    {
+                        name: 'Perfil',
+                        value: '<:starM:832974891635572787><:starM:832974891635572787><:starM:832974891635572787><:starM:832974891635572787><:starM:832974891635572787> `Estrela5` 10.000.000 <:NPoints:837666759389347910>NPoints'
+                    }
+                )
+                .setFooter(`${prefix}buy | ${prefix}itens | ${prefix}setcolor | ${prefix}slot`)
+            return message.inlineReply(loja)
+
+        } else {
+
+            const loja = new Discord.MessageEmbed()
+                .setColor(color)
+                .setTitle('🏪 Lojinha Naya 24h')
+                .setDescription('Aqui na Lojinha Naya, você pode comprar várias coisas para ter acesso a comandos e funções incriveis.')
+                .addFields(
+                    {
+                        name: 'Disponiveis',
+                        value: '🎣 `Vara de Pesca` 140 <:NPoints:837666759389347910>NPoints\n🔫 `Arma` 4.000 <:NPoints:837666759389347910>NPoints\n⛏️ `Picareta` 85 <:NPoints:837666759389347910>NPoints\n🪓 `Machado` 35 <:NPoints:837666759389347910>NPoints\n🎟️ `Fichas` 2 <:NPoints:837666759389347910>NPoints\n💌 `Carta de Amor` 1 <:NPoints:837666759389347910>NPoints\n🥘 `Comida` 2 <:NPoints:837666759389347910>NPoints\n🪱 `Isca` 1 <:NPoints:837666759389347910>NPoints\n🥤 `Água` 1 <:NPoints:837666759389347910>NPoints'
+                    },
+                    {
+                        name: 'Loteria',
+                        value: '🎫 `Ticket Loteria` 10 <:NPoints:837666759389347910>NPoints' + `\nPrêmio Atual: ${loteria} <:NPoints:837666759389347910>NPoints`
+                    },
+                    {
+                        name: 'Perfil',
+                        value: '<:starM:832974891635572787> `Estrela1` 500.000 <:NPoints:837666759389347910>NPoints\n<:starM:832974891635572787><:starM:832974891635572787> `Estrela2` 1.000.000 <:NPoints:837666759389347910>NPoints\n<:starM:832974891635572787><:starM:832974891635572787><:starM:832974891635572787> `Estrela3` 2.000.000 <:NPoints:837666759389347910>NPoints\n<:starM:832974891635572787><:starM:832974891635572787><:starM:832974891635572787><:starM:832974891635572787> `Estrela4` 4.000.000 <:NPoints:837666759389347910>NPoints\n🔰 `Título` 10.000<:NPoints:837666759389347910>NPoints'
+                    }
+                )
+                .setFooter(`${prefix}buy | ${prefix}itens | ${prefix}vender | ${prefix}slot | ${prefix}loja vip`)
+            return message.inlineReply(loja)
+
+        }
     }
 }

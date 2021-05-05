@@ -6,6 +6,9 @@ exports.run = async (client, message, args) => {
     let prefix = db.get(`prefix_${message.guild.id}`)
     if (prefix === null) { prefix = "-" }
 
+    let color = await db.get(`color_${message.author.id}`)
+    if (color === null) color = '#6F6C6C'
+
     if (!args[0]) {
         let rank = new Discord.MessageEmbed()
             .setColor('BLUE')
@@ -40,8 +43,8 @@ exports.run = async (client, message, args) => {
         }
 
         let embedxp = new Discord.MessageEmbed()
+            .setColor(color)
             .setTitle("👑 Ranking Global - XP")
-            .setColor("YELLOW")
         lb.forEach(d => {
             embedxp.addField(`${d.rank}. ${d.user.tag}`, `🆔 *(${d.user.id})*\n⬆️ ${d.level} (${d.xp} / ${d.xpreq})`)
         })
@@ -71,7 +74,7 @@ exports.run = async (client, message, args) => {
         }
 
         let embedxp = new Discord.MessageEmbed()
-            .setColor("YELLOW")
+            .setColor(color)
             .setTitle("👑 Ranking Global - NPoints")
         lb.forEach(d => {
             embedxp.addField(`${d.rank}. ${d.user.tag}`, `🆔 *(${d.user.id})*\n💸 Carteira - ${d.level} <:NPoints:837666759389347910>NPoints\n🏦 Banco - ${d.xp} <:NPoints:837666759389347910>NPoints`)

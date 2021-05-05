@@ -44,7 +44,7 @@ exports.run = async (client, message, args) => {
 
   let canal = db.get(`ideiachannel_${message.guild.id}`)
   let content = args.join(" ")
-  let avatar = message.author.displayAvatarURL({ format: 'png' })
+  let avatar = message.author.displayAvatarURL({ dynamic: true, format: "png", size: 1024 })
 
   if (canal === null) { return message.inlineReply(nochannel) }
   if (!client.channels.cache.get(canal)) { return message.inlineReply(nochannel1) }

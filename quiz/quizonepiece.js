@@ -1,5 +1,6 @@
 const Discord = require("discord.js")
 const quiz = require('./onepiece.json')
+const db = require("quick.db")
 
 exports.run = async (client, message, args) => {
     let item = quiz[Math.floor(Math.random() * quiz.length)]
@@ -18,9 +19,14 @@ exports.run = async (client, message, args) => {
     message.channel.send(quiztime).then(msg => msg.delete({ timeout: 5000 })).then(msg => message.channel.send(pergunta)).then(() => {
         message.channel.awaitMessages(filter, { max: 1, time: 15000, errors: ['time'] })
             .then(collected => {
+
+                const amount = Math.floor(Math.random() * 200) + 1
+                db.add(`mpoints_${collected.first().author.id}`, amount)
+
                 let resposta = new Discord.MessageEmbed()
                     .setColor('GREEN')
                     .setTitle(`${collected.first().author.username} acertou a pergunta!`)
+                    .setDescription(`${collected.first().author} ganhou ${amount} <:NPoints:837666759389347910>NPoints`)
                 message.channel.send(resposta)
             })
             .catch(collected => {

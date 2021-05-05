@@ -5,7 +5,7 @@ exports.run = async (client, message, args) => {
 
     let prefix = db.get(`prefix_${message.guild.id}`)
     if (prefix === null) { prefix = "-" }
-    
+
     if (['help', 'ajuda', 'comandos'].includes(args[0])) { return message.inlineReply('Erooou, é `' + prefix + 'help perfil`') }
 
     let user = message.mentions.members.first() || message.member
@@ -24,6 +24,9 @@ exports.run = async (client, message, args) => {
     if (family2 === `⠀\n2. <@null>`) family2 = "⠀"
     if (family3 === `⠀\n3. <@null>`) family3 = "⠀"
 
+    let color = await db.get(`color_${user.id}`)
+    if (color === null) color = '#6F6C6C'
+
     let level = await db.fetch(`level_${user.id}`)
     if (level === null) level = 0
 
@@ -32,10 +35,10 @@ exports.run = async (client, message, args) => {
 
     let title = await db.get(`titulo_${user.id}`)
     let titleloja = await db.get(`title_${user.id}`)
-    if (titleloja === null) { titulo = `🔰 Não possui título` }
-    if (title === null) { titulo = `🔰 Sem título definido` }
-    if (!titleloja) { titulo = `🔰 Não possui título` }
-    if (titleloja && !title) { titulo = `🔰 Sem título definido` }
+    if (titleloja === null) { titulo = `<:xis:835943511932665926> Não possui título` }
+    if (title === null) { titulo = `<:xis:835943511932665926> Sem título definido` }
+    if (!titleloja) { titulo = `<:xis:835943511932665926> Não possui título` }
+    if (titleloja && !title) { titulo = `<:xis:835943511932665926> Sem título definido` }
     if (title && titleloja) { titulo = `🔰 ${db.get(`titulo_${user.id}`)}` }
 
     let status = await db.get(`status_${user.id}`)
@@ -48,7 +51,7 @@ exports.run = async (client, message, args) => {
     if (sexo === `⠀\nnull`) { sexo = "⠀\n<:xis:835943511932665926> Sem sexo definido" }
 
     let niver = await `⠀\n🎉 ${db.get(`aniversario_${user.id}`)}`
-    if (niver === `⠀\n🎉 null`) { niver = "⠀\n:tada: Sem aniversário definido" }
+    if (niver === `⠀\n🎉 null`) { niver = "⠀\n<:xis:835943511932665926> Sem aniversário definido" }
 
     let estrela = '<:starM:832974891635572787>'
     let noestrela = '<:nostar:832972978009538591>'
@@ -95,7 +98,7 @@ exports.run = async (client, message, args) => {
     }
 
     let perfilembed = new Discord.MessageEmbed()
-        .setColor('#BF3BFC')
+        .setColor(color)
         .addFields(
             {
                 name: '👤 Pessoal',
