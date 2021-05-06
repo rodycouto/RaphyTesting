@@ -20,28 +20,28 @@ exports.run = async (client, message, args) => {
         return message.channel.send(`<:xis:835943511932665926> ${message.author}, você foi banido do chat global! Acha que foi um engano? \`` + prefix + 'support`').then(msg => msg.delete({ timeout: 6000 })).catch(err => { return })
     }
 
-    let globalcooldown = db.fetch(`globalcooldown`)
-    if (globalcooldown === null) globalcooldown = 10000
-    if (!db.fetch(`globalcooldown`)) globalcooldown = 10000
+    let timing = db.fetch(`timemuteglobal_${message.author.id}`)
+    if (timing === null) timing = 0
+    if (!db.fetch(`timemuteglobal_${message.author.id}`)) timing = 0
 
-    let timeout1 = globalcooldown
-    let author1 = db.fetch(`globaltiming_${message.author.id}`)
+    let timeout = timing
+    let author = db.fetch(`muteglobal_${message.author.id}`)
 
-    if (author1 !== null && timeout1 - (Date.now() - author1) > 0) {
-        let time = ms(timeout1 - (Date.now() - author1))
-        return message.channel.send(`<:xis:835943511932665926> Espere o sistema global esfriar os motores... ${time.minutes}m e ${time.seconds}s`).then(msg => msg.delete({ timeout: 5000 }).catch(err => { return }))
+    if (author !== null && timeout - (Date.now() - author) > 0) {
+        let time = ms(timeout - (Date.now() - author))
+        return message.channel.send(`${message.author}, <:xis:835943511932665926> Você foi mutado, espere mais... ${time.minutes}m e ${time.seconds}s`).then(msg => msg.delete({ timeout: 5000 }).catch(err => { return }))
     } else {
 
-        let timing = db.fetch(`timemuteglobal_${message.author.id}`)
-        if (timing === null) timing = 0
-        if (!db.fetch(`timemuteglobal_${message.author.id}`)) timing = 0
+        let globalcooldown = db.fetch(`globalcooldown`)
+        if (globalcooldown === null) globalcooldown = 10000
+        if (!db.fetch(`globalcooldown`)) globalcooldown = 10000
 
-        let timeout = timing
-        let author = db.fetch(`muteglobal_${message.author.id}`)
+        let timeout1 = globalcooldown
+        let author1 = db.fetch(`globaltiming_${message.author.id}`)
 
-        if (author !== null && timeout - (Date.now() - author) > 0) {
-            let time = ms(timeout - (Date.now() - author))
-            return message.channel.send(`${message.author}, <:xis:835943511932665926> Você foi mutado, espere mais... ${time.minutes}m e ${time.seconds}s`).then(msg => msg.delete({ timeout: 5000 }).catch(err => { return }))
+        if (author1 !== null && timeout1 - (Date.now() - author1) > 0) {
+            let time = ms(timeout1 - (Date.now() - author1))
+            return message.channel.send(`<:xis:835943511932665926> Espere o sistema global esfriar os motores... ${time.minutes}m e ${time.seconds}s`).then(msg => msg.delete({ timeout: 5000 }).catch(err => { return }))
         } else {
 
             let CanalDoGlobalChat = db.get(`globalchat_${message.guild.id}`)

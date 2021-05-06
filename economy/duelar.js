@@ -76,7 +76,6 @@ exports.run = async (client, message, args) => {
 
                 if (reaction.emoji.name === '⚔️') { // Sim
                     msg.delete().catch(err => { return })
-                    db.delete(`duelotimeout_${message.author.id}`)
 
                     db.add(`cachebattle_${message.author.id}`, Valor * 2)
                     db.subtract(`mpoints_${message.author.id}`, Valor)
@@ -95,6 +94,7 @@ exports.run = async (client, message, args) => {
                     setTimeout(function () {
                         let winlose = ['win', 'lose']
                         let result = winlose[Math.floor(Math.random() * winlose.length)]
+                        db.delete(`duelotimeout_${message.author.id}`)
 
                         if (result === 'win') {
                             WinEmbed.setDescription(`${message.author} recebeu: ${cache}<:RPoints:837666759389347910>RPoints`)
