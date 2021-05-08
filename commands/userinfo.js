@@ -1,5 +1,6 @@
 const Discord = require("discord.js")
 const moment = require('moment')
+const db = require("quick.db")
 
 exports.run = async (client, message, args) => {
 
@@ -8,9 +9,12 @@ exports.run = async (client, message, args) => {
     let roles = user.roles.cache.sort((a, b) => b.position - a.position).map(role => role.toString()).slice(0, -1)
     let userFlags = user.user.flags.toArray()
 
+    let color = await db.get(`color_${user.id}`)
+    if (color === null) color = '#6F6C6C'
+
     const embed = new Discord.MessageEmbed()
+        .setColor(color)
         .setTitle(`📝 Informações sobre ${user.user.username}`)
-        .setColor(`#f3f3f3`)
         .setThumbnail(user.user.displayAvatarURL({ dynamic: true }))
         .addField('Usuário', [`❯ Nome Original: ${user.user.tag}`, `❯ ID: ${user.user.id}`, `❯ Status Atual: ${user.presence.status}`, `❯ Bandeira: ${userFlags.length ? userFlags.map(flag => flags[flag]).join(', ') : 'Nenhuma'}`, `❯ Foto de perfil: [Link da foto](${user.user.displayAvatarURL()})`, `❯ Criou a conta em: ${moment(user.user.createdTimestamp).format('DD/MM/YY')} | ${moment(user.user.createdTimestamp).fromNow()}`, `❯ Jogando: ${user.user.presence.game || 'Nada no momento'}`])
         .addField('Servidor', [`❯ Nome no Servidor: ${user.user.username}`, `❯ Entrou no Server em: ${moment(user.joinedAt).format('DD/MM/YY')}`, `❯ Maior cargo: ${user.roles.highest.id === message.guild.id ? 'Nenhum' : user.roles.highest.name}`])

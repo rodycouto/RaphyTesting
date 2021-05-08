@@ -18,9 +18,12 @@ exports.run = async (client, message, args) => {
 
     if (!language || language.length !== 2 || !text) { return message.inlineReply(lan) }
 
+    let colors = ['RED', 'YELLOW', 'GREEN', 'BLUE']
+    let result = colors[Math.floor(Math.random() * colors.length)]
+
     translate(args.slice(1).join(" "), { to: language }).then(res => {
         const translateEmbed = new Discord.MessageEmbed()
-            .setColor('BLUE')
+            .setColor(result)
             .setAuthor(`Google Tradutor`, googlepng)
             .setDescription("```css\n" + `${res.text}` + "\n```", false)
             .setColor("#6959CD")
