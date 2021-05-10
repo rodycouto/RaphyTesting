@@ -38,7 +38,7 @@ exports.run = async (client, message, args) => {
                 .addFields(
                     {
                         name: 'Cores',
-                        value: '🟥 `Vermelho` 10000 <:RPoints:837666759389347910>RPoints\n🟧 `Laranja` 10000 <:RPoints:837666759389347910>RPoints\n⬜ `Branco` 10000 <:RPoints:837666759389347910>RPoints\n `Rosa` 10000 <:RPoints:837666759389347910>RPoints\n `Ciano` 1000000 <:RPoints:837666759389347910>RPoints'
+                        value: '`Vermelho` 10000 <:RPoints:837666759389347910>RPoints\n`Laranja` 10000 <:RPoints:837666759389347910>RPoints\n`Branco` 10000 <:RPoints:837666759389347910>RPoints\n `Rosa` 10000 <:RPoints:837666759389347910>RPoints\n `Ciano` 1000000 <:RPoints:837666759389347910>RPoints'
                     },
                     {
                         name: 'Perfil',

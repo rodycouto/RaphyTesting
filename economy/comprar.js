@@ -201,7 +201,7 @@ exports.run = async (client, message, args) => {
         if (['ciano', 'ciane'].includes(args[0].toLowerCase())) {
 
             if (!vip) { return message.inlineReply('<:xis:835943511932665926> Esta é uma cor exclusiva para vips.\nSaiba mais em `' + prefix + 'vip`') }
-            if (db.get(`red_${message.author.id}`)) { return message.inlineReply(`❗ Você já possui este item.`) }
+            if (db.get(`ciane_${message.author.id}`)) { return message.inlineReply(`❗ Você já possui este item.`) }
             if (money === null) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você não tem dinheiro para comprar esta cor.`) }
             if (money === 0) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você não tem dinheiro.`) }
             if (money < 0) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você está com divida.`) }
@@ -264,7 +264,7 @@ exports.run = async (client, message, args) => {
         if (['rosa', 'pink'].includes(args[0].toLowerCase())) {
 
             if (!vip) { return message.inlineReply('<:xis:835943511932665926> Esta é uma cor exclusiva para vips.\nSaiba mais em `' + prefix + 'vip`') }
-            if (db.get(`red_${message.author.id}`)) { return message.inlineReply(`❗ Você já possui este item.`) }
+            if (db.get(`pink_${message.author.id}`)) { return message.inlineReply(`❗ Você já possui este item.`) }
             if (money === null) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você não tem dinheiro para comprar esta cor.`) }
             if (money === 0) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você não tem dinheiro.`) }
             if (money < 0) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você está com divida.`) }
@@ -305,7 +305,7 @@ exports.run = async (client, message, args) => {
 
         if (['verde', 'green'].includes(args[0].toLowerCase())) {
 
-            if (db.get(`red_${message.author.id}`)) { return message.inlineReply(`❗ Você já possui este item.`) }
+            if (db.get(`green_${message.author.id}`)) { return message.inlineReply(`❗ Você já possui este item.`) }
             if (money === null) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você não tem dinheiro para comprar esta cor.`) }
             if (money === 0) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você não tem dinheiro.`) }
             if (money < 0) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você está com divida.`) }
@@ -325,7 +325,7 @@ exports.run = async (client, message, args) => {
 
         if (['amarelo', 'yellow'].includes(args[0].toLowerCase())) {
 
-            if (db.get(`red_${message.author.id}`)) { return message.inlineReply(`❗ Você já possui este item.`) }
+            if (db.get(`yellow_${message.author.id}`)) { return message.inlineReply(`❗ Você já possui este item.`) }
             if (money === null) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você não tem dinheiro para comprar esta cor.`) }
             if (money === 0) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você não tem dinheiro.`) }
             if (money < 0) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você está com divida.`) }
@@ -345,7 +345,7 @@ exports.run = async (client, message, args) => {
 
         if (['azul', 'blue'].includes(args[0].toLowerCase())) {
 
-            if (db.get(`red_${message.author.id}`)) { return message.inlineReply(`❗ Você já possui este item.`) }
+            if (db.get(`blue_${message.author.id}`)) { return message.inlineReply(`❗ Você já possui este item.`) }
             if (money === null) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você não tem dinheiro para comprar esta cor.`) }
             if (money === 0) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você não tem dinheiro.`) }
             if (money < 0) { return message.inlineReply(`<:xis:835943511932665926> ${message.author}, você está com divida.`) }
