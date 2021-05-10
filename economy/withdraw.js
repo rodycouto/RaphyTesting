@@ -18,89 +18,69 @@ exports.run = async (client, message, args) => {
         return message.inlineReply(presomax)
     } else {
 
-        let money = db.get(`mpoints_${message.author.id}`)
+        let member = db.fetch(`banco_${message.author.id}`)
+
         let prefix = db.get(`prefix_${message.guild.id}`)
         if (prefix === null) prefix = "-"
 
         if (!args[0]) {
-            let noamout = new Discord.MessageEmbed()
+            const noamout = new Discord.MessageEmbed()
                 .setColor('#8B0000')
                 .setTitle('Siga o formato correto')
-                .setDescription('`' + prefix + 'dep Valor`\n ' + '`' + prefix + 'dep all`\n ')
+                .setDescription('`' + prefix + 'sacar Valor`')
             return message.inlineReply(noamout)
         }
 
-        if (['all', 'tudo'].includes(args[0])) {
-            let money = db.get(`mpoints_${message.author.id}`)
-            if (!db.get(`mpoints_${message.author.id}`)) money = '0'
-
-            if (money === null) {
-                let nota = new Discord.MessageEmbed()
-                    .setColor('#8B0000')
-                    .setDescription(`<:xis:835943511932665926> Você não tem nada para depositar.`)
-                return message.inlineReply(nota)
-            }
-
-            if (money < 0) {
-                let nota = new Discord.MessageEmbed()
-                    .setColor('#8B0000')
-                    .setDescription(`<:xis:835943511932665926> Você não tem nada para depositar.`)
-                return message.inlineReply(nota)
-            }
-
-            if (money == 0) {
-                let nota = new Discord.MessageEmbed()
-                    .setColor('#8B0000')
-                    .setDescription(`<:xis:835943511932665926> Você não tem nada para depositar.`)
-                return message.inlineReply(nota)
-            }
-
-            if (money > 0) {
-                db.add(`banco_${message.author.id}`, money)
-                db.subtract(`mpoints_${message.author.id}`, money)
-
-                let nota = new Discord.MessageEmbed()
-                    .setColor('GREEN')
-                    .setDescription(`${message.author} depositou ${money}<:RPoints:837666759389347910>`)
-                return message.inlineReply(nota)
-            }
-        }
-
-        if (isNaN(args[0])) {
-            let notnumber = new Discord.MessageEmbed()
+        if (member < args[0]) {
+            const not = new Discord.MessageEmbed()
                 .setColor('#8B0000')
-                .setTitle('Valor não reconhecido')
-                .setDescription('<:xis:835943511932665926> O valor que você digitou não é um número.')
-            return message.inlineReply(notnumber)
-        }
-
-        if (money < 0) {
-            let not = new Discord.MessageEmbed()
-                .setColor('#8B0000')
-                .setTitle('<:xis:835943511932665926> Você não tem todo esse dinheiro.')
-            return message.inlineReply(not)
-        }
-
-        if (money < args[0]) {
-            let not = new Discord.MessageEmbed()
-                .setColor('#8B0000')
-                .setTitle('<:xis:835943511932665926> Você não tem todo esse dinheiro.')
+                .setTitle('Você não tem todo esse dinheiro no banco.')
             return message.inlineReply(not)
         }
 
         if (args[0] < 0) {
-            let nota = new Discord.MessageEmbed()
+            const nota = new Discord.MessageEmbed()
                 .setColor('#8B0000')
-                .setTitle('<:xis:835943511932665926> Diga um valor maior que 0')
+                .setTitle('Diga um valor maior que 0')
             return message.inlineReply(nota)
         }
-        db.add(`banco_${message.author.id}`, args[0])
-        db.subtract(`mpoints_${message.author.id}`, args[0])
 
-        let embed = new Discord.MessageEmbed()
+        if (args[0] === 'all') {
+            let money = db.get(`banco_${message.author.id}`)
+            if (money === null) money = '0'
+
+            if (!db.get(`banco_${message.author.id}`)) money = '0'
+
+            if (money == '0') {
+                const nota = new Discord.MessageEmbed()
+                    .setColor('#8B0000')
+                    .setDescription(`Você não tem nada para sacar no banco.`)
+                return message.inlineReply(nota)
+            }
+
+            db.add(`mpoints_${message.author.id}`, money)
+            db.subtract(`banco_${message.author.id}`, money)
+
+            const nota = new Discord.MessageEmbed()
+                .setColor('GREEN')
+                .setDescription(`Você sacou ${money}<:RPoints:837666759389347910> do banco`)
+            return message.inlineReply(nota)
+        }
+
+        if (isNaN(args[0])) {
+            const notnumber = new Discord.MessageEmbed()
+                .setColor('#8B0000')
+                .setTitle('Valor não reconhecido')
+                .setDescription('O valor que você digitou não é um número.')
+            return message.inlineReply(notnumber)
+        }
+
+        db.add(`mpoints_${message.author.id}`, args[0])
+        db.subtract(`banco_${message.author.id}`, args[0])
+
+        const embed = new Discord.MessageEmbed()
             .setColor('#efff00')
-            .setDescription(`${message.author} depositou ${args[0]}<:RPoints:837666759389347910> no banco.`)
+            .setDescription(`${message.author} sacou ${args[0]}<:RPoints:837666759389347910> do banco.`)
         message.inlineReply(embed)
-
     }
 }
