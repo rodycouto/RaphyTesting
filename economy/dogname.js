@@ -7,8 +7,8 @@ exports.run = async (client, message, args) => {
     if (prefix === null) prefix = "-"
 
     let medalha = db.get(`medalha_${message.author.id}`)
-    if (medalha === null) { return message.inlineReply('<:xis:835943511932665926> Você ainda não obteve sua melhada!') }
-    if (!db.get(`medalha_${message.author.id}`)) { return message.inlineReply('<:xis:835943511932665926> Você ainda não obteve sua melhada!') }
+    if (medalha === null) { return message.inlineReply('<:xis:835943511932665926> Você ainda não obteve sua medalha!') }
+    if (!db.get(`medalha_${message.author.id}`)) { return message.inlineReply('<:xis:835943511932665926> Você ainda não obteve sua medalha!') }
 
     const args0 = new Discord.MessageEmbed()
         .setColor('BLUE')
@@ -40,11 +40,11 @@ exports.run = async (client, message, args) => {
 
             if (reaction.emoji.name === '✅') { // Sim
                 msg.delete().catch(err => { return })
-                
+
                 setTimeout(function () {
                     db.set(`dogname_${message.author.id}`, args[0])
                     message.inlineReply(`<a:Check:836347816036663309> ${message.author}, o nome do seu cachorro/a agora é **${args[0]}**`)
-                })
+                }, 5100)
                 return message.inlineReply('<a:Pulse:839682326211854337> Validando nome no banco de dados...').then(msg => msg.delete({ timeout: 5000 }).catch(err => { return }))
             }
 

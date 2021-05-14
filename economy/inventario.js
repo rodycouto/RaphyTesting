@@ -106,10 +106,10 @@ exports.run = async (client, message, args) => {
     if (cachorro === null) { cachorro = "" }
     if (!db.get(`cachorro_${user.id}`)) { cachorro = "" }
 
-    let dogname = await `\n<:doguinho:836393852889202698> ${db.get(`dogname_${message.author.id}`)}`
+    let dogname = await `\n<:doguinho:836393852889202698> ${db.get(`dogname_${user.id}`)}`
     if (dogname === "\n<:doguinho:836393852889202698> ON") { dogname = "\n<:doguinho:836393852889202698> Doguinho sem nome" }
     if (dogname === null) { dogname = "" }
-    if (!db.get(`dogname_${message.author.id}`)) { dogname = "" }
+    if (!db.get(`dogname_${user.id}`)) { dogname = "" }
 
     let medalha = await db.get(`medalha_${user.id}`)
     if (medalha) { medalha = "\n🏅 Medalha Cammum" }
