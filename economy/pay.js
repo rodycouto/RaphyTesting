@@ -10,7 +10,7 @@ exports.run = async (client, message, args) => {
     if (author1 !== null && timeout1 - (Date.now() - author1) > 0) {
         let time = ms(timeout1 - (Date.now() - author1))
 
-        let presomax = new Discord.MessageEmbed()
+        const presomax = new Discord.MessageEmbed()
             .setColor('#8B0000')
             .setTitle('🚨 Você está em prisão máxima!')
             .setDescription(`Liberdade em: ${time.hours}h ${time.minutes}m e ${time.seconds}s`)
@@ -20,7 +20,6 @@ exports.run = async (client, message, args) => {
 
         let user = message.mentions.members.first()
         let bot = message.mentions.members.bot
-        let nomoney = 'Dinheiro insuficiente.'
 
         let money = db.get(`mpoints_${message.author.id}`)
         if (money === null) money = '0'
@@ -35,22 +34,19 @@ exports.run = async (client, message, args) => {
             .addField('Comando', '`' + prefix + 'pay @user quantia`\n' + '`' + prefix + 'pay @user all/tudo`')
             .setFooter('Apenas o dinheiro na carteira será válido para pagamentos.')
 
-        const formato = new Discord.MessageEmbed()
-            .setColor('#8B0000')
-            .setTitle('Siga o formato correto')
-            .setDescription('`' + prefix + 'pay @user Valor`')
-
         if (!args[0]) { return message.inlineReply(noargs) }
-        if (!args[1]) { return message.inlineReply(formato) }
-        if (user === message.author) { return message.inlineReply('Você não pode pagar você mesmo.') }
-        if (bot) { return message.inlineReply('Você não pode pagar bots.') }
-        if (money < args[1]) { return message.inlineReply(`Você precisa ter ${args[1]}<:RPoints:837666759389347910> na carteira para poder pagar ${user.user.username}.`) }
-        if (args[1] < 0) { return message.inlineReply(nomoney) }
-        if (isNaN(args[1])) { return message.inlineReply('Valor digitado não é um número.') }
+        if (!args[1]) { return message.inlineReply('<:xis:835943511932665926> | Siga o formato correto!\n`' + prefix + 'pay @user valor`') }
+        if (args[2]) { return message.inlineReply('<:xis:835943511932665926> | Nada além do comando, está bem? `' + prefix + 'pay @user valor`') }
+        if (user === message.author) { return message.inlineReply('<:xis:835943511932665926> | Você não pode pagar você mesmo.') }
+        if (user.id === '837147659898191902') { return message.inlineReply('<:xis:835943511932665926> | Eu não preciso do seu dinheiro, desculpa.')}
+        if (bot) { return message.inlineReply('<:xis:835943511932665926> | Você não pode pagar bots.') }
+        if (money < args[1]) { return message.inlineReply(`<:xis:835943511932665926> | Você precisa ter ${args[1]}<:RPoints:837666759389347910> na carteira para poder pagar ${user.user.username}.`) }
+        if (args[1] < 0) { return message.inlineReply('<:xis:835943511932665926> | Dinheiro insuficiente.') }
+        if (isNaN(args[1])) { return message.inlineReply('<:xis:835943511932665926> | O valor digitado não é um número.') }
+
         db.add(`cachepay_${message.author.id}`, args[1])
         db.subtract(`mpoints_${message.author.id}`, args[1])
         let cache = db.get(`cachepay_${message.author.id}`)
-
 
         const confirm = new Discord.MessageEmbed()
             .setColor('BLUE')

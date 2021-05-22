@@ -25,7 +25,7 @@ exports.run = async (client, message, args) => {
     if (isNaN(args[1])) { return message.inlineReply('`' + prefix + 'clear @user Quantidade` Máx: 100') }
     if (args[1] > 100) return message.channel.send('Me fala um número até 100, ok?')
 
-    let userMessages = await message.channel.messages.fetch({ limit: parseInt(amountToDelete) })
+    let userMessages = await message.channel.messages.fetch({ limit: parseInt(amountToDelete) }).catch(err => { return })
     let userFilter = userMessages.filter(obj => obj.author.id === message.mentions.users.first().id)
 
     message.channel.bulkDelete(userFilter).catch(err => { return })
@@ -34,7 +34,7 @@ exports.run = async (client, message, args) => {
 
   if (['bot', "bots"].includes(args[0])) {
     if (args[1]) { return message.inlineReply('<:xis:835943511932665926> | Nada além do primeiro argumento! Use `' + prefix + 'clear` para mais informações.') }
-    let awaitBotMessages = await message.channel.messages.fetch({ limit: 100 })
+    let awaitBotMessages = await message.channel.messages.fetch({ limit: 100 }).catch(err => { return })
     let botFilter = awaitBotMessages.filter(obj => obj.author.bot)
 
     message.channel.bulkDelete(botFilter).catch(err => { return })
@@ -43,7 +43,7 @@ exports.run = async (client, message, args) => {
   }
 
   if (['images', "imagens", "fotos", "foto", "imagem", "midia"].includes(args[0])) {
-    let awaitImageMessages = await message.channel.messages.fetch({ limit: 100 })
+    let awaitImageMessages = await message.channel.messages.fetch({ limit: 100 }).catch(err => { return })
     if (args[1] > 100) { return message.channel.send('O número de mensagens não pode passar de 100.') }
     let imageFilter = awaitImageMessages.filter(obj => obj.attachments.size > 0)
 
@@ -57,7 +57,7 @@ exports.run = async (client, message, args) => {
     let messages = 0
     let i = true
     while (i) {
-      let deleteAble = await message.channel.messages.fetch({ limit: 100 })
+      let deleteAble = await message.channel.messages.fetch({ limit: 100 }).catch(err => { return })
       if (deleteAble.size < 100) {
         await message.channel.bulkDelete(deleteAble).catch(err => { return })
         messages += deleteAble.size
@@ -75,7 +75,7 @@ exports.run = async (client, message, args) => {
     }
     if (args[1]) { return message.inlineReply('<:xis:835943511932665926> | Nada além do primeiro argumento! Use `' + prefix + 'clear` para mais informações.') }
     if (parseInt(args[0]) > 100) return message.channel.send('Me fala um número até 100, ok? Se quiser apagar TUDO, use o comando `clear all`')
-    let messages = await message.channel.messages.fetch({ limit: parseInt(args[0]) })
+    let messages = await message.channel.messages.fetch({ limit: parseInt(args[0]) }).catch(err => { return })
     message.channel.bulkDelete(messages).then(msg => {
       message.channel.send('Deletei ' + msg.size + ' mensagens.\nMensagens acima de 14 dias não podem ser apagadas. (Limitações do Discord)').then(msg => msg.delete({ timeout: 5000 }).catch(err => { return }))
     }).catch(err => { return })
